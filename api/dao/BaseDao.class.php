@@ -1,16 +1,20 @@
 <?php
 
+  require_once dirname(__FILE__)."/../config.php";
+
   class BaseDao {
 
+    private $connection;
+
     public function __construct() {
-      $servername = "localhost";
-      $username = "doctorappointment";
-      $password = "doctorappointment";
+
+
+
 
       try {
-      $conn = new PDO("mysql:host=$servername;dbname=doctorappointment", $username, $password);
+      $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
       // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       echo "Connected successfully";
       } catch(PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
