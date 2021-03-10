@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/dao/BaseDao.class.php";
 
 
-$baseObject=new BaseDao();
+$baseObject=new BaseDao(); 
 
 echo "API testing";
 
