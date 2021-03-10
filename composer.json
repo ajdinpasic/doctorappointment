@@ -1,0 +1,11 @@
+{
+    "name": "ibu/doctorappointment",
+    "license": "apache2",
+    "authors": [
+        {
+            "name": "ajdinpasic",
+            "email": "ajdin.pasic@stu.ibu.edu.ba"
+        }
+    ],
+    "require": {}
+}
