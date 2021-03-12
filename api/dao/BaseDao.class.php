@@ -15,9 +15,9 @@
       $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
       // set the PDO error mode to exception
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
+      // echo "Connected successfully";
       } catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
+        throw $e;
       }
 
 
@@ -32,12 +32,17 @@
 
   }
 
-    public function query() {
+    public function query($query,$parameters) {
+
+      $stmt = $this->connection->prepare($query);
+      $stmt->execute($parameters);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
   }
-    public function query_unique() {
-
+    public function query_unique($query,$parameters) {
+      $result=$this->query($query,$parameters);
+      return reset($result);
 
   }
 
