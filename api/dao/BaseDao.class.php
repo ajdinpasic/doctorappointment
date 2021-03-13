@@ -28,7 +28,19 @@
 
   }
 
-    public function update() {
+    public function update($id,$table,$entity,$id_column="id") {
+      $query="UPDATE ${table} SET ";
+      foreach($entity as $key =>$value) {
+        $query.=$key." = :".$key.", ";
+
+      }
+      $query=substr($query,0,-2);
+      $query.=" WHERE $id_column = :id";
+
+      //$sql = "UPDATE accounts SET created_at = :created_at, type = :type,  password = :password email = :email  WHERE account_id=:account_id";
+      $stmt= $this->connection->prepare($query);
+      $entity["id"]=$id;
+      $stmt->execute($entity);
 
   }
 
