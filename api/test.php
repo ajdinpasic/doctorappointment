@@ -75,11 +75,11 @@ print_r ($r); */
 
 $proba=new AccountsDao();
 $a=[
-  "password" => "lakunoc"
+  "password" => "novaa"
 
 
 ];
-$proba->updateAccount(1,$a);
-
+$proba->updateAccountByEmail("naida.f@gmail.com",$a);
+$proba->updateAccountById(1,$a);
 
  ?>
