@@ -28,22 +28,13 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 
 
     }
-    public function updateAccount($account_id,$account) {
+    public function updateAccountById($account_id,$account) {
 
-      $query="UPDATE accounts SET ";
-      foreach($account as $key =>$value) {
-        $query.=$key." = :".$key.", ";
-
-      }
-      $query=substr($query,0,-2);
-      $query.=" WHERE account_id = :account_id";
-
-      //$sql = "UPDATE accounts SET created_at = :created_at, type = :type,  password = :password email = :email  WHERE account_id=:account_id";
-      $stmt= $this->connection->prepare($query);
-      $account["account_id"]=$account_id;
-      $stmt->execute($account);
+      $this->update($account_id,"accounts",$account,"account_id");
     }
-
+    public function updateAccountbyEMail($email,$account) {
+      $this->update($email,"accounts",$account,"email");
+    }
 
 
   }
