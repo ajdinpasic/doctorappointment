@@ -20,15 +20,38 @@ $account_dao=new AccountsDao();
 $account=$account_dao->getUserById(1);
 print_r ($account);  */
 
-/*
-$acc1=new AccountsDao();
 
+
+/*
 $r1_acc1=$acc1->getAccountByType("patient");
 
 print_r ($r1_acc1); */
-/*
-$account_dao=new AccountsDao();
 
+// $account_dao=new AccountsDao();
+/*
+$a= [
+  "password" => "ghgh99"
+
+
+];
+
+$account_dao->updateAccount(1,$a); */
+/*
+$b= [
+
+  "created_at" => "2020-03-13 11:37:58",
+  "type" =>"patient",
+  "password" => "cxcx",
+  "email" => "mirza.k@gmail.com"
+
+
+
+];
+
+print_r ($account_dao->addAccount($b)); */
+
+
+/*
 $acc1= [
 
   "created_at" => "2021-03-13 11:37:58",
@@ -41,8 +64,22 @@ $acc1= [
 $account_dao->addAccount($acc1);
 
  print_r ($acc1); */
+/*
+$acc=new AccountsDao();
+
+$r=$acc->getAccountByType("patient");
+
+print_r ($r); */
 
 
+
+$proba=new AccountsDao();
+$a=[
+  "password" => "lakunoc"
+
+
+];
+$proba->updateAccount(1,$a);
 
 
  ?>
