@@ -2,9 +2,9 @@
 
   class DoctorsDao extends BaseDao{
 
-    public function getDoctorbyId($id) {
+  /*  public function getDoctorbyId($id) {
 
-    }
+  } */
 
 
 
