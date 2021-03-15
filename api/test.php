@@ -74,12 +74,19 @@ print_r ($r); */
 
 
 $proba=new AccountsDao();
-$a=[
-  "password" => "novaa"
+
+$data= [
+   "created_at" => "2020-03-13 11:37:58",
+   "type"=> "patient",
+   "password" => "2222222aaaa",
+   "email" => "bq@gmail.com"
+
+
 
 
 ];
-$proba->updateAccountByEmail("naida.f@gmail.com",$a);
-$proba->updateAccountById(1,$a);
+$result=$proba->addAccount($data);
+print_r($result);
+
 
  ?>
