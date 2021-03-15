@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname (__FILE__)./"BaseDao.class.php";
+require_once dirname (__FILE__)."/BaseDao.class.php";
 
 class AppointmentsDao extends BaseDao {
     public function getAllAppointments() {
