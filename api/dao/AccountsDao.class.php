@@ -29,7 +29,9 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     public function updateAccountbyEMail($email,$account) {
       $this->update($email,"accounts",$account,"email");
     }
-
+    public function getAllAccounts() {
+      return $this->query("SELECT * FROM accounts",[]);
+    }
 
   }
 
