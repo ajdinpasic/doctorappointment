@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
   require_once dirname(__FILE__)."/../config.php";
 
   class BaseDao {
@@ -24,8 +26,22 @@
 
   }
 
-    public function insert() {
-
+    public function insert($table,$entity) {
+      $query="INSERT INTO ".$table." ( ";
+      foreach($entity as $key => $value) {
+        $query.=$key.", ";
+      }
+      $query=substr($query,0,-2);
+      $query.=") VALUES ( ";
+      foreach ($entity as $key => $value) {
+        $query.=":".$key.", ";
+      }
+      $query=substr($query,0,-2);
+      $query.=")";
+      $stmt=$this->connection->prepare($query);
+      $stmt->execute($entity);
+      $entity['id']=$this->connection->lastInsertId();
+      return $entity;
   }
 
     public function update($id,$table,$entity,$id_column="id") {
