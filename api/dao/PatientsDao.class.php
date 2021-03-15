@@ -20,7 +20,9 @@
     public function updatePatientById($id,$patient) {
       $this->update($id,"patients",$patient,"patient_id");
     }
-
+    public function addPatient($patient) {
+      return $this->insert("patients",$patient);
+    }
 
 
   }
