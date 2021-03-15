@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once dirname(__FILE__)."/BaseDao.class.php";
 
   class AccountsDao extends BaseDao{
@@ -22,10 +24,8 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     }
 
     public function addAccount($account) {
-      $sql = "INSERT INTO accounts (created_at, type, password, email) VALUES (:created_at, :type, :password, :email)";
-      $stmt= $this->connection->prepare($sql);
-      $stmt->execute($account);
 
+      return $this->insert("accounts",$account);
 
     }
     public function updateAccountById($account_id,$account) {
