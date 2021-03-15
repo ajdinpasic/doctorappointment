@@ -17,12 +17,6 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
       return $this->query_unique("SELECT * FROM accounts WHERE email = :email",["email"=>$email]);
     }
 
-    public function getAccountByType($type) {
-
-      return $this->query("SELECT * FROM accounts where type = :type",["type"=>$type]);
-
-    }
-
     public function addAccount($account) {
 
       return $this->insert("accounts",$account);
