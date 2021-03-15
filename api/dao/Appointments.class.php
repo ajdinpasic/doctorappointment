@@ -18,6 +18,9 @@ class AppointmentsDao extends BaseDao {
     public function updateAppointmentById($id,$appointment) {
       $this->update($id,"appointments",$appointment,"appointment_id");
     }
+    public function addAppointment($appointment) {
+      return $this->insert("appointments",$appointment);
+    }
 }
 
 
