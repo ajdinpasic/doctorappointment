@@ -26,7 +26,8 @@ error_reporting(E_ALL);
 
   }
 
-    public function insert($table,$entity) {
+    protected function insert($table,$entity) {
+
       $query="INSERT INTO ".$table." ( ";
       foreach($entity as $key => $value) {
         $query.=$key.", ";
@@ -44,7 +45,7 @@ error_reporting(E_ALL);
       return $entity;
   }
 
-    public function update($id,$table,$entity,$id_column="id") {
+    protected function update($id,$table,$entity,$id_column="id") {
       $query="UPDATE ${table} SET ";
       foreach($entity as $key =>$value) {
         $query.=$key." = :".$key.", ";
@@ -60,7 +61,7 @@ error_reporting(E_ALL);
 
   }
 
-    public function query($query,$parameters) {
+    protected function query($query,$parameters) {
 
       $stmt = $this->connection->prepare($query);
       $stmt->execute($parameters);
@@ -68,7 +69,7 @@ error_reporting(E_ALL);
 
 
   }
-    public function query_unique($query,$parameters) {
+    protected function query_unique($query,$parameters) {
       $result=$this->query($query,$parameters);
       return reset($result);
 
