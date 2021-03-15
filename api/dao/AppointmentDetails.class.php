@@ -9,7 +9,12 @@ class AppointmentDetailsDao extends BaseDao {
       public function getDetailByAppointmentId($id) {
         return $this->query_unique("SELECT * FROM appointmentdetails WHERE appointment_id = :id",["id" => $id]);
       }
-
+      public function addDetails($detail) {
+        return $this->insert("appointmentdetails",$detail);
+      }
+      public function updateDetailsByAppointmentId($id,$detail) {
+        $this->update($id,"appointmentdetails",$detail,"appointment_id");
+      }
 
 
 
