@@ -15,7 +15,9 @@ class AppointmentsDao extends BaseDao {
     public function getAppointmentByDoctorId($id) {
       return $this->query_unique("SELECT * FROM appointments WHERE doctor_id =:id",["id" => $id]);
     }
-
+    public function updateAppointmentById($id,$appointment) {
+      $this->update($id,"appointments",$appointment,"appointment_id");
+    }
 }
 
 
