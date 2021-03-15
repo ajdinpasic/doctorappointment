@@ -17,7 +17,9 @@
     public function getAllPatients() {
       return $this->query("SELECT * FROM patients",[]);
     }
-
+    public function updatePatientById($id,$patient) {
+      $this->update($id,"patients",$patient,"patient_id");
+    }
 
 
 
