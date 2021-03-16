@@ -11,22 +11,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+$patient_dao=new PatientsDao();
 
 
-$data = [
-  "prob_description" => "Something bad happened.LOL HGHGHG",
-  "prescription" => "Something bad hap463463pened.LOL HGHGHG",
-  "price" => 400.00,
-  "type" => "blood sample",
-  "appointment_id" => 1,
-  "card_id" => 2
-
-];
-
-
-$app_dao=new AppointmentDetailsDao();
-$result=$app_dao->addDetails($data);
+$result=$patient_dao->getAllEntities();
 print_r ($result);
+
+
+
 
 
 

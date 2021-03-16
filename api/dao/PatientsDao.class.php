@@ -7,9 +7,9 @@
   class PatientsDao extends BaseDao{
 
     public function __construct() {
-        parent::__construct("creditcards","credit_card_id");
+        parent::__construct("patients","patient_id");
     }
-    
+
     public function getPatientByEmail($email) {
       return $this->query_unique("SELECT * FROM patients WHERE patient_email = :patient_email",["email"=>$email]);
 
