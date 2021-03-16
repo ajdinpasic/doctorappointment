@@ -8,10 +8,11 @@ error_reporting(E_ALL);
 
     protected $connection;
     private $table;
-    public function __construct($table) {
+    private $unique_key;
+
+    public function __construct($table,$unique_key) {
       $this->table=$table;
-
-
+      $this->unique_key=$unique_key;
 
       try {
       $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
@@ -56,7 +57,7 @@ error_reporting(E_ALL);
 
       //$sql = "UPDATE accounts SET created_at = :created_at, type = :type,  password = :password email = :email  WHERE account_id=:account_id";
       $stmt= $this->connection->prepare($query);
-      $entity["id"]=$id;
+      $entity['id']=$id;
       $stmt->execute($entity);
 
   }
@@ -74,14 +75,18 @@ error_reporting(E_ALL);
       return reset($result);
 
   }
-  public function insertEntity($data) {
-    return $this->insert($this->table,$data);
+    public function insertEntity($data) {
+
+      return $this->insert($this->table,$data);
   }
-  public function updateEntity($id,$data) {
-    $this->update($id,$this->table,$data);
+    public function updateEntity($id,$data) {
+      $this->update($id,$this->table,$data,$this->unique_key);
   }
-  public function getEntity($id) {
-    return $this->query_unique("SELECT * FROM ${table} WHERE ");
+    public function getEntity($id) {
+      return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
+  }
+    public function getAllEntities() {
+      return $this->query("SELECT * FROM ".$this->table,[]);
   }
 
 }
