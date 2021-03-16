@@ -7,10 +7,13 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/BaseDao.class.php";
 
   class DoctorsDao extends BaseDao{
+    public function __construct() {
+        parent::__construct("doctors","doctor_id");
+    }
 
   /*  public function getDoctorbyId($id) {
 
-  } */
+  }
 
   public function getAllDoctors() {
     return $this->query("SELECT * FROM doctors",[]);
@@ -23,7 +26,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
   }
   public function addDoctor($doctor) {
     return $this->insert("doctors",$doctor);
-  }
+  } */
 
   }
 
