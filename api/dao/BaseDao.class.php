@@ -7,9 +7,9 @@ error_reporting(E_ALL);
   class BaseDao {
 
     protected $connection;
-
-    public function __construct() {
-
+    private $table;
+    public function __construct($table) {
+      $this->table=$table;
 
 
 
@@ -73,6 +73,15 @@ error_reporting(E_ALL);
       $result=$this->query($query,$parameters);
       return reset($result);
 
+  }
+  public function insertEntity($data) {
+    return $this->insert($this->table,$data);
+  }
+  public function updateEntity($id,$data) {
+    $this->update($id,$this->table,$data);
+  }
+  public function getEntity($id) {
+    return $this->query_unique("SELECT * FROM ${table} WHERE ");
   }
 
 }
