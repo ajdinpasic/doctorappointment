@@ -85,8 +85,8 @@ error_reporting(E_ALL);
     public function getEntity($id) {
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
   }
-    public function getAllEntities() {
-      return $this->query("SELECT * FROM ".$this->table,[]);
+    public function getAllEntities($offset = 3, $limit = 25) {
+      return $this->query("SELECT * FROM {$this->table} LIMIT {$limit} OFFSET {$offset}",[]);
   }
 
 }
