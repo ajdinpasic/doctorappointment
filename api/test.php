@@ -15,9 +15,9 @@ $acc=new AccountsDao();
 /*print_r($_GET);
 die; */
 
-$result=$acc->getAllEntities($_GET["offset"],$_GET["limit"]);
+$result=$acc->getEntity(1);
 
-print_r($result);
+echo json_encode($result,JSON_PRETTY_PRINT);
 
 
 
