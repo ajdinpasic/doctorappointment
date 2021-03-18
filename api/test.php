@@ -11,12 +11,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$patient_dao=new PatientsDao();
+$acc=new AccountsDao();
+/*print_r($_GET);
+die; */
 
+$result=$acc->getAllEntities($_GET["offset"],$_GET["limit"]);
 
-$result=$patient_dao->getAllEntities();
-print_r ($result);
-
+print_r($result);
 
 
 
