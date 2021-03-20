@@ -1,15 +1,13 @@
 <?php
 
-
-
-
+require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
   Flight::route('GET /accounts', function(){
     $offset= Flight::routeForLimitAndOffset("offset",0);
     $limit= Flight::routeForLimitAndOffset("limit",10);
 
     Flight::json(Flight::account_dao()->getAllEntities($offset,$limit));
- 
+
   });
 
     Flight::route('GET /account/@id', function($id){

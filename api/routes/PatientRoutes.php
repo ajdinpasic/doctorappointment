@@ -13,22 +13,22 @@ Flight::route('GET /patients', function(){
 });
 
 Flight::route('GET /patient/@id', function($id){
-  $result=Flight::patient_dao()->getEntity($id);
+  $result=Flight::patient_service()->getEntity($id);
   Flight::json($result);
 });
 
 Flight::route('POST /patients', function(){
   $request = Flight::request();
   $data=$request->data->getData();
-  $result=Flight::patient_dao()->insertEntity($data);
+  $result=Flight::patient_service()->insertEntity($data);
   Flight::json($result);
 });
 
 Flight::route('PUT /patients/@id', function($id){
   $request=Flight::request();
   $data=$request->data->getData();
-  Flight::patient_dao()->updateEntity($id,$data);
-  $result=Flight::patient_dao()->getEntity($id);
+  Flight::patient_service()->updateEntity($id,$data);
+  $result=Flight::patient_service()->getEntity($id);
   Flight::json($result);
 
 });
