@@ -8,27 +8,27 @@
     $offset= Flight::routeForLimitAndOffset("offset",0);
     $limit= Flight::routeForLimitAndOffset("limit",10);
 
-    Flight::json(Flight::account()->getAllEntities($offset,$limit));
- }
+    Flight::json(Flight::account_dao()->getAllEntities($offset,$limit));
+ 
   });
 
     Flight::route('GET /account/@id', function($id){
-      $result=Flight::account()->getEntity($id);
+      $result=Flight::account_dao()->getEntity($id);
       Flight::json($result);
     });
 
   Flight::route('POST /accounts', function(){
       $request = Flight::request();
       $data=$request->data->getData();
-      $result=Flight::account()->insertEntity($data);
+      $result=Flight::account_dao()->insertEntity($data);
       Flight::json($result);
     });
 
     Flight::route('PUT /accounts/@id', function($id){
       $request=Flight::request();
       $data=$request->data->getData();
-      Flight::account()->updateEntity($id,$data);
-      $result=Flight::account()->getEntity($id);
+      Flight::account_dao()->updateEntity($id,$data);
+      $result=Flight::account_dao()->getEntity($id);
       Flight::json($result);
 
     });
