@@ -11,7 +11,7 @@ class PatientService {
   }
 
 
-  public function getAccountService($search,$offset,$limit) {
+  public function getPatientService($search,$offset,$limit) {
     if ($search) {
       return $this->patient_dao->getPatientsByName($search,$offset,$limit);
     } else {
