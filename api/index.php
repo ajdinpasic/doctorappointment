@@ -9,6 +9,8 @@ require_once dirname(__FILE__)."/dao/AccountsDao.class.php";
 require_once dirname(__FILE__)."/dao/PatientsDao.class.php";
 require_once dirname (__FILE__)."/../vendor/autoload.php";
 require_once dirname (__FILE__)."/routes/AccountRoutes.php";
+require_once dirname (__FILE__)."/routes/PatientRoutes.php";
+require_once dirname (__FILE__)."/Services/PatientServices.class.php";
 
 Flight::map('routeForLimitAndOffset', function($name,$defaultValue=NULL){
   $request=Flight::request();
@@ -16,14 +18,11 @@ Flight::map('routeForLimitAndOffset', function($name,$defaultValue=NULL){
   $params = $params ? $params : $defaultValue;
   return $params;
 });
-Flight::map('rrouteForLimitAndOffset', function($name,$defaultValue=NULL){
-  $request=Flight::request();
-  $params= @$request->query->getData()[$name];
-  $params = $params ? $params : $defaultValue;
-  return $params;
-});
-Flight::register('account', 'AccountsDao');
 
+Flight::register('account_dao', 'AccountsDao');
+Flight::register('patient_dao', 'PatientsDao');
+
+Flight::register('patient_service', 'PatientService');
 
 Flight::start();
 
