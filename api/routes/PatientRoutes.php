@@ -17,10 +17,10 @@ Flight::route('GET /patient/@id', function($id){
   Flight::json($result);
 });
 
-Flight::route('POST /patients', function(){
+Flight::route('POST /patients/register', function(){
   $request = Flight::request();
   $data=$request->data->getData();
-  $result=Flight::patient_service()->insertEntity($data);
+  $result=Flight::patient_service()->register($data);
   Flight::json($result);
 });
 

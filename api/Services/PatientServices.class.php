@@ -23,29 +23,29 @@ class PatientService extends BaseService{
     return $this->dao->getAllEntities($offset,$limit); }
 
 
-} /*
+}
   public function register($patient) {
-    if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
+    //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
 
     $account = $this->account_dao->insertEntity([
 
-      "created_at" => date(Config::DATE_FORMAT);
-      "password" => $patient["password"],
-      "email" => $patient["email"],
-      "type" => $patient["type"]
+      "type" => "patient",
+      "created_at" => date(Config::DATE_FORMAT)
 
     ]);
 
-    $user= parent:: insertEntity([
+    $patient= parent:: insertEntity([
       "patient_name" => $patient["patient_name"],
       "patient_surname" => $patient["patient_surname"],
-      "account_id" => $account["account_id"]
-
+      "patient_email" => $patient["patient_email"],
+      "password" => $patient["password"],
+      "account_id" => $patient["account_id"],
+      "token" => md5(random_bytes(16))
 
     ]);
+    return $patient;
 
-
-  } */
+  }
 
   public function confirm($token) {
 
