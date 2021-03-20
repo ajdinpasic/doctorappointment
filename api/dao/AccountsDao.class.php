@@ -8,7 +8,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 
     public function __construct() {
         parent::__construct("accounts","account_id");
-    }
+    } /*
     public function updateAccountbyEMail($email,$account) {
       $this->update($email,"accounts",$account,"email");
     }
@@ -16,7 +16,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     public function getAccountbyEmail($email) {
       return $this->query_unique("SELECT * FROM accounts WHERE email = :email",["email"=>$email]);
     }
-    
+    */
   }
  /*
      public function getAllAccounts() {

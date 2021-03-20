@@ -22,7 +22,7 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
       $result=Flight::account_service()->insertEntity($data);
       Flight::json($result);
     });
-
+    /*
     Flight::route('PUT /accounts/@id', function($id){
       $request=Flight::request();
       $data=$request->data->getData();
@@ -30,7 +30,7 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
       $result=Flight::account_service()->getEntity($id);
       Flight::json($result);
 
-    });
+    }); */
 
 
 
