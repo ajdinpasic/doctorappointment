@@ -21,8 +21,8 @@ Flight::map('routeForLimitAndOffset', function($name,$defaultValue=NULL){
 
 Flight::register('account_dao', 'AccountsDao');
 Flight::register('patient_dao', 'PatientsDao');
-
 Flight::register('patient_service', 'PatientService');
+Flight::register('account_service', 'PatientService');
 
 Flight::start();
 
