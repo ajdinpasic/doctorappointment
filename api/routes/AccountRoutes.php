@@ -1,26 +1,17 @@
 <?php
 
   require_once dirname(__FILE__)."/../dao/AccountsDao.class.php";
+  require_once dirname(__FILE__)."/../index.php";
 
 
-    Flight::map('hello', function($name){
-      echo "hello $name!";
-    });
 
-  // Call your custom method
-  Flight::hello('Bob');
 
 
 
   Flight::route('GET /accounts', function(){
-    $request=Flight::request();
-    $offset= @$request->query->getData()["offset"];
-    $offset = $offset ? $offset : 0;
-    $limit= @$request->query->getData()["limit"];
-    $limit = $limit ? $limit : 15;
-
-    print_r($offset);
-    print_r($limit);
+    $offset= Flight::routeForLimitAndOffset("offset",0);
+    $limit= Flight::routeForLimitAndOffset("limit",0);
+    Flight::json(Flight::account()->getAllEntities($offset,$limit));
   });
 
     Flight::route('GET /account/@id', function($id){
