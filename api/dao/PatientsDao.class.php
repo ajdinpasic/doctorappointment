@@ -12,7 +12,7 @@
 
     public function getPatientsByName($search,$offset,$limit) {
       return $this->query("SELECT * FROM patients
-        WHERE patient_name LIKE CONCAT('%', :patient_name, '%') LIMIT ${limit} OFFSET ${offset}",["patient_name" => $search]);
+        WHERE LOWER(patient_name) LIKE CONCAT('%', :patient_name, '%') LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search)]);
     }
 
     }
