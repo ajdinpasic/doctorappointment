@@ -10,10 +10,14 @@
         parent::__construct("patients","patient_id");
     }
 
-    public function getPatientByEmail($email) {
-      return $this->query_unique("SELECT * FROM patients WHERE patient_email = :patient_email",["email"=>$email]);
+    public function getPatientsByName($search,$offset,$limit) {
+      return $this->query("SELECT * FROM patients
+        WHERE patient_name LIKE CONCAT('%', :patient_name, '%') LIMIT ${limit} OFFSET ${offset}",["patient_name" => $search]);
+    }
 
-    } /*
+    }
+
+     /*
 
     public function getPatientById($id) {
       return $this->query_unique("SELECT * FROM patients WHERE patient_id = :patient_id",["patient_id" => $id]);
@@ -29,7 +33,7 @@
     } */
 
 
-  }
+
 
 
 

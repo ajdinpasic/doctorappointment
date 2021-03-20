@@ -16,6 +16,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     public function getAccountbyEmail($email) {
       return $this->query_unique("SELECT * FROM accounts WHERE email = :email",["email"=>$email]);
     }
+    
   }
  /*
      public function getAllAccounts() {
