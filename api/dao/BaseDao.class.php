@@ -85,9 +85,22 @@ error_reporting(E_ALL);
     public function getEntity($id) {
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
   }
-public function getAllEntities($offset = 0, $limit = 25 ,$order="id") {
+public function getAllEntities($offset = 0, $limit = 25 ,$order="-id") {
+
+  global $orderWay;
+
+  switch(substr($order,0,1)) {
+    case "+" :
+     $orderWay = "DESC"; break;
+    case "−" :
+    $orderWay = "ASC"; break;
+  };
+  $orderColumn=substr($order,1);
+
+
+
       return $this->query("SELECT * FROM {$this->table}
-        ORDER BY {$order} DESC
+        ORDER BY {$orderColumn} {$orderWay}
         LIMIT {$limit} OFFSET {$offset}",[]);
   }
 

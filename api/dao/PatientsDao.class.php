@@ -11,7 +11,7 @@
     }
 
     public function getPatientsByName($search,$offset,$limit,$order) {
-/*
+
       global $orderWay;
 
       switch(substr($order,0,1)) {
@@ -20,12 +20,12 @@
         case "−" :
         $orderWay = "ASC"; break;
       };
-      $orderColumn=substr($order,1); */
+      $orderColumn=substr($order,1);
 
 
       return $this->query("SELECT * FROM patients
         WHERE LOWER(patient_name) LIKE CONCAT('%', :patient_name, '%')
-        ORDER BY {$order} DESC
+        ORDER BY {$order} {$orderWay}
         LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search) /*"orderWay" => $orderWay*/]);
     }
     public function getPatientsByToken($token) {

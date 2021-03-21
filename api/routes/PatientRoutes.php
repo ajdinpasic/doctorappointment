@@ -7,7 +7,7 @@ Flight::route('GET /patients', function(){
   $offset= Flight::routeForLimitAndOffset("offset",0);
   $limit= Flight::routeForLimitAndOffset("limit",10);
   $search = Flight::routeForLimitAndOffset("search");
-  $order = Flight ::routeForLimitAndOffset("order","patient_id");
+  $order = Flight ::routeForLimitAndOffset("order","-patient_id");
   //$orderWay = Flight ::routeForLimitAndOffset("orderWay","DESC");
   Flight::json(Flight::patient_service()->getPatientService($search,$offset,$limit,$order));
 
