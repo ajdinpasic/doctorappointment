@@ -32,6 +32,12 @@ Flight::route('PUT /patients/@id', function($id){
   Flight::json($result);
 
 });
+  Flight::route('GET /patients/confirm/@token', function($token){
+    Flight::patient_service()->confirm($token);
+    Flight::json(["Message" => "Your account is successfully activated"]);
+  });
+
+
 
 
 

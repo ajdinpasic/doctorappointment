@@ -11,8 +11,11 @@
     }
 
     public function getPatientsByName($search,$offset,$limit) {
-      return $this->query("SELECT * FROM patients
+      return parent::query("SELECT * FROM patients
         WHERE LOWER(patient_name) LIKE CONCAT('%', :patient_name, '%') LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search)]);
+    }
+    public function getPatientsByToken($token) {
+      return $this->query_unique("SELECT * FROM patients WHERE token = :token",["token"=> $token]);
     }
 
     }
