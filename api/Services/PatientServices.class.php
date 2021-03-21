@@ -15,12 +15,12 @@ class PatientService extends BaseService{
   }
 
 
-  public function getPatientService($search,$offset,$limit) {
+  public function getPatientService($search,$offset,$limit,$order) {
     if ($search) {
-      return $this->dao->getPatientsByName($search,$offset,$limit);
+      return $this->dao->getPatientsByName($search,$offset,$limit,$order);
     } else {
 
-    return $this->dao->getAllEntities($offset,$limit); }
+    return $this->dao->getAllEntities($offset,$limit,$order); }
 
 
 }
