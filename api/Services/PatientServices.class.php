@@ -28,7 +28,7 @@ class PatientService extends BaseService{
     //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
 
     try {
-      // open transaction here
+      $this->dao->beginTransaction();
 
       $account = $this->account_dao->insertEntity([
 
@@ -46,15 +46,15 @@ class PatientService extends BaseService{
         "token" => md5(random_bytes(16))
 
       ]);
-      return $patient;
-      // commit here
+
+      $this->dao->commit();
     } catch (Exception $e) {
-      //rollback
+      $this->dao->rollback();
       throw $e;
     }
 
 
-
+      return $patient;
     // TODO: send email with some token
   }
 

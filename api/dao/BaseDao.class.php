@@ -11,6 +11,18 @@ error_reporting(E_ALL);
     private $unique_key;
 
 
+    public function beginTransaction() {
+      $this->connection->beginTransaction();
+    }
+
+    public function commit() {
+      $this->connection->commit();
+    }
+
+    public function rollback() {
+      $this->connection->rollback();
+    }
+
 
     public static function parse_order($order) {
 
@@ -36,6 +48,7 @@ error_reporting(E_ALL);
       $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
       // set the PDO error mode to exception
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
       // echo "Connected successfully";
       } catch(PDOException $e) {
         throw $e;
@@ -103,6 +116,7 @@ error_reporting(E_ALL);
     public function getEntity($id) {
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
     }
+
     public function getAllEntities($offset = 0, $limit = 25 ,$order="-id") {
 
       list($orderColumn,$orderWay)= self::parse_order($order);
