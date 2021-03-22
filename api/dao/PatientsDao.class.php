@@ -12,15 +12,7 @@
 
     public function getPatientsByName($search,$offset,$limit,$order) {
 
-      global $orderWay;
-
-      switch(substr($order,0,1)) {
-        case "+" :
-         $orderWay = "DESC"; break;
-        case "−" :
-        $orderWay = "ASC"; break;
-      };
-      $orderColumn=substr($order,1);
+      list($orderColumn,$orderWay)= self:: parse_order($order);
 
 
       return $this->query("SELECT * FROM patients

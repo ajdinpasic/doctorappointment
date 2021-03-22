@@ -11,12 +11,10 @@ class AccountService extends BaseService{
     $this->dao=new AccountsDao();
   }
 
-  public function getAccountService($search,$offset,$limit) {
-    if ($search) {
-      return $this->dao->getAccountByEmail($search,$offset,$limit);
-    } else {
+  public function getAccountService($offset,$limit,$order) {
 
-    return $this->dao->getAllEntities($offset,$limit); }
+
+    return $this->dao->getAllEntities($offset,$limit,$order); }
 
 
 
@@ -24,7 +22,7 @@ class AccountService extends BaseService{
 }
 
 
-}
+
 
 
  ?>

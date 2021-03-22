@@ -10,6 +10,24 @@ error_reporting(E_ALL);
     private $table;
     private $unique_key;
 
+
+
+    public static function parse_order($order) {
+
+      global $orderWay;
+
+      switch(substr($order,0,1)) {
+        case "+" :
+         $orderWay = "DESC"; break;
+        case "−" :
+        $orderWay = "ASC"; break;
+      };
+      $orderColumn=substr($order,1);
+
+      return [$orderColumn,$orderWay];
+
+    }
+
     public function __construct($table,$unique_key) {
       $this->table=$table;
       $this->unique_key=$unique_key;
@@ -60,7 +78,7 @@ error_reporting(E_ALL);
       $entity['id']=$id;
       $stmt->execute($entity);
 
-  }
+    }
 
     protected function query($query,$parameters) {
 
@@ -69,34 +87,25 @@ error_reporting(E_ALL);
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-  }
+    }
     protected function query_unique($query,$parameters) {
       $result=$this->query($query,$parameters);
       return reset($result);
 
-  }
+    }
     public function insertEntity($data) {
 
       return $this->insert($this->table,$data);
-  }
+    }
     public function updateEntity($id,$data) {
       $this->update($id,$this->table,$data,$this->unique_key);
-  }
+    }
     public function getEntity($id) {
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
-  }
-public function getAllEntities($offset = 0, $limit = 25 ,$order="-id") {
+    }
+    public function getAllEntities($offset = 0, $limit = 25 ,$order="-id") {
 
-  global $orderWay;
-
-  switch(substr($order,0,1)) {
-    case "+" :
-     $orderWay = "DESC"; break;
-    case "−" :
-    $orderWay = "ASC"; break;
-  };
-  $orderColumn=substr($order,1);
-
+      list($orderColumn,$orderWay)= self::parse_order($order);
 
 
       return $this->query("SELECT * FROM {$this->table}
