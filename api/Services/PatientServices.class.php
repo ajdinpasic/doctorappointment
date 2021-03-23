@@ -9,6 +9,7 @@ class PatientService extends BaseService{
 
   private $account_dao;
 
+
   public function __construct() {
     $this->dao=new PatientsDao();
     $this->account_dao= new AccountsDao();
@@ -26,9 +27,9 @@ class PatientService extends BaseService{
 }
   public function register($patient) {
     //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
-
+    $this->dao->beginTransaction();
     try {
-      $this->dao->beginTransaction();
+
 
       $account = $this->account_dao->insertEntity([
 
@@ -47,20 +48,26 @@ class PatientService extends BaseService{
 
       ]);
 
-      $this->dao->commit();
+
     } catch (Exception $e) {
-      $this->dao->rollback();
+      $this->dao->rollBack();
+      if (str_contains($e->getMessage(), "patients.uq_email")) {
+          throw new Exception("Account with same email exists in the database", 400);
+    } else {
       throw $e;
+   }
+
+
     }
 
-
+    $this->dao->commit();
       return $patient;
     // TODO: send email with some token
   }
 
   public function confirm($token) {
     $patient= $this->dao->getPatientsByToken($token);
-    if (!isset($patient["patient_id"])) throw new Exception("Invalid token");
+    if (!isset($patient["patient_id"])) throw new Exception("Invalid token",400);
     $this->account_dao->updateEntity($patient["account_id"],["status"=> "Active"]);
 
     //  TODO: send email to customer (success)

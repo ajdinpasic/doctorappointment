@@ -12,15 +12,18 @@ error_reporting(E_ALL);
 
 
     public function beginTransaction() {
+    //  $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
       $this->connection->beginTransaction();
     }
 
     public function commit() {
       $this->connection->commit();
+    //  $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT,1);
     }
 
-    public function rollback() {
-      $this->connection->rollback();
+    public function rollBack() {
+      $this->connection->rollBack();
+      //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
     }
 
 
@@ -47,8 +50,10 @@ error_reporting(E_ALL);
       try {
       $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
       // set the PDO error mode to exception
+      //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
+
+
       // echo "Connected successfully";
       } catch(PDOException $e) {
         throw $e;
