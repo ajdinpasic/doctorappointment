@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
+//require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
   Flight::route('GET /accounts', function(){
