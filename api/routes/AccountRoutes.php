@@ -3,6 +3,19 @@
 //require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
+/**
+ * @OA\Info(title="doctorappointment API", version="0.1")
+ */
+
+/**
+ * @OA\Get(
+ *     path="/accounts",
+ *     @OA\Response(response="200", description="Output all accounts from the database")
+ * )
+ */
+
+
+
   Flight::route('GET /accounts', function(){
     $offset= Flight::routeForLimitAndOffset("offset",0);
     $limit= Flight::routeForLimitAndOffset("limit",10);
@@ -10,6 +23,24 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
     Flight::json(Flight::account_service()->getAccountService($offset,$limit,$order));
 
   });
+
+  /**
+   * @OA\Get(
+   *     path="/accounts/{id}",
+   *@OA\Parameter(
+   *    @OA\Schema(type="integer"),
+   *    in="path",
+   *    allowReserved=true,
+   *    name="account_id",
+   *    default="1"),
+   *     @OA\Response(response="200", description="Get specific account based on given id"),
+   *
+ *
+ * )
+   */
+
+
+
 
     Flight::route('GET /account/@id', function($id){
       $result=Flight::account_service()->getEntity($id);
