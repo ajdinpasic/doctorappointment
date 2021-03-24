@@ -8,10 +8,23 @@ class AppointmentsDao extends BaseDao {
       parent::__construct("appointments","appointment_id");
   }
 
-  
+
     public function getAllAppointments() {
       return $this->query("SELECT * FROM appointments",[]);
-    } /*
+    }
+
+    public function getAppointmentByPatient($id) {
+      return $this->query_unique("SELECT * FROM appointments WHERE patient_id = :patient_id",["patient_id"=> $id]);
+
+    }
+    public function getAppointmentByDoctor($id) {
+      return $this->query_unique("SELECT * FROM appointments WHERE doctor_id = :doctor_id",["doctor_id"=> $id]);
+
+    }
+
+
+
+    /*
     public function getAppointmentById($id) {
       return $this->query_unique("SELECT * FROM appointments WHERE appointment_id =:id",["id" => $id]);
     }
