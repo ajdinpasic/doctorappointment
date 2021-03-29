@@ -5,6 +5,12 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
 /**
  * @OA\Info(title="doctorappointment API", version="0.1")
+ * @OA\OpenApi(
+*   @OA\Server(
+*       url="http://localhost/doctorappointment/api/",
+*       description="DEVELOPMENT ENVIRONMENT"
+*   )
+* )
  */
 
 /**
@@ -26,7 +32,7 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
   /**
    * @OA\Get(
-   *     path="/accounts/{id}",
+   *     path="/account/{account_id}",
    *@OA\Parameter(
    *    @OA\Schema(type="integer"),
    *    in="path",
