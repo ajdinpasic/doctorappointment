@@ -3,15 +3,7 @@
 //require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
-/**
- * @OA\Info(title="doctorappointment API", version="0.1")
- * @OA\OpenApi(
-*   @OA\Server(
-*       url="http://localhost/doctorappointment/api/",
-*       description="DEVELOPMENT ENVIRONMENT"
-*   )
-* )
- */
+
 
 /**
  * @OA\Get(
@@ -38,7 +30,7 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
    *    in="path",
    *    allowReserved=true,
    *    name="account_id",
-   *    default="1"),
+   *    example="1"),
    *     @OA\Response(response="200", description="Get specific account based on given id"),
    *
  *

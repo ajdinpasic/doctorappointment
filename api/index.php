@@ -18,6 +18,7 @@ require_once dirname (__FILE__)."/Services/PatientServices.class.php";
 require_once dirname (__FILE__)."/Services/AccountServices.class.php";
 require_once dirname (__FILE__)."/Services/DoctorServices.class.php";
 require_once dirname (__FILE__)."/Services/AppointmentServices.class.php";
+require_once dirname (__FILE__)."/routes/doc.php";
 Flight::set('flight.log_errors', true);
 
 /*
