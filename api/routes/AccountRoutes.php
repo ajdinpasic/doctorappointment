@@ -7,8 +7,11 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
 /**
  * @OA\Get(
- *     path="/accounts",
- *     @OA\Response(response="200", description="Output all accounts from the database")
+ *     path="/accounts",tags={"account"},
+ *    @OA\Parameter(type="integer", in="query", name="offset", default="0", description="Offset for pagination"),
+ *    @OA\Parameter(type="integer", in="query", name="limit", default="10", description="Limit for pagination"),
+ *    @OA\Parameter(type="string", in="query", name="order", default="-account_id", description="Ordering for pagination"),
+ *    @OA\Response(response="200", description="Output all accounts from the database")
  * )
  */
 
@@ -24,14 +27,14 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
   /**
    * @OA\Get(
-   *     path="/account/{account_id}",
+   *     path="/account/{account_id}",tags={"account"},
    *@OA\Parameter(
    *    @OA\Schema(type="integer"),
    *    in="path",
    *    allowReserved=true,
    *    name="account_id",
    *    example="1"),
-   *     @OA\Response(response="200", description="Get specific account based on given id"),
+   *     @OA\Response(response="200", description="Get specific account based on given id")
    *
  *
  * )
