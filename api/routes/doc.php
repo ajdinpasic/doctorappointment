@@ -19,6 +19,10 @@ Flight::route('GET /swagger', function(){
 
 });
 
+Flight::route('GET /', function(){
 
+  Flight::redirect('/docs');
+
+});
 
  ?>
