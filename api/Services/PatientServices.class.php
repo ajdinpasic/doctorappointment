@@ -84,7 +84,21 @@ class PatientService extends BaseService{
 
       //return $result1;
   }
+  public function forget($patient) {
+    $result1=$this->dao->getPatientByEmail($patient["patient_email"]);
+    if (!isset($result1["patient_id"])) throw new Exception ("Patient does not exist",400);
+    $newToken=md5(random_bytes(16));
+    $result2=$this->updateEntity($result1["patient_id"],["token" =>$newToken]);
+    $result1["token"]=$newToken;
+    $this->smtpclient->send_token_for_resetPasswordPatient($result1);
+  }
 
+  public function reset($patient) {
+    $result1=$this->dao->getPatientsByToken($patient["token"]);
+    if (!isset($result1["patient_id"])) throw new Exception ("Invalid token",400);
+
+    $this->dao->updateEntity($result1["patient_id"],["password" => md5($patient["password"])]);
+  }
 
 
 /*

@@ -45,6 +45,19 @@ Flight::route('PUT /patients/@id', function($id){
     Flight::json("Your are successfully loged in");
   });
 
+  Flight::route('POST /patients/forget', function(){
+    $request = Flight::request();
+    $data=$request->data->getData();
+    Flight::patient_service()->forget($data);
+    Flight::json("Your recovery URL has been sent to your email account");
+  });
+
+  Flight::route('POST /patients/reset', function(){
+    $request = Flight::request();
+    $data=$request->data->getData();
+    Flight::patient_service()->reset($data);
+    Flight::json("Your password has been changed");
+  });
 
 
  ?>

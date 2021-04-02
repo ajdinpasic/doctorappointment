@@ -95,6 +95,7 @@ error_reporting(E_ALL);
       $stmt= $this->connection->prepare($query);
       $entity['id']=$id;
       $stmt->execute($entity);
+      return $entity;
 
     }
 
@@ -116,7 +117,7 @@ error_reporting(E_ALL);
       return $this->insert($this->table,$data);
     }
     public function updateEntity($id,$data) {
-      $this->update($id,$this->table,$data,$this->unique_key);
+      return $this->update($id,$this->table,$data,$this->unique_key);
     }
     public function getEntity($id) {
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);

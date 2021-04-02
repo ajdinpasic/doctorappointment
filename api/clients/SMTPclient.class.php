@@ -42,7 +42,24 @@ public function send_token_for_registrationPatient($patient) {
   $this->mailer->send($message);
 }
 
+public function send_token_for_resetPasswordPatient($patient) {
+  $message = (new Swift_Message('Reset of your password'))
+    ->setFrom(['doctorappointment12345@gmail.com' => 'doctorappointment'])
+    ->setTo([$patient["patient_email"]])
+    ->setBody('Your token for the new password is: '.$patient["token"]);
 
+
+  $this->mailer->send($message);
+}
+public function send_token_for_resetPasswordDoctor($doctor) {
+  $message = (new Swift_Message('Reset of your password'))
+    ->setFrom(['doctorappointment12345@gmail.com' => 'doctorappointment'])
+    ->setTo([$doctor["doctor_email"]])
+    ->setBody('Your token for the new password is: '.$doctor["token"]);
+
+
+  $this->mailer->send($message);
+}
 
 
 }

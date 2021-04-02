@@ -13,7 +13,7 @@ class BaseService {
   }
 
   public function updateEntity($id,$data) {
-    $this->dao->updateEntity($id,$data);
+    return $this->dao->updateEntity($id,$data);
   }
 
 }
