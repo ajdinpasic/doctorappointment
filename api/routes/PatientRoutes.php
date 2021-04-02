@@ -21,8 +21,8 @@ Flight::route('GET /patient/@id', function($id){
 Flight::route('POST /patients/register', function(){
   $request = Flight::request();
   $data=$request->data->getData();
-  $result=Flight::patient_service()->register($data);
-  Flight::json($result);
+  Flight::patient_service()->register($data);
+  Flight::json("Check out your email for further instructions");
 });
 
 Flight::route('PUT /patients/@id', function($id){
@@ -38,8 +38,12 @@ Flight::route('PUT /patients/@id', function($id){
     Flight::json(["Message" => "Your account is successfully activated"]);
   });
 
-
-
+  Flight::route('POST /patients/login', function(){
+    $request = Flight::request();
+    $data=$request->data->getData();
+    Flight::patient_service()->login($data);
+    Flight::json("Your are successfully loged in");
+  });
 
 
 

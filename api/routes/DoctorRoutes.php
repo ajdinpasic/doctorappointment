@@ -5,8 +5,8 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 Flight::route('POST /doctors/register', function(){
   $request = Flight::request();
   $data=$request->data->getData();
-  $result=Flight::doctor_service()->register($data);
-  Flight::json($result);
+  Flight::doctor_service()->register($data);
+  Flight::json("Check out your email for further instructions");
 });
 
 
@@ -41,7 +41,12 @@ Flight::route('PUT /doctors/@id', function($id){
 
 });
 
-
+Flight::route('POST /doctors/login', function(){
+  $request = Flight::request();
+  $data=$request->data->getData();
+  Flight::doctor_service()->login($data);
+  Flight::json("Your are successfully loged in");
+});
 
 
 

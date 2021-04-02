@@ -4,15 +4,18 @@ require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/DoctorsDao.class.php";
 require_once dirname(__FILE__)."/../dao/AccountsDao.class.php";
+require_once dirname(__FILE__)."/../clients/SMTPclient.class.php";
 
 class DoctorService extends BaseService {
 
   private $account_dao;
+  private $smtpclient;
 
 
   public function __construct() {
     $this->dao=new DoctorsDao();
     $this->account_dao= new AccountsDao();
+    $this->smtpclient=new SMTPclient();
   }
 
 
@@ -27,9 +30,9 @@ class DoctorService extends BaseService {
 }
   public function register($doctor) {
     //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
-    $this->dao->beginTransaction();
-    try {
 
+    try {
+      $this->dao->beginTransaction();
 
       $account = $this->account_dao->insertEntity([
 
@@ -43,12 +46,12 @@ class DoctorService extends BaseService {
         "doctor_name" => $doctor["doctor_name"],
         "doctor_surname" => $doctor["doctor_surname"],
         "doctor_email" => $doctor["doctor_email"],
-        "password" => $doctor["password"],
+        "password" => md5($doctor["password"]),
         "token" => md5(random_bytes(16))
 
       ]);
 
-
+      $this->dao->commit();
     } catch (Exception $e) {
       $this->dao->rollBack();
       if (str_contains($e->getMessage(), "doctors.uq_email")) {
@@ -60,9 +63,9 @@ class DoctorService extends BaseService {
 
     }
 
-    $this->dao->commit();
+      $this->smtpclient->send_token_for_registrationDoctor($doctor);
       return $doctor;
-    // TODO: send email with some token
+
   }
 
   public function confirm($token) {
@@ -73,7 +76,15 @@ class DoctorService extends BaseService {
     //  TODO: send email to customer (success)
   }
 
+public function login($doctor) {
+    $result1=$this->dao->getDoctorByEmail($doctor["doctor_email"]);
+    if (!isset($result1["doctor_id"])) throw new Exception ("Doctor does not exist",400);
+    $result2=$this->account_dao->getAccountById($result1["account_id"]);
+    if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
+    if ($result1["password"] != md5($doctor["password"])) throw new Exception ("invalid password",400);
 
+    //return $result1;
+}
 
 
 }

@@ -16,19 +16,19 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     public function getAccountbyEmail($email) {
       return $this->query_unique("SELECT * FROM accounts WHERE email = :email",["email"=>$email]);
     }
-    */
-  }
- /*
-     public function getAllAccounts() {
-       return $this->query("SELECT * FROM accounts",[]);
-     }
-     public function getAllAccounts() {
-       return $this->query("SELECT * FROM accounts",[]);
-     }
 
+  }
+
+     public function getAllAccounts() {
+       return $this->query("SELECT * FROM accounts",[]);
+     }
+     public function getAllAccounts() {
+       return $this->query("SELECT * FROM accounts",[]);
+     }
+*/
     public function getAccountById($id) {
       return $this->query_unique("SELECT * FROM accounts WHERE account_id = :account_id",["account_id"=>$id]);
-    }
+    } /*
     public function addAccount($account) {
 
     }
@@ -44,6 +44,6 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 
       $this->update($account_id,"accounts",$account,"account_id");
     } */
-
+}
 
 ?>

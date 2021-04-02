@@ -23,14 +23,15 @@
     public function getPatientsByToken($token) {
       return $this->query_unique("SELECT * FROM patients WHERE token = :token",["token"=> $token]);
     }
-
+    public function getPatientByEmail($email) {
+      return $this->query_unique("SELECT * FROM patients WHERE patient_email = :patient_email",["patient_email"=>$email]);
     }
 
-     /*
 
     public function getPatientById($id) {
       return $this->query_unique("SELECT * FROM patients WHERE patient_id = :patient_id",["patient_id" => $id]);
     }
+    /*
     public function getAllPatients() {
       return $this->query("SELECT * FROM patients",[]);
     }
@@ -41,7 +42,7 @@
       return $this->insert("patients",$patient);
     } */
 
-
+}
 
 
 

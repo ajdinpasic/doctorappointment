@@ -32,12 +32,12 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 
   }
 
-  public function getAllDoctors() {
+  public function getDcotorBy() {
     return $this->query("SELECT * FROM doctors",[]);
-  }
-  public function getDoctorById($id) {
-    return $this->query_unique("SELECT * FROM doctors WHERE doctor_id = :id",["id"=>$id]);
-  }
+  } */
+  public function getDoctorByEmail($email) {
+    return $this->query_unique("SELECT * FROM doctors WHERE doctor_email = :doctor_email",["doctor_email"=>$email]);
+  } /*
   public function updateDoctorById($id,$doctor) {
     return $this->update($id,"doctors",$doctor,"doctor_id");
   }
