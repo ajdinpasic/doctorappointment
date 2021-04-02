@@ -71,7 +71,7 @@ class DoctorService extends BaseService {
   public function confirm($token) {
     $doctor= $this->dao->getDoctorsByToken($token);
     if (!isset($doctor["doctor_id"])) throw new Exception("Invalid token",400);
-    $this->account_dao->updateEntity($doctor["account_id"],["status"=> "Active"]);
+    $this->account_dao->updateEntity($doctor["account_id"],["status"=> "Active","token" => NULL]);
 
     //  TODO: send email to customer (success)
   }
@@ -89,8 +89,9 @@ public function login($doctor) {
 public function forget($doctor) {
   $result1=$this->dao->getDoctorByEmail($doctor["doctor_email"]);
   if (!isset($result1["doctor_id"])) throw new Exception ("Doctor does not exist",400);
+    if (strtotime(date(Config::DATE_FORMAT)) - strtotime($result1["token_expire"])  < 300 ) throw new Exception("Token overload",400);
   $newToken=md5(random_bytes(16));
-  $result2=$this->updateEntity($result1["doctor_id"],["token" =>$newToken]);
+  $result2=$this->updateEntity($result1["doctor_id"],["token" =>$newToken,"token_expire" => date(Config::DATE_FORMAT)]);
   $result1["token"]=$newToken;
   $this->smtpclient->send_token_for_resetPasswordDoctor($result1);
 }
@@ -100,7 +101,7 @@ public function forget($doctor) {
 public function reset($doctor) {
   $result1=$this->dao->getDoctorsByToken($doctor["token"]);
   if (!isset($result1["doctor_id"])) throw new Exception ("Invalid token",400);
-
+  if (strtotime(date(Config::DATE_FORMAT)) - strtotime($result1["token_expire"]) > 300 ) throw new Exception("Token session expired",400);
   $this->dao->updateEntity($result1["doctor_id"],["password" => md5($doctor["password"])]);
 }
 
