@@ -1,5 +1,6 @@
 <?php
 
+
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 
 Flight::route('POST /doctors/register', function(){
@@ -27,9 +28,35 @@ Flight::route('GET /doctors', function(){
 
 });
 
+/**
+ * @OA\Get(
+ *     path="/doctor/{doctor_id}",tags={"doctors"},security={{"ApiKeyAuth":{}}},
+ *@OA\Parameter(
+ *    type="integer",
+ *    in="path",
+ *    allowReserved=true,
+ *    name="doctor_id",
+ *    example="1"),
+ *     @OA\Response(response="200", description="Get specific doctor based on given id")
+ *
+*
+* )
+ */
 Flight::route('GET /doctor/@id', function($id){
-  $result=Flight::doctor_service()->getEntity($id);
-  Flight::json($result);
+  $headers= getallheaders();
+  $token= @$headers["Authentication"];
+  //print_r($headers); die;
+  try {
+    $decoded = (array)\Firebase\JWT\JWT::decode($token,"JWT",["HS256"]);
+      $result=Flight::doctor_service()->getEntity($id);
+      Flight::json($result);
+
+  } catch (Exception $e) {
+    Flight::json(["message" => $e->getMessage()], 401); die;
+  }
+
+
+
 });
 
 Flight::route('PUT /doctors/@id', function($id){
@@ -44,8 +71,8 @@ Flight::route('PUT /doctors/@id', function($id){
 Flight::route('POST /doctors/login', function(){
   $request = Flight::request();
   $data=$request->data->getData();
-  Flight::doctor_service()->login($data);
-  Flight::json("Your are successfully loged in");
+  Flight::json(Flight::doctor_service()->login($data));
+  //Flight::json("Your are successfully loged in");
 });
 
 Flight::route('POST /doctors/forget', function(){

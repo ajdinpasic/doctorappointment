@@ -8,6 +8,7 @@ require_once dirname(__FILE__)."/../clients/SMTPclient.class.php";
 
 class DoctorService extends BaseService {
 
+
   private $account_dao;
   private $smtpclient;
 
@@ -37,7 +38,8 @@ class DoctorService extends BaseService {
       $account = $this->account_dao->insertEntity([
 
         "type" => "doctor",
-        "created_at" => date(Config::DATE_FORMAT)
+        "created_at" => date(Config::DATE_FORMAT),
+        "role" => "admin"
 
       ]);
 
@@ -82,8 +84,8 @@ public function login($doctor) {
     $result2=$this->account_dao->getAccountById($result1["account_id"]);
     if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
     if ($result1["password"] != md5($doctor["password"])) throw new Exception ("invalid password",400);
-
-    //return $result1;
+    $jwt = (array)\Firebase\JWT\JWT::encode(["doctor_id" => $result1["doctor_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], "JWT");
+    return ["token" => $jwt];
 }
 
 public function forget($doctor) {

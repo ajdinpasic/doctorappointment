@@ -36,7 +36,8 @@ class PatientService extends BaseService{
       $account = $this->account_dao->insertEntity([
 
         "type" => "patient",
-        "created_at" => date(Config::DATE_FORMAT)
+        "created_at" => date(Config::DATE_FORMAT),
+        "role" => "user"
 
       ]);
 

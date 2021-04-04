@@ -7,6 +7,12 @@
 *       url="http://localhost/doctorappointment/api/",
 *       description="DEVELOPMENT ENVIRONMENT"
 *   )
+* ),
+* @OA\SecurityScheme(
+*      securityScheme="ApiKeyAuth",
+*      type="apiKey",
+*      in="header",
+*      name="Authentication"
 * )
  */
 
