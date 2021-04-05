@@ -40,7 +40,7 @@
         window.onload = function () {
             // Begin Swagger UI call region
             const ui = SwaggerUIBundle({
-                url: "http://localhost/doctorappointment/api/test.php",
+                url: "//<?=$_SERVER['SERVER_NAME']?><?=str_replace("/docs/", "/swagger", $_SERVER['REQUEST_URI'])?>",
                 dom_id: '#swagger-ui',
                 deepLinking: true,
                 presets: [

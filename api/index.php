@@ -18,7 +18,8 @@ require_once dirname (__FILE__)."/Services/PatientServices.class.php";
 require_once dirname (__FILE__)."/Services/AccountServices.class.php";
 require_once dirname (__FILE__)."/Services/DoctorServices.class.php";
 require_once dirname (__FILE__)."/Services/AppointmentServices.class.php";
-require_once dirname (__FILE__)."/routes/doc.php";
+require_once dirname (__FILE__)."/routes/middleware.php";
+
 Flight::set('flight.log_errors', true);
 
 /*
@@ -39,6 +40,25 @@ Flight::register('patient_service', 'PatientService');
 Flight::register('account_service', 'AccountService');
 Flight::register('doctor_service', 'DoctorService');
 Flight::register('appointment_service', 'AppointmentService');
+
+
+
+
+Flight::route('GET /swagger', function(){
+
+  $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
+  header('Content-Type: application/json');
+  echo $openapi->toJson();
+
+});
+
+Flight::route('GET /', function(){
+
+  Flight::redirect('/docs');
+
+});
+
+
 
 Flight::start();
 
