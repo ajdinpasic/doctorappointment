@@ -26,10 +26,10 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
  *   @OA\RequestBody(description="New doctor registers", required=true,
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
- *    				 @OA\Property(property="doctor_name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
- *     				 @OA\Property(property="doctor_surname", required="true", type="string", example="First Last Name",	description="Name of the user`" ),
- *    				 @OA\Property(property="doctor_email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" ),
- *             @OA\Property(property="password", required="true", type="string", example="12345",	description="Password" )
+ *    				 @OA\Property(property="doctor_name", required="true", type="string", example="My Test Account",	description="Name of the doctor" ),
+ *     				 @OA\Property(property="doctor_surname", required="true", type="string", example="First Last Name",	description="Surnname of the doctor`" ),
+ *    				 @OA\Property(property="doctor_email", required="true", type="string", example="myemail@gmail.com",	description="Patient's email address" ),
+ *             @OA\Property(property="password", required="true", type="string", example="12345",	description="Patient's password" )
  *          )
  *       )
  *     ),
@@ -106,7 +106,7 @@ Flight::route('GET /doctors/@id', function($id){
  *          )
  *       )
  *     ),
- *     @OA\Response(response="200", description="Update account based on id")
+ *     @OA\Response(response="200", description="Update doctor based on id")
  * )
  */
 
@@ -127,7 +127,7 @@ Flight::route('PUT /doctors/@id', function($id){
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
  *    				 @OA\Property(property="doctor_email", required="true", type="string", example="myemail@gmail.com",	description="Doctor's email address" ),
- *             @OA\Property(property="password", required="true", type="string", example="12345",	description="Password" )
+ *             @OA\Property(property="password", required="true", type="string", example="12345",	description="Doctor's password" )
  *          )
  *       )
  *     ),
@@ -145,6 +145,22 @@ Flight::route('POST /doctors/login', function(){
   //Flight::json("Your are successfully loged in");
 });
 
+/**
+ * @OA\Post(path="/doctors/forget", tags={"doctors"}, description="Send recovery URL to doctor email address",
+ *   @OA\RequestBody(description="Doctor forgets password", required=true,
+ *       @OA\MediaType(mediaType="application/json",
+ *    			@OA\Schema(
+ *    				 @OA\Property(property="doctor_email", required="true", type="string", example="myemail@gmail.com",	description="Doctor's email address" )
+ *          )
+ *       )
+ *     ),
+ *  @OA\Response(response="200", description="Message that recovery link has been sent.")
+ * )
+ */
+
+
+
+
 Flight::route('POST /doctors/forget', function(){
   $request = Flight::request();
   $data=$request->data->getData();
@@ -152,6 +168,19 @@ Flight::route('POST /doctors/forget', function(){
   Flight::json("Your recovery URL has been sent to your email account");
 });
 
+/**
+ * @OA\Post(path="/doctors/reset", tags={"doctors"}, description="Reset doctor password using recovery token",
+ *   @OA\RequestBody(description="Doctor resets password", required=true,
+ *       @OA\MediaType(mediaType="application/json",
+ *    			@OA\Schema(
+ *    				 @OA\Property(property="token", required="true", type="string", example="123",	description="Recovery token" ),
+ *    				 @OA\Property(property="password", required="true", type="string", example="123",	description="New password" )
+ *          )
+ *       )
+ *     ),
+ *  @OA\Response(response="200", description="Message that doctor has changed password.")
+ * )
+ */
 
 
 Flight::route('POST /doctors/reset', function(){
