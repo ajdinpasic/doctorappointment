@@ -21,6 +21,12 @@ class AppointmentsDao extends BaseDao {
       return $this->query_unique("SELECT * FROM appointments WHERE doctor_id = :doctor_id",["doctor_id"=> $id]);
 
     }
+    public function getAppointmentForPatient($patient_id,$id) {
+      return $this->query_unique("SELECT * FROM appointments WHERE patient_id = :patient_id AND appointment_id = :appointment_id",["patient_id"=> $patient_id,"appointment_id" => $id]);
+    }
+    public function getAppointmentForDoctor($doctor_id,$id) {
+      return $this->query_unique("SELECT * FROM appointments WHERE doctor_id = :doctor_id AND appointment_id = :appointment_id",["doctor_id"=> $doctor_id,"appointment_id" => $id]);
+    }
 
 
 
