@@ -4,12 +4,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
 require_once dirname(__FILE__)."/dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/dao/AccountsDao.class.php";
 require_once dirname(__FILE__)."/dao/PatientsDao.class.php";
 require_once dirname(__FILE__)."/dao/DoctorsDao.class.php";
 require_once dirname(__FILE__)."/dao/AppointmentsDao.class.php";
 require_once dirname (__FILE__)."/../vendor/autoload.php";
+require_once dirname (__FILE__)."/routes/middleware.php";
 require_once dirname (__FILE__)."/routes/AccountRoutes.php";
 require_once dirname (__FILE__)."/routes/DoctorRoutes.php";
 require_once dirname (__FILE__)."/routes/PatientRoutes.php";
@@ -18,7 +20,7 @@ require_once dirname (__FILE__)."/Services/PatientServices.class.php";
 require_once dirname (__FILE__)."/Services/AccountServices.class.php";
 require_once dirname (__FILE__)."/Services/DoctorServices.class.php";
 require_once dirname (__FILE__)."/Services/AppointmentServices.class.php";
-require_once dirname (__FILE__)."/routes/middleware.php";
+
 
 Flight::set('flight.log_errors', true);
 
@@ -42,7 +44,11 @@ Flight::register('doctor_service', 'DoctorService');
 Flight::register('appointment_service', 'AppointmentService');
 
 
-
+/* utility function for getting header parameters */
+Flight::map('header', function($name){
+  $headers = getallheaders();
+  return @$headers[$name];
+});
 
 Flight::route('GET /swagger', function(){
 
@@ -52,13 +58,16 @@ Flight::route('GET /swagger', function(){
 
 });
 
+
 Flight::route('GET /', function(){
 
   Flight::redirect('/docs');
 
 });
 
-require_once dirname (__FILE__)."/routes/middleware.php";
+
+
+
 
 Flight::start();
 
