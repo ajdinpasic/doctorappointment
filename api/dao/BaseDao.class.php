@@ -83,19 +83,16 @@ error_reporting(E_ALL);
   }
 
     protected function update($id,$table,$entity,$id_column="id") {
-      $query="UPDATE ${table} SET ";
-      foreach($entity as $key =>$value) {
-        $query.=$key." = :".$key.", ";
+      $query = "UPDATE ${table} SET ";
+  foreach($entity as $name => $value){
+    $query .= $name ."= :". $name. ", ";
+  }
+  $query = substr($query, 0, -2);
+  $query .= " WHERE ${id_column} = :id";
 
-      }
-      $query=substr($query,0,-2);
-      $query.=" WHERE $id_column = :id";
-
-      //$sql = "UPDATE accounts SET created_at = :created_at, type = :type,  password = :password email = :email  WHERE account_id=:account_id";
-      $stmt= $this->connection->prepare($query);
-      $entity['id']=$id;
-      $stmt->execute($entity);
-      return $entity;
+  $stmt= $this->connection->prepare($query);
+  $entity['id'] = $id;
+  $stmt->execute($entity);
 
     }
 
