@@ -73,7 +73,7 @@ class DoctorService extends BaseService {
   public function confirm($token) {
     $doctor= $this->dao->getDoctorsByToken($token);
     if (!isset($doctor["doctor_id"])) throw new Exception("Invalid token",400);
-    $this->account_dao->updateEntity($doctor["account_id"],["status"=> "Active","token" => NULL]);
+    $this->account_dao->updateEntity($doctor["account_id"],["status"=> "Active"]);
 
     //  TODO: send email to customer (success)
   }
@@ -84,7 +84,7 @@ public function login($doctor) {
     $result2=$this->account_dao->getAccountById($result1["account_id"]);
     if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
     if ($result1["password"] != md5($doctor["password"])) throw new Exception ("invalid password",400);
-    $jwt = (array)\Firebase\JWT\JWT::encode(["doctor_id" => $result1["doctor_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], "JWT");
+    $jwt = (array)\Firebase\JWT\JWT::encode(["doctor_id" => $result1["doctor_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
     return ["token" => $jwt];
 }
 

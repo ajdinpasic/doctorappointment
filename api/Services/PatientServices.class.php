@@ -71,7 +71,8 @@ class PatientService extends BaseService{
   public function confirm($token) {
     $patient= $this->dao->getPatientsByToken($token);
     if (!isset($patient["patient_id"])) throw new Exception("Invalid token",400);
-    $this->account_dao->updateEntity($patient["account_id"],["status"=> "Active","token" => NULL]);
+  $this->account_dao->updateEntity($patient["account_id"],["status"=> "Active"]);
+
 
     //  TODO: send email to customer (success)
   }
@@ -82,8 +83,8 @@ class PatientService extends BaseService{
       $result2=$this->account_dao->getAccountById($result1["account_id"]);
       if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
       if ($result1["password"] != md5($patient["password"])) throw new Exception ("invalid password",400);
-
-      //return $result1;
+      $jwt = (array)\Firebase\JWT\JWT::encode(["patient_id" => $result1["patient_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
+      return ["token" => $jwt];
   }
   public function forget($patient) {
     $result1=$this->dao->getPatientByEmail($patient["patient_email"]);
