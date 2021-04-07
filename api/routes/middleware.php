@@ -39,7 +39,7 @@ Flight::route('/doctors/*', function(){
 
    $doctor = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
     if (Flight::request()->method != "GET" && (!isset($doctor["doctor_id"]))){
-      throw new Exception("Patient can only perform get upon doctors", 403);
+      throw new Exception("Patients are not allowed to perform that", 403);
     }
     Flight::set('doctor', $doctor);
     return TRUE;
@@ -63,7 +63,7 @@ Flight::route('/patients/*', function(){
   try {
     $patient = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
      if (Flight::request()->method != "GET" && (!isset($patient["patient_id"]))){
-       throw new Exception("Doctor can only perform get upon patients", 403);
+       throw new Exception("Doctors are not allowed to perform that", 403);
      }
      Flight::set('patient', $patient);
      return TRUE;
@@ -76,5 +76,48 @@ Flight::route('/patients/*', function(){
 });
 
 
+
+Flight::route('/patients/appointments/*', function(){
+  if (Flight::request()-> url == "/swagger") return TRUE;
+
+  $headers= getallheaders();
+  $token= @$headers["Authentication"];
+
+  try {
+    $patient = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
+     if (!isset($patient["patient_id"])){
+       throw new Exception("You cannot access this", 403);
+     }
+     Flight::set('patient', $patient);
+     return TRUE;
+
+  } catch (Exception $e) {
+    Flight::json(["message" => $e->getMessage()], 401);
+    die;
+  }
+
+});
+
+Flight::route('/doctors/appointments/*', function(){
+  if (Flight::request()-> url == "/swagger") return TRUE;
+
+
+  $headers= getallheaders();
+  $token= @$headers["Authentication"];
+  //print_r($headers); die;
+  try {
+
+   $doctor = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
+    if (!isset($doctor["doctor_id"])){
+      throw new Exception("You cannot access this", 403);
+    }
+    Flight::set('doctor', $doctor);
+    return TRUE;
+
+  } catch (Exception $e) {
+    Flight::json(["message" => $e->getMessage()], 401);
+    die;
+  }
+});
 
  ?>
