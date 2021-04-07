@@ -59,7 +59,8 @@ Flight::route('GET /patients', function(){
 
 
 
-Flight::route('GET /patient/@id', function($id){
+Flight::route('GET /patients/@id', function($id){
+  if(Flight::get("patient")["patient_id"] != $id ) throw new Exception("This is not for you",403);
   $result=Flight::patient_service()->getEntity($id);
   Flight::json($result);
 });
@@ -113,9 +114,19 @@ Flight::route('PUT /patients/@id', function($id){
   Flight::json($result);
 
 });
+
+/**
+ * @OA\Get(path="/patients/confirm/{token}", tags={"patients"},
+ *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
+ *     @OA\Response(response="200", description="Message upon successfull activation.")
+ * )
+ */
+
+
   Flight::route('GET /patients/confirm/@token', function($token){
     Flight::patient_service()->confirm($token);
     Flight::json(["Message" => "Your account is successfully activated"]);
+  //  Flight::json(Flight::jwt(Flight::PatientService()->confirm($token)));
   });
 
   /**
@@ -138,8 +149,8 @@ Flight::route('PUT /patients/@id', function($id){
   Flight::route('POST /patients/login', function(){
     $request = Flight::request();
     $data=$request->data->getData();
-    Flight::patient_service()->login($data);
-    Flight::json("Your are successfully loged in");
+    Flight::json(Flight::patient_service()->login($data));
+    //Flight::json("Your are successfully loged in");
   });
 
   /**

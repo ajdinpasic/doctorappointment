@@ -45,6 +45,12 @@ Flight::route('POST /doctors/register', function(){
   Flight::json("Check out your email for further instructions");
 });
 
+/**
+ * @OA\Get(path="/doctors/confirm/{token}", tags={"doctors"},
+ *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
+ *     @OA\Response(response="200", description="Message upon successfull activation.")
+ * )
+ */
 
 Flight::route('GET /doctors/confirm/@token', function($token){
   Flight::doctor_service()->confirm($token);
@@ -86,7 +92,8 @@ Flight::route('GET /doctors', function(){
 * )
  */
 Flight::route('GET /doctors/@id', function($id){
-    if(Flight::get("doctor")["doctor_id"] != $id) throw new Exception("This is not for you",403);
+  //print_r($id); die;
+    //if(Flight::get("doctor")["doctor_id"] != $id) throw new Exception("This is not for you",403);
       $result=Flight::doctor_service()->getEntity($id);
       Flight::json($result);
 
