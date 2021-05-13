@@ -13,9 +13,12 @@ class AppointmentService extends BaseService {
     $this->doctor_dao=new DoctorsDao();
   }
 
-  public function getAppointmentService($offset,$limit,$order) {
+  public function getAllAppointmentsDoctorService($id) {
+    return $this->dao->getAllAppointmentsForDoctor($id);
+  }
 
-    return $this->dao->getAllEntities($offset,$limit,$order);
+  public function getAllAppointmentsPatientService($id) {
+    return $this->dao->getAllAppointmentsForPatient($id);
   }
 /*
   public function getAppointmentByPatientOrDoctor($patient_id,$doctor_id) {
@@ -31,7 +34,7 @@ class AppointmentService extends BaseService {
 } */
   public function register($patient_id,$appointment) {
 
-  $doctor=$this->doctor_dao->getDoctorByNameForAppointment(strtolower($appointment["doctor_name"]));
+  $doctor=$this->doctor_dao->getEntity(strtolower($appointment["doctor_id"]));
   if(!isset($doctor["doctor_id"])) throw new Exception("Doctor does not exits",400);
     $appointment = parent:: insertEntity([
       "scheduled_at" => $appointment["scheduled_at"],
