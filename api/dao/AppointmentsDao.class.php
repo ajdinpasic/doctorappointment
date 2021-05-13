@@ -9,8 +9,14 @@ class AppointmentsDao extends BaseDao {
   }
 
 
-    public function getAllAppointments() {
-      return $this->query("SELECT * FROM appointments",[]);
+    public function getAllAppointmentsForDoctor($doctor_id) {
+      //echo($doctor_id); die;
+      return $this->query("SELECT * FROM appointments WHERE doctor_id = :doctor_id",["doctor_id"=> $doctor_id]);
+    }
+
+    public function getAllAppointmentsForPatient($patient_id) {
+      //echo($doctor_id); die;
+      return $this->query("SELECT * FROM appointments WHERE patient_id = :patient_id",["patient_id"=> $patient_id]);
     }
 
     public function getAppointmentByPatient($id) {
