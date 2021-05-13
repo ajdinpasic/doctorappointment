@@ -62,6 +62,7 @@ Flight::route('GET /doctors/confirm/@token', function($token){
  *     path="/doctors",tags={"doctors"},security={{"ApiKeyAuth":{}}},
  *    @OA\Parameter(type="integer", in="query", name="offset", default="0", description="Offset for pagination"),
  *    @OA\Parameter(type="integer", in="query", name="limit", default="10", description="Limit for pagination"),
+ *    @OA\Parameter(type="string", in="query", name="search", default="John", description="Search for pagination"),
  *    @OA\Parameter(type="string", in="query", name="order", default="-account_id", description="Ordering for pagination"),
  *    @OA\Response(response="200", description="Output all doctors from the database")
  * )
@@ -120,6 +121,7 @@ Flight::route('GET /doctors/@id', function($id){
 
 
 Flight::route('PUT /doctors/@id', function($id){
+  if(Flight::get("doctor")["doctor_id"] != $id ) throw new Exception("This is not for you",403);
   $request=Flight::request();
   $data=$request->data->getData();
   Flight::doctor_service()->updateEntity($id,$data);

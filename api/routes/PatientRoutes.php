@@ -23,6 +23,7 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
   *     path="/patients",tags={"patients"},security={{"ApiKeyAuth":{}}},
   *    @OA\Parameter(type="integer", in="query", name="offset", default="0", description="Offset for pagination"),
   *    @OA\Parameter(type="integer", in="query", name="limit", default="10", description="Limit for pagination"),
+  *    @OA\Parameter(type="string", in="query", name="search", default="ajdin", description="Search for pagination"),
   *    @OA\Parameter(type="string", in="query", name="order", default="-account_id", description="Ordering for pagination"),
   *    @OA\Response(response="200", description="Output all doctors from the database")
   * )
@@ -60,7 +61,7 @@ Flight::route('GET /patients', function(){
 
 
 Flight::route('GET /patients/@id', function($id){
-  if(Flight::get("patient")["patient_id"] != $id ) throw new Exception("This is not for you",403);
+  //if(Flight::get("patient")["patient_id"] != $id ) throw new Exception("This is not for you",403);
   $result=Flight::patient_service()->getEntity($id);
   Flight::json($result);
 });
@@ -107,6 +108,7 @@ Flight::route('POST /patients/register', function(){
 
 
 Flight::route('PUT /patients/@id', function($id){
+  if(Flight::get("patient")["patient_id"] != $id ) throw new Exception("This is not for you",403);
   $request=Flight::request();
   $data=$request->data->getData();
   Flight::patient_service()->updateEntity($id,$data);

@@ -13,7 +13,7 @@ error_reporting(E_ALL);
  *    			@OA\Schema(
  *    				 @OA\Property(property="scheduled_at", required="true", type="timestamp", example="2021-03-13 11:37:58",	description="Timestamp of the appointment" ),
  *     				 @OA\Property(property="office", required="true", type="integer", example="10",	description="Number of the office" ),
- *    				 @OA\Property(property="doctor_name", required="true", type="string", example="1",	description="Name of the doctor" )
+ *    				 @OA\Property(property="doctor_id", required="true", type="string", example="1",	description="Name of the doctor" )
  *          )
  *       )
  *     ),
@@ -28,27 +28,42 @@ Flight::route('POST /patients/appointments/register', function(){
   Flight::json("Appointment successfully scheduled");
 });
 
+/**
+ * @OA\Get(
+ *     path="/doctor/appointments",tags={"appointments"},security={{"ApiKeyAuth":{}}},
+ *     @OA\Response(response="200", description="Get all appointments of one doctor")
+ *
+*
+* )
+ */
 
-Flight::route('GET /appointments', function(){
-  $offset= Flight::routeForLimitAndOffset("offset",0);
-  $limit= Flight::routeForLimitAndOffset("limit",10);
-  //$search = Flight::routeForLimitAndOffset("search");
-  $order = Flight ::routeForLimitAndOffset("order","-patient_id");
-  //$orderWay = Flight ::routeForLimitAndOffset("orderWay","DESC");
-  Flight::json(Flight::appointment_service()->getAppointmentService($offset,$limit,$order));
-
-});
-
-Flight::route('GET /appointment', function(){
-  $patient_id = Flight ::routeForLimitAndOffset("patient_id");
-  $doctor_id = Flight ::routeForLimitAndOffset("doctor_id");
-  $result=Flight::appointment_service()->getAppointmentByPatientOrDoctor($patient_id,$doctor_id);
+Flight::route('GET /doctor/appointments', function(){
+  $id=Flight::get("doctor")["doctor_id"];
+  $result=Flight::appointment_service()->getAllAppointmentsDoctorService($id);
   Flight::json($result);
 });
 
 /**
  * @OA\Get(
- *     path="/patients/appointments/{appointment_id}",tags={"appointments"},security={{"ApiKeyAuth":{}}},
+ *     path="/patient/appointments",tags={"appointments"},security={{"ApiKeyAuth":{}}},
+ *     @OA\Response(response="200", description="Get all appointments of one patient")
+ *
+*
+* )
+ */
+
+Flight::route('GET /patient/appointments', function(){
+  $id=Flight::get("patient")["patient_id"];
+  $result=Flight::appointment_service()->getAllAppointmentsPatientService($id);
+  Flight::json($result);
+});
+
+
+
+
+/**
+ * @OA\Get(
+ *     path="/patients/appointment/{appointment_id}",tags={"appointments"},security={{"ApiKeyAuth":{}}},
  *@OA\Parameter(
  *    type="integer",
  *    in="path",
@@ -61,7 +76,7 @@ Flight::route('GET /appointment', function(){
 * )
  */
 
-Flight::route('GET /patients/appointments/@id', function($id){
+Flight::route('GET /patients/appointment/@id', function($id){
   $result=Flight::appointment_service()->getAppointmentForPatient(Flight::get("patient")["patient_id"],$id);
   Flight::json($result);
 });
@@ -71,7 +86,7 @@ Flight::route('GET /patients/appointments/@id', function($id){
 
 /**
  * @OA\Get(
- *     path="/doctors/appointments/{appointment_id}",tags={"appointments"},security={{"ApiKeyAuth":{}}},
+ *     path="/doctors/appointment/{appointment_id}",tags={"appointments"},security={{"ApiKeyAuth":{}}},
  *@OA\Parameter(
  *    type="integer",
  *    in="path",
@@ -84,7 +99,7 @@ Flight::route('GET /patients/appointments/@id', function($id){
 * )
  */
 
-Flight::route('GET /doctors/appointments/@id', function($id){
+Flight::route('GET /doctors/appointment/@id', function($id){
   $result=Flight::appointment_service()->getAppointmentForDoctor(Flight::get("doctor")["doctor_id"],$id);
   Flight::json($result);
 });
