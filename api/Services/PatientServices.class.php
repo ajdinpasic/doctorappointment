@@ -83,7 +83,7 @@ class PatientService extends BaseService{
       $result2=$this->account_dao->getAccountById($result1["account_id"]);
       if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
       if ($result1["password"] != md5($patient["password"])) throw new Exception ("invalid password",400);
-      $jwt = (array)\Firebase\JWT\JWT::encode(["patient_id" => $result1["patient_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
+      $jwt = (array)\Firebase\JWT\JWT::encode(["exp"=> (time()+Config::JWT_EXPIRE_TIME),"patient_id" => $result1["patient_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
       return ["token" => $jwt];
   }
   public function forget($patient) {

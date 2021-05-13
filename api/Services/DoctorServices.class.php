@@ -39,7 +39,7 @@ class DoctorService extends BaseService {
 
         "type" => "doctor",
         "created_at" => date(Config::DATE_FORMAT),
-        "role" => "admin"
+        "role" => "user"
 
       ]);
 
@@ -84,7 +84,7 @@ public function login($doctor) {
     $result2=$this->account_dao->getAccountById($result1["account_id"]);
     if ($result2["status"] != "Active") throw new Exception ("Account is not confirmed ",400);
     if ($result1["password"] != md5($doctor["password"])) throw new Exception ("invalid password",400);
-    $jwt = (array)\Firebase\JWT\JWT::encode(["doctor_id" => $result1["doctor_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
+    $jwt = (array)\Firebase\JWT\JWT::encode(["exp"=> (time()+Config::JWT_EXPIRE_TIME),"doctor_id" => $result1["doctor_id"],"account_id" =>$result1["account_id"],"role" =>$result2["role"]], Config::JWT_SECRET);
     return ["token" => $jwt];
 }
 
