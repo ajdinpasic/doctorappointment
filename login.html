@@ -10,16 +10,16 @@
         <title>Startmin - Bootstrap Admin Theme</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../css/metisMenu.min.css" rel="stylesheet">
+        <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../css/startmin.css" rel="stylesheet">
+        <link href="./assets/css/startmin.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,18 +41,14 @@
                             <form role="form">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                        <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                        </label>
-                                    </div>
+
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                                    <button id="buttonForLogin" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
                                 </fieldset>
                             </form>
                         </div>
@@ -62,16 +58,32 @@
         </div>
 
         <!-- jQuery -->
-        <script src="../js/jquery.min.js"></script>
+        <script src="./assets/js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+          function doLogin() {
+            $("#buttonForLogin").prop('disabled',true);
+            var loginInfo = {
+               "doctor_email" : $("#email").val(),
+               "password" :$("#password").val()
+            }
+            $.post( "http://localhost/doctorappointment/api/doctors/login", loginInfo ).done(function( data ) {
+    alert( "Data Loaded: " + data );
+    window.localStorage.setItem("token",data.token);
+    window.location = "index.html";
+  }).fail(function(error) {
+    $("#buttonForLogin").prop('disabled',false);
+    alert( error.responseJSON.message );
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="../js/metisMenu.min.js"></script>
+  });
 
-        <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
+
+          }
+        </script>
+
+
 
     </body>
 </html>
