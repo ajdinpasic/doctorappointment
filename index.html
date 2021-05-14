@@ -37,7 +37,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body style="display:none;">
 
         <div id="wrapper">
 
@@ -278,13 +278,18 @@
 
 
 
-           app.route({view: 'dashboard', load: 'dashboard.html' });
-           app.route({view: 'tables', load: 'tables.html' });
-            app.route({view: 'notifications', load: 'notifications.html' });
+           //app.route({view: 'dashboard', load: 'dashboard.html' });
+           //app.route({view: 'tables', load: 'tables.html' });
+            //app.route({view: 'notifications', load: 'notifications.html' });
 
 
             // run app
             app.run();
+            if (!window.localStorage.getItem("token")) {
+              window.location= "login.html";
+            } else {
+              $('body').show();
+            }
           });
         </script>
 
