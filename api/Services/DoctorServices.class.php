@@ -43,7 +43,7 @@ class DoctorService extends BaseService {
 
       ]);
 
-      $doctor= parent:: insertEntity([
+      $doctor= $this->dao-> insertEntity([
         "account_id" => $account["id"],
         "doctor_name" => $doctor["doctor_name"],
         "doctor_surname" => $doctor["doctor_surname"],
