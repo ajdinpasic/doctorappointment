@@ -84,7 +84,7 @@
             $.post( "http://localhost/doctorappointment/api/doctors/register", registerInfo ).done(function( data ) {
             console.log(data);
           alert(data);
-        //  window.location ="login.html";
+        window.location ="login.html";
   }).fail(function(error) {
     $("#buttonForRegister").prop('disabled',false);
     console.log(error);
