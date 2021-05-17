@@ -38,7 +38,7 @@
                             <h3 class="panel-title">Reset password</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="doctor-forgot-form" role="form">
                                 <fieldset>
 
                                     <div class="form-group">
@@ -69,15 +69,16 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
 
         function doForgot() {
           $("#buttonForForgot").prop('disabled',true);
-          var forgotInfo = {
+          /*var forgotInfo = {
 
              "doctor_email" : $("#email").val()
-          };
-          $.post( "http://localhost/doctorappointment/api/doctors/forget", forgotInfo ).done(function( data ) {
+          }; */
+          $.post( "http://localhost/doctorappointment/api/doctors/forget", jsonize_form("#doctor-forgot-form") ).done(function( data ) {
           console.log(data);
         alert("Check out your email");
 }).fail(function(error) {

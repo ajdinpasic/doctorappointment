@@ -38,7 +38,7 @@
                             <h3 class="panel-title">Enter new password</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="doctor-reset-form" role="form">
                                 <fieldset>
 
                                     <div class="form-group">
@@ -66,18 +66,19 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
 
         function doReset() {
           $("#buttonForReset").prop('disabled',true);
           var urlParams = new URLSearchParams(window.location.search);
-          //echo(urlParams); die;
-          var resetInfo = {
+
+        /*  var resetInfo = {
 
              "token" :  urlParams.get('token'),
              "password" : $("#password").val()
-          };
-          $.post( "http://localhost/doctorappointment/api/doctors/reset", resetInfo ).done(function( data ) {
+          }; */
+          $.post( "http://localhost/doctorappointment/api/doctors/reset", jsonize_form("#doctor-reset-form") ).done(function( data ) {
           console.log(data);
         alert("Password changed");
         window.location="index.html";

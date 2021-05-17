@@ -38,7 +38,7 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="doctor-login-form" role="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
@@ -66,10 +66,11 @@
         </div>
 
         <!-- jQuery -->
-        <script src="./assets/js/jquery.min.js"></script>
+       <script src="./assets/js/jquery.min.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="./assets/js/bootstrap.min.js"></script>
+       <!-- Bootstrap Core JavaScript -->
+       <script src="./assets/js/bootstrap.min.js"></script>
+       <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
 
         $(function(){
@@ -82,11 +83,11 @@
 
           function doLogin() {
             $("#buttonForLogin").prop('disabled',true);
-            var loginInfo = {
+          /*  var loginInfo = {
                "doctor_email" : $("#email").val(),
                "password" :$("#password").val()
-            }
-            $.post( "http://localhost/doctorappointment/api/doctors/login", loginInfo ).done(function( data ) {
+            } */
+            $.post( "http://localhost/doctorappointment/api/doctors/login", jsonize_form("#doctor-login-form") ).done(function( data ) {
     alert( "Data Loaded: " + data );
     window.localStorage.setItem("token",data.token);
     window.location = "index.html";
