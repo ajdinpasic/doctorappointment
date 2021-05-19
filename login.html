@@ -12,6 +12,9 @@
         <!-- Bootstrap Core CSS -->
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+
         <!-- MetisMenu CSS -->
         <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
 
@@ -41,10 +44,10 @@
                             <form id="doctor-login-form" role="form">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                        <input  class="form-control" placeholder="E-mail" name="doctor_email" type="email" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
 
                                     <!-- Change this to a button or input when using this as a form -->
@@ -70,10 +73,12 @@
 
        <!-- Bootstrap Core JavaScript -->
        <script src="./assets/js/bootstrap.min.js"></script>
+       <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
        <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
 
         $(function(){
+
           if(window.localStorage.getItem("token")) {
             window.location="index.html";
           } else {
@@ -88,12 +93,14 @@
                "password" :$("#password").val()
             } */
             $.post( "http://localhost/doctorappointment/api/doctors/login", jsonize_form("#doctor-login-form") ).done(function( data ) {
-    alert( "Data Loaded: " + data );
+
+
     window.localStorage.setItem("token",data.token);
     window.location = "index.html";
   }).fail(function(error) {
     $("#buttonForLogin").prop('disabled',false);
-    alert( error.responseJSON.message );
+
+    toastr.error(error.responseJSON.message );
 
   });
 

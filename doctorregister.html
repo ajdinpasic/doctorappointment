@@ -12,6 +12,8 @@
         <!-- Bootstrap Core CSS -->
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
         <!-- MetisMenu CSS -->
         <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
 
@@ -71,6 +73,7 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
         function doRegister() {
@@ -89,7 +92,7 @@
   }).fail(function(error) {
     $("#buttonForRegister").prop('disabled',false);
     console.log(error);
-    alert( error.responseJSON.message );
+    toastr.error(error.responseJSON.message );
 
   });
         }
