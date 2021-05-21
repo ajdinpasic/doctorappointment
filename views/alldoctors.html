@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Doctor's appointments</h1>
+                <h1 class="page-header">List of all doctors </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -16,11 +16,11 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="probna-lista-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table id="doctors-list-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Doctor name</th>
-                                        <th>Doctor surname</th>
+                                        <th>Doctor's name</th>
+                                        <th>Doctor's surname</th>
 
                                     </tr>
                                 </thead>
@@ -70,7 +70,7 @@
                     +'<td>'+data[i].doctor_name+'</td>'
                     +'<td>'+data[i].doctor_surname+'</td>';
                 }
-                  $("#probna-lista-table tbody").html(html);
+                  $("#doctors-list-table tbody").html(html);
              }
       });
   }
