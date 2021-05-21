@@ -1,32 +1,4 @@
-/*$(function () {
 
-  $("#doctor-login-form").validate({
-    rules : {
-      doctor_email : {
-        required: true,
-        doctor_email: true
-      },
-      password : {
-        required : true
-      }
-    },
-    messages : {
-      doctor_email : {
-        required : "You need to enter an email",
-        doctor_email : "Please enter a valid e-mail adress"
-      },
-      password: {
-        required: "You need to enter a password"
-      }
-    }
-
-
-
-  });
-
-
-
-}); */
 $(document).ready(function() {
 
     $('input').on('blur', function() {
@@ -57,6 +29,7 @@ $(document).ready(function() {
             required: "You need to enter a password"
           }
         }
-    });
+    }); 
+
 
 });
