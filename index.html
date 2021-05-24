@@ -157,6 +157,9 @@
                                 <a href="#alldoctors"><i class="fa fa-table fa-fw"></i> Doctors</a>
                             </li>
                             <li>
+                                <a href="#allappointments"><i class="fa fa-table fa-fw"></i> Appointments</a>
+                            </li>
+                            <li>
                                 <a href="#notifications"><i class="fa fa-table fa-fw"></i> Notifications</a>
                             </li>
                             <li>
@@ -250,6 +253,8 @@
               <section id="tables" data-load="tables.html" ></section>
               <section id="notifications" data-load="notifications.html" ></section>
               <section id="alldoctors" data-load="alldoctors.html" ></section>
+              <section id="allappointments" data-load="allappointments.html" ></section>
+                <section id="redirect" data-load="redirect.html" ></section>
 
 
 
@@ -296,9 +301,13 @@
 
             // run app
             app.run();
-            if (!window.localStorage.getItem("token")) {
-              window.location= "login.html";
-            } else {
+
+             if (!window.localStorage.getItem("token")) {
+
+                window.location = "login.html";
+
+                    }
+            else {
               $('body').show();
             }
           });
