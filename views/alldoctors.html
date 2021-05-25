@@ -51,6 +51,33 @@
    getAllDoctors();
 
   function getAllDoctors() {
+
+    $("#doctors-list-table").DataTable({
+
+      "processing" : true,
+      "serverSide" : true,
+      "ajax" : {
+        url : "http://localhost/doctorappointment/api/doctors",
+        type : "GET",
+        beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+        dataSrc : "",
+        data :  function (d) {
+          d.offset=d.start;
+          d.limit=d.length;
+          d.search=d.search.value;
+          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data);
+
+        }
+      },
+      columns: [
+        { "data" : "doctor_name"},
+        { "data" : "doctor_surname"}
+      ]
+
+
+    });
+
+    /*
     $.ajax({
          url: "http://localhost/doctorappointment/api/doctors",
          type: "GET",
@@ -66,6 +93,6 @@
                   $("#doctors-list-table tbody").html(html);
                   $("#doctors-list-table ").DataTable();
              }
-      });
+      }); */
   }
 </script>

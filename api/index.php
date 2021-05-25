@@ -33,7 +33,7 @@ Flight::set('flight.log_errors', true);
 
 Flight::map('error', function(Exception $ex){
     Flight::json(["message" => $ex->getMessage()], $ex->getCode());
-}); 
+});
 
 
 
@@ -41,7 +41,7 @@ Flight::map('routeForLimitAndOffset', function($name,$defaultValue=NULL){
   $request=Flight::request();
   $params= @$request->query->getData()[$name];
   $params = $params ? $params : $defaultValue;
-  return $params;
+  return urldecode($params);
 });
 
 Flight::register('patient_service', 'PatientService');
