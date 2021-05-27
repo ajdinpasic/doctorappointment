@@ -1,3 +1,4 @@
+
 <link href="./assets/css/user.css" rel="stylesheet">
 <div id="page-wrapper">
 <div class="container-fluid">
@@ -36,7 +37,9 @@
                                 <i class="fa fa-suitcase"></i>
                                 <p>189</p>
                             </div>
-                            <button type="submit" name="edit_user" style="background-color:gold;color:black;">Edit your profile</button>
+                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#update-doctor-profile-modal">
+                                Edit your profile
+                            </button>
                         </div>
                     </div>
                     <p class="m-t-15 text-muted">User has agreed to privacy policy and accepts the terms and conditions on this website </p>
@@ -50,8 +53,77 @@
 
 
 
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+
+
+    <! -- modal -->
+
+    <div class="modal fade" id="update-doctor-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          Edit your profile
+                      </div>
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-lg-6">
+                                  <form role="form" id="update-doctor-profile">
+                                      <div class="form-group">
+                                          <label>Update your name</label>
+                                          <input type="text" name="doctor_name" class="form-control" placeholder="Enter new name">
+
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Update your surname</label>
+                                          <input type="text" name="doctor_surname" class="form-control" placeholder="Enter new surname">
+                                      </div>
+
+
+
+
+
+
+                                      <button type="submit" onClick="updateDoctorProfile();" class="btn btn-default">Submit Button</button>
+                                      <button type="reset" class="btn btn-default">Reset Button</button>
+                                  </form>
+                              </div>
+                              <!-- /.col-lg-6 (nested) -->
+
+                              <!-- /.col-lg-6 (nested) -->
+                          </div>
+                          <!-- /.row (nested) -->
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
 <script src="./assets/js/utils.js"></script>
 <script type="text/javascript">
+
+
 
 
 
@@ -59,6 +131,10 @@ var token = parseJwt(window.localStorage.getItem("token"));
 var token_id=token.doctor_id;
 if (window.localStorage.getItem("token")) {
   getDoctor();
+  if(sessionStorage.getItem("showmsg")=='1'){
+             toastr.success("Updated successfully");
+             sessionStorage.removeItem("showmsg");
+           }
 }
 
  function getDoctor() {
@@ -73,7 +149,34 @@ if (window.localStorage.getItem("token")) {
                 document.getElementById("b").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname
                 document.getElementById("c").innerHTML = "Doctor email: "+data.doctor_email
              }
+
       }); }
+
+function updateDoctorProfile() {
+
+  updatedProfile=jsonize_form("#update-doctor-profile");
+  sessionStorage.setItem("showmsg", "1");
+  console.log(updatedProfile);
+  $.ajax({
+       url: "http://localhost/doctorappointment/api/doctors/"+token_id,
+       type: "PUT",
+       data: JSON.stringify(updatedProfile),
+       contentType: 'application/json',
+       beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+       success: function(data) {
+
+
+        //getDoctor();
+        $("#update-doctor-profile").trigger("reset");
+        $("#update-doctor-profile-modal").modal("hide");
+
+
+        },
+        error:function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+
+        }
+    });  }
 
 
 </script>
