@@ -20,6 +20,7 @@
                                         <th>Doctor's ID</th>
                                         <th>Doctor's name</th>
                                         <th>Doctor's surname</th>
+                                        <th>Doctor's Email</th>
 
                                     </tr>
                                 </thead>
@@ -27,7 +28,8 @@
                                     <tr class="odd gradeX">
                                         <td>Trident</td>
                                         <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
 
                                     </tr>
 
@@ -63,7 +65,7 @@
         url : "http://localhost/doctorappointment/api/doctors",
         type : "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-        dataSrc : function (resp) {
+        dataSrc: function (resp) {
           console.log(resp);
           return resp;
         },
@@ -80,10 +82,17 @@
 
         }
       },
+      /*preDrawCallback: function (settings){
+        settings._iRecordsTotal=2;
+        settings._iRecordsDisplay=2;
+        console.log(settings);
+
+      }, */
       columns: [
         { "data" : "doctor_id"},
         { "data" : "doctor_name"},
-        { "data" : "doctor_surname"}
+        { "data" : "doctor_surname"},
+        { "data" : "doctor_email"}
       ]
 
 

@@ -12,9 +12,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        DataTables Advanced Tables
-                    </div>
+
 
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -24,6 +22,7 @@
                                         <th>Scheduled at</th>
                                         <th>Reserved at</th>
                                         <th>Office</th>
+                                        <th>Patient' ID</th>
 
 
                                     </tr>
@@ -31,8 +30,9 @@
                                 <tbody>
                                     <tr class="odd gradeX">
                                         <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
 
                                     </tr>
 
@@ -84,31 +84,39 @@
       processing : true,
       serverSide : true,
       pagingType : "simple",
+      searching : false,
+      ordering : false,
       "ajax" : {
         url : "http://localhost/doctorappointment/api/doctor/appointments",
         type : "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-        dataSrc : function (resp) {
+        dataSrc: function (resp) {
           console.log(resp);
           return resp;
         },
         data :  function (d) {
-          d.offset=d.start;
+        /*  d.offset=d.start;
           d.limit=d.length;
           d.search=d.search.value;
-          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data);
+          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data); */
 
           delete d.start;
           delete d.length;
           delete d.column;
           delete d.draw;
 
-        }
-      },
+        } },
+        /*initComplete: function (settings){
+          settings._iRecordsTotal=2;
+          settings._iRecordsDisplay=2;
+          settings.iDraw=2;
+        }, */
+
       columns: [
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
-        { "data" : "office"}
+        { "data" : "office"},
+        { "data" : "patient_id"}
       ]
 
 
