@@ -1,0 +1,79 @@
+<link href="./assets/css/user.css" rel="stylesheet">
+<div id="page-wrapper">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card user-card">
+                <div class="card-header">
+                    <h5 id="a"></h5>
+                </div>
+                <div class="card-block">
+                    <div class="user-image">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
+                    </div>
+                    <h6 class="f-w-600 m-t-25 m-b-10" id="b"></h6>
+                    <p id="c"class="text-muted"></p>
+                    <hr>
+                    <p class="text-muted m-t-15">Activity Level: 87%</p>
+                    <ul class="list-unstyled activity-leval">
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <div class="bg-c-blue counter-block m-t-10 p-20">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fa fa-comment"></i>
+                                <p>1256</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-user"></i>
+                                <p>8562</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-suitcase"></i>
+                                <p>189</p>
+                            </div>
+                            <button type="submit" name="edit_user" style="background-color:gold;color:black;">Edit your profile</button>
+                        </div>
+                    </div>
+                    <p class="m-t-15 text-muted">User has agreed to privacy policy and accepts the terms and conditions on this website </p>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+          </div>
+
+
+
+
+<script src="./assets/js/utils.js"></script>
+<script type="text/javascript">
+
+
+
+var token = parseJwt(window.localStorage.getItem("token"));
+var token_id=token.doctor_id;
+if (window.localStorage.getItem("token")) {
+  getDoctor();
+}
+
+ function getDoctor() {
+    $.ajax({
+         url: "http://localhost/doctorappointment/api/doctors/"+token_id,
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+         success: function(data) {
+            console.log(data);
+            //console.log(aaa.doctor_id);
+                document.getElementById("a").innerHTML = "Doctor Id: "+data.doctor_id
+                document.getElementById("b").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname
+                document.getElementById("c").innerHTML = "Doctor email: "+data.doctor_email
+             }
+      }); }
+
+
+</script>
