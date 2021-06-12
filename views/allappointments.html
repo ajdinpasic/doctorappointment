@@ -1,3 +1,6 @@
+<style media="screen">
+  overflow-x :  hidden;
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -19,6 +22,7 @@
                             <table id="doctors-appointments-list-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                        <th>Appointment Id</th>
                                         <th>Scheduled at</th>
                                         <th>Reserved at</th>
                                         <th>Office</th>
@@ -29,6 +33,7 @@
                                 </thead>
                                 <tbody>
                                     <tr class="odd gradeX">
+                                        <td>Trident</td>
                                         <td>Trident</td>
                                         <td>Trident</td>
                                         <td>Trident</td>
@@ -56,7 +61,7 @@
 <!-- /#page-wrapper -->
 
 <script type="text/javascript">
-  
+
    getAllAppointments();
 
   /* function getAllAppointments() {
@@ -84,9 +89,26 @@
 
       processing : true,
       serverSide : true,
+      bDestory : true,
       pagingType : "simple",
       searching : false,
       ordering : false,
+      preDrawCallback : function (settings) {
+        if (settings.aoData.length < settings._iDisplayLength) {
+          settings._iRecordsTotal=0;
+          settings._iRecordsDisplay=0;
+        } else {
+        settings._iRecordsTotal=100000000;
+        settings._iRecordsDisplay=10000000; }
+        console.log(settings);
+      },
+      "language": {
+        "lengthMenu": "Display _MENU_ records per page",
+       "zeroRecords": "Nothing found - sorry",
+       "info": "Showing page _PAGE_",
+       "infoEmpty": "Showing page _PAGE_",
+       "infoFiltered": ""
+        },
       "ajax" : {
         url : "http://localhost/doctorappointment/api/doctor/appointments",
         type : "GET",
@@ -114,11 +136,26 @@
         }, */
 
       columns: [
+          { "data" : "appointment_id",
+            "render" : function (data,type,row,meta) {
+            return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;"></a>';
+
+
+            }
+
+        },
+
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
         { "data" : "office"},
         { "data" : "patient_id"}
-      ]
+
+
+
+      ],
+    }).on('xhr.dt',function(e,settings,json,xhr) {
+      console.log(settings);
+
 
 
     }); }
