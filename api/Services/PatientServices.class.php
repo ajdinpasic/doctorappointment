@@ -18,12 +18,12 @@ class PatientService extends BaseService{
   }
 
 
-  public function getPatientService($search,$offset,$limit,$order) {
+  public function getPatientService($search,$offset,$limit,$order,$total=FALSE) {
     if ($search) {
-      return $this->dao->getPatientsByName($search,$offset,$limit,$order);
+      return $this->dao->getPatientsByName($search,$offset,$limit,$order,$total);
     } else {
 
-    return $this->dao->getAllEntities($offset,$limit,$order); }
+    return $this->dao->getAllEntities($offset,$limit,$order,$total); }
 
 
 }
@@ -102,6 +102,7 @@ class PatientService extends BaseService{
     if (strtotime(date(Config::DATE_FORMAT)) - strtotime($result1["token_expire"]) > 300 ) throw new Exception("Token session expired",400);
     $this->dao->updateEntity($result1["patient_id"],["password" => md5($patient["password"]),"token" => NULL]);
   }
+
 
 
 /*

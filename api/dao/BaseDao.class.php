@@ -120,15 +120,19 @@ error_reporting(E_ALL);
       return $this->query_unique("SELECT * FROM ".$this->table." WHERE ".$this->unique_key." = :id",["id" => $id]);
     }
 
-    public function getAllEntities($offset = 0, $limit = 25 ,$order="-id") {
+    public function getAllEntities($offset = 0, $limit = 25 ,$order="-id",$total=FALSE) {
 
       list($orderColumn,$orderWay)= self::parse_order($order);
-
-
+      if ($total) {
+        return $this->query("SELECT COUNT(*) AS total FROM {$this->table}",[]);
+      }
+      else {
       return $this->query("SELECT * FROM {$this->table}
         ORDER BY {$orderColumn} {$orderWay}
-        LIMIT {$limit} OFFSET {$offset}",[]);
+        LIMIT {$limit} OFFSET {$offset}",[]); }
   }
+
+
 
 }
 

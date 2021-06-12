@@ -10,16 +10,22 @@
         parent::__construct("patients","patient_id");
     }
 
-    public function getPatientsByName($search,$offset,$limit,$order) {
+    public function getPatientsByName($search,$offset,$limit,$order,$total=FALSE) {
 
       list($orderColumn,$orderWay)= self:: parse_order($order);
-
+      if ($total) {
+        return $this->query("SELECT COUNT(*) AS total FROM patients
+          WHERE LOWER(patient_name) LIKE CONCAT('%', :patient_name, '%')
+          ORDER BY {$order} {$orderWay}
+          LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search) /*"orderWay" => $orderWay*/]);
+      } else {
 
       return $this->query("SELECT * FROM patients
         WHERE LOWER(patient_name) LIKE CONCAT('%', :patient_name, '%')
         ORDER BY {$order} {$orderWay}
-        LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search) /*"orderWay" => $orderWay*/]);
+        LIMIT {$limit} OFFSET {$offset}",["patient_name" =>strtolower($search) /*"orderWay" => $orderWay*/]); }
     }
+
     public function getPatientsByToken($token) {
       return $this->query_unique("SELECT * FROM patients WHERE token = :token",["token"=> $token]);
     }
@@ -41,6 +47,8 @@
     public function addPatient($patient) {
       return $this->insert("patients",$patient);
     } */
+
+
 
 }
 

@@ -38,6 +38,10 @@ Flight::route('GET /patients', function(){
   $search = Flight::routeForLimitAndOffset("search");
   $order = Flight ::routeForLimitAndOffset("order","-patient_id");
   //$orderWay = Flight ::routeForLimitAndOffset("orderWay","DESC");
+  $total = Flight::patient_service()->getPatientService($search,$offset,$limit,$order,TRUE);
+  //Flight::json($total[0]["total"]); die;
+  header('total-records: ' .$total[0]["total"]);
+
   Flight::json(Flight::patient_service()->getPatientService($search,$offset,$limit,$order));
 
 });
