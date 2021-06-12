@@ -60,7 +60,13 @@
 
       processing : true,
       serverSide : true,
-      pagingType : "simple",
+      bDestory : true,
+      //pagingType : "simple",
+      preDrawCallback : function (settings) {
+        if (settings.jqXHR) {
+          settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
+        settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records'); }
+      },
       "ajax" : {
         url : "http://localhost/doctorappointment/api/doctors",
         type : "GET",
@@ -89,11 +95,21 @@
 
       }, */
       columns: [
-        { "data" : "doctor_id"},
+
+      { "data" : "doctor_id",
+        "render" : function (data,type,row,meta) {
+        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;"></a>';
+
+
+        }
+
+    },
         { "data" : "doctor_name"},
         { "data" : "doctor_surname"},
         { "data" : "doctor_email"}
-      ]
+      ],
+    }).on('xhr.dt',function(e,settings,json,xhr) {
+      console.log(settings);
 
 
     });
