@@ -129,13 +129,17 @@
 
 var token = parseJwt(window.localStorage.getItem("token"));
 var token_id=token.doctor_id;
-if (window.localStorage.getItem("token")) {
-  getDoctor();
+
   if(sessionStorage.getItem("showmsg")=='1'){
              toastr.success("Updated successfully");
              sessionStorage.removeItem("showmsg");
+             setTimeout(function(){
+                     window.location = 'index.html';
+                  }, 1500);
            }
-}
+
+if (window.localStorage.getItem("token")) {
+  getDoctor(); }
 
  function getDoctor() {
     $.ajax({
