@@ -30,10 +30,10 @@ require_once dirname (__FILE__)."/Services/AppointmentServices.class.php";
 
 Flight::set('flight.log_errors', true);
 
-
+/*
 Flight::map('error', function(Exception $ex){
     Flight::json(["message" => $ex->getMessage()], $ex->getCode());
-});
+}); */
 
 
 
