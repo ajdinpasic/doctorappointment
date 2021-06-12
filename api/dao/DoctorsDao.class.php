@@ -16,15 +16,20 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
     }
 
 
-    public function getDoctorsByName($search,$offset,$limit,$order) {
+    public function getDoctorsByName($search,$offset,$limit,$order,$total=FALSE) {
 
       list($orderColumn,$orderWay)= self:: parse_order($order);
-
-
+      if($total) {
+        return $this->query("SELECT COUNT(*) AS total FROM doctors
+          WHERE LOWER(doctor_name) LIKE CONCAT('%', :doctor_name, '%')
+          ORDER BY {$order} {$orderWay}
+          LIMIT {$limit} OFFSET {$offset}",["doctor_name" =>strtolower($search) /*"orderWay" => $orderWay*/]);
+      }
+else {
       return $this->query("SELECT * FROM doctors
         WHERE LOWER(doctor_name) LIKE CONCAT('%', :doctor_name, '%')
         ORDER BY {$order} {$orderWay}
-        LIMIT {$limit} OFFSET {$offset}",["doctor_name" =>strtolower($search) /*"orderWay" => $orderWay*/]);
+        LIMIT {$limit} OFFSET {$offset}",["doctor_name" =>strtolower($search) /*"orderWay" => $orderWay*/]); }
 
 }
 

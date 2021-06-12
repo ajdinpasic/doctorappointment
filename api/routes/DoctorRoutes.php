@@ -74,6 +74,8 @@ Flight::route('GET /doctors', function(){
   $search = Flight::routeForLimitAndOffset("search");
   $order = Flight ::routeForLimitAndOffset("order","-doctor_id");
   //$orderWay = Flight ::routeForLimitAndOffset("orderWay","DESC");
+  $total = Flight::doctor_service()->getDoctorService($search,$offset,$limit,$order,TRUE);
+  header('total-records: ' .$total[0]["total"]);
   Flight::json(Flight::doctor_service()->getDoctorService($search,$offset,$limit,$order));
 
 });

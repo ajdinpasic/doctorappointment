@@ -20,12 +20,12 @@ class DoctorService extends BaseService {
   }
 
 
-  public function getDoctorService($search,$offset,$limit,$order) {
+  public function getDoctorService($search,$offset,$limit,$order,$total=FALSE) {
     if ($search) {
-      return $this->dao->getDoctorsByName($search,$offset,$limit,$order);
+      return $this->dao->getDoctorsByName($search,$offset,$limit,$order,$total);
     } else {
 
-    return $this->dao->getAllEntities($offset,$limit,$order); }
+    return $this->dao->getAllEntities($offset,$limit,$order,$total); }
 
 
 }
