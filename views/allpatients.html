@@ -61,23 +61,23 @@
       processing : true,
       serverSide : true,
       bDestory : true,
-      pagingType : "simple",
+      //pagingType : "simple",
       preDrawCallback : function (settings) {
-        if (settings.aoData.length < settings._iDisplayLength) {
-          settings._iRecordsTotal=0;
-          settings._iRecordsDisplay=0;
-        } else {
+        if (settings.jqXHR) {
+          settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
+        settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records');
+        } /*else {
         settings._iRecordsTotal=100000000;
         settings._iRecordsDisplay=10000000; }
-        console.log(settings);
-      },
+        console.log(settings); */
+      },/*
       "language": {
         "lengthMenu": "Display _MENU_ records per page",
        "zeroRecords": "Nothing found - sorry",
        "info": "Showing page _PAGE_",
        "infoEmpty": "Showing page _PAGE_",
        "infoFiltered": ""
-        },
+     }, */
       "ajax" : {
         url : "http://localhost/doctorappointment/api/patients",
         type : "GET",
