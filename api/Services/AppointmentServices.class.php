@@ -13,8 +13,8 @@ class AppointmentService extends BaseService {
     $this->doctor_dao=new DoctorsDao();
   }
 
-  public function getAllAppointmentsDoctorService($id) {
-    return $this->dao->getAllAppointmentsForDoctor($id);
+  public function getAllAppointmentsDoctorService($id,$total=FALSE) {
+    return $this->dao->getAllAppointmentsForDoctor($id,$total);
   }
 
   public function getAllAppointmentsPatientService($id) {

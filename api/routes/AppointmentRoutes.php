@@ -39,6 +39,8 @@ Flight::route('POST /patients/appointments/register', function(){
 
 Flight::route('GET /doctor/appointments', function(){
   $id=Flight::get("doctor")["doctor_id"];
+  $total=Flight::appointment_service()->getAllAppointmentsDoctorService($id,TRUE);
+  header('total-records: ' .$total[0]["total"]);
   $result=Flight::appointment_service()->getAllAppointmentsDoctorService($id);
   Flight::json($result);
 });
