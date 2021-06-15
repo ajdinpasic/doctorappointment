@@ -55,16 +55,14 @@
                                         <option>Pulmonary examination</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group-test">
                                     <label>Select the appointment</label>
-                                    <select multiple class="form-control" name="appointment_id">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select multiple class="form-control" name="appointment_id" id="appointment_id">
+                                        <option>here</option>
+
                                     </select>
                                 </div>
+
                                 <button type="submit" onClick="registerDetail()" class="btn btn-default">Submit Button</button>
                                 <button type="reset" class="btn btn-default">Reset Button</button>
                             </form>
@@ -86,16 +84,16 @@
 
 <script src="./assets/js/utils.js"></script>
 <script type="text/javascript">
-  if(sessionStorage.getItem("showmsg")=='detail'){
+ if(sessionStorage.getItem("showmsg")=='detail'){
   toastr.success("Detail registered successfully");
 
     sessionStorage.removeItem("showmsg");
     setTimeout(function(){
             window.location = 'index.html';
          }, 1500);
-  }
+} 
 
-
+ test();
 function registerDetail() {
 
   registerDetail=jsonize_form("#register-new-detail");
@@ -121,6 +119,26 @@ function registerDetail() {
 
         }
     });  }
+
+    function test() {
+
+    $.ajax({
+         url: "http://localhost/doctorappointment/api/doctor/appointments",
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+         success: function(data) {
+            console.log(data);
+                var html ="";
+                for(var i =0 ; i<data.length; i++) {
+                  html +=
+                    '<option>'+data[i].appointment_id+'</option>';
+
+                }
+                  $("#appointment_id").html(html);
+                //  $("#appointment_id").DataTable();
+
+             }
+      }); }
 
 
 </script>
