@@ -84,6 +84,7 @@
 
 <script src="./assets/js/utils.js"></script>
 <script type="text/javascript">
+
  if(sessionStorage.getItem("showmsg")=='detail'){
   toastr.success("Detail registered successfully");
 
@@ -91,7 +92,7 @@
     setTimeout(function(){
             window.location = 'index.html';
          }, 1500);
-} 
+}
 
  test();
 function registerDetail() {
@@ -123,6 +124,7 @@ function registerDetail() {
     function test() {
 
     $.ajax({
+        async: false,
          url: "http://localhost/doctorappointment/api/doctor/appointments",
          type: "GET",
          beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
