@@ -1,11 +1,26 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">List of all appointments </h1>
-            </div>
+          <div class="col-lg-12">
+              <h1 class="page-header">Click below to add new detail about specific appointment</h1>
+          </div>
             <!-- /.col-lg-12 -->
-        </div>
+</div>
+        <!-- /.row -->
+        <button type="button" style="background-color:green;"class="btn btn-primary btn-lg" data-toggle="modal" data-target="#register-new-detail-modal">
+            Register new apointment detail
+        </button> <br> <br>
+        <!-- /.row -->
+
+    <!-- /.container-fluid -->
+
+<!-- staropravo -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">List of all appointments </h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
         <!-- /.row -->
 
 
@@ -65,12 +80,13 @@
 
           <div class="card">
     <div class="card-body">
-       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
-      <h3 id="scheduled"><b>Scheduled at</b></h3>
-      <h3 id="reserved"><b>Reserved at</b></h3>
-      <p id="office"><i>Office number</i></p>
-      <p id="p_id"><i>Patient id</i></p>
-      <p id="d_id"><i>Doctor id</i></p>
+       <img src="./assets/appointment-512.png" width="200" height="200" class="img-radius" alt="User-Profile-Image">
+
+      <h3 id="problem"><b>Problem description</b></h3>
+      <h3 id="prescription"><b>Prescription<b></h3>
+      <p id="type"><i>Type</i></p>
+      <p id="detail_id"><i>Detail id</i></p>
+
     </div>
   </div>
 
@@ -80,7 +96,117 @@
     <!-- /.modal-dialog -->
 </div> </div>
 
+<div class="modal fade" id="see-patient-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 id="fullname"><b>Fullname</b></h3>
+      <p id="email"><i>Email</i></p>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+
+<div class="modal fade" id="see-doctor-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 id="doctor_fullname"><b>Fullname</b></h3>
+      <p id="doctor_email"><i>Email</i></p>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+<div class="modal fade" id="register-new-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      Register new appointment detail
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form role="form" id="register-new-detail">
+                                <div class="form-group">
+
+                                    <input class="form-control" type="text" name="p" placeholder="Describe the problem">
+
+                                </div>
+                                <div class="form-group">
+
+                                    <input class="form-control" type="text" name="prescription" placeholder="Describe the prescription">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Select the type of appointment</label>
+                                    <select class="form-control" name="type">
+                                        <option>Blood examination</option>
+                                        <option>Dental examination</option>
+                                        <option>Surgical examination</option>
+                                        <option>Eye examination</option>
+                                        <option>Pulmonary examination</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-test">
+                                    <label>Select the appointment</label>
+                                    <select multiple class="form-control" name="appointment_id" id="appointment_id">
+                                        <option>here</option>
+
+                                    </select>
+                                </div>
+
+                                <button type="submit" onClick="registerDetail()" class="btn btn-default">Submit Button</button>
+                                <button type="reset" class="btn btn-default">Reset Button</button>
+                            </form>
+                        </div>
+
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+                      <!-- /.row (nested) -->
+                  </div>
+                  <!-- /.panel-body -->
+              </div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="./assets/js/utils.js"></script>
 <script type="text/javascript">
+  if(sessionStorage.getItem("showmsg")=='detail'){
+   toastr.success("Detail registered successfully");
+
+     sessionStorage.removeItem("showmsg");
+     setTimeout(function(){
+              window.location = 'index.html';
+           }, 1500);
+  }
+  // staro pravo odavde vaznooo
 
    getAllAppointments();
 
@@ -161,8 +287,19 @@
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
         { "data" : "office"},
-        { "data" : "patient_id"},
-        { "data" : "doctor_id"}
+        { "data" : "patient_id",
+        "render" : function (data,type,row,meta) {
+      return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeePatient('+data+')"><i class="fa fa-edit"></i></a>';
+      }
+
+      },
+        { "data" : "doctor_id",
+        "render" : function (data,type,row,meta) {
+      return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctor('+data+')"><i class="fa fa-edit"></i></a>';
+      }
+
+
+      }
 
 
       ],
@@ -179,25 +316,118 @@
 $("#add-email-template-modal").modal("show");
 
          $.ajax({
-               async: false,
-               url: "http://localhost/doctorappointment/api/doctors/appointment/"+appointment_id,
+               async: true,
+               url: "http://localhost/doctorappointment/api/doctor/details/"+appointment_id,
                type: "GET",
                beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
                success: function(data) {
                  console.log(data);
 
 
-              document.getElementById("scheduled").innerHTML = "Scheduled at: "+data.scheduled_at;
-              document.getElementById("reserved").innerHTML = "Reserved at: "+data.reserved_at;
-              document.getElementById("office").innerHTML = "Office number: "+data.office;
-              document.getElementById("p_id").innerHTML = "Patient: "+data.patient_id;
-              document.getElementById("d_id").innerHTML = "Doctor: "+data.doctor_id;
+              document.getElementById("detail_id").innerHTML = "Detail id: "+data.app_detail_id;
+              document.getElementById("problem").innerHTML = "Problem description: "+data.p;
+              document.getElementById("prescription").innerHTML = "Prescription: "+data.prescription;
+              document.getElementById("type").innerHTML = "Type of appointment: "+data.type;
+
 
       }
 
 
 
       }); }
+
+      function SeePatient(patient_id) {
+
+      $("#see-patient-profile-modal").modal("show");
+
+         $.ajax({
+               async: true,
+               url: "http://localhost/doctorappointment/api/patients/"+patient_id,
+               type: "GET",
+               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+               success: function(data) {
+                 console.log(data);
+
+
+              document.getElementById("fullname").innerHTML = "Patient full name: "+data.patient_name+" "+data.patient_surname;;
+              document.getElementById("email").innerHTML = "Patient email: "+data.patient_email;
+
+      }
+
+
+
+      }); }
+
+      function SeeDoctor(doctor_id) {
+
+      $("#see-doctor-profile-modal").modal("show");
+
+           $.ajax({
+                 async: true,
+                 url: "http://localhost/doctorappointment/api/doctors/"+doctor_id,
+                 type: "GET",
+                 beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+                 success: function(data) {
+                   console.log(data);
+
+
+                document.getElementById("doctor_fullname").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname;;
+                document.getElementById("doctor_email").innerHTML = "Doctor email: "+data.doctor_email;
+
+        }
+
+
+
+        }); }
+
+       function registerDetail() {
+
+         registerDetail=jsonize_form("#register-new-detail");
+         sessionStorage.setItem("showmsg", "detail");
+         console.log(registerDetail);
+         $.ajax({
+              url: "http://localhost/doctorappointment/api/doctor/appointments/details/register",
+              type: "POST",
+              data: registerDetail,
+
+              beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+              success: function(data) {
+
+
+               console.log(data);
+              // $("#register-new-detail").trigger("reset");
+               $("#register-new-detail-modal").modal("hide");
+
+
+               },
+               error:function (jqXHR, textStatus, errorThrown) {
+                 console.log(jqXHR);
+
+               }
+           });  }
+           test();
+
+           function test() {
+
+           $.ajax({
+               async: true,
+                url: "http://localhost/doctorappointment/api/doctor/appointments",
+                type: "GET",
+                beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+                success: function(data) {
+                   console.log(data);
+                       var html ="";
+                       for(var i =0 ; i<data.length; i++) {
+                         html +=
+                           '<option>'+data[i].appointment_id+'</option>';
+
+                       }
+                         $("#appointment_id").html(html);
+                       //  $("#appointment_id").DataTable();
+
+                    }
+             }); }
+
 
 
 
