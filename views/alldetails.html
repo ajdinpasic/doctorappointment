@@ -124,7 +124,7 @@ function registerDetail() {
     function test() {
 
     $.ajax({
-        async: false,
+        async: true,
          url: "http://localhost/doctorappointment/api/doctor/appointments",
          type: "GET",
          beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},

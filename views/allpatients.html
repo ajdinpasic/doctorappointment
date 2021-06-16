@@ -169,7 +169,7 @@ function OpenSeePatient(patient_id) {
 $("#add-email-template-modal").modal("show");
 
    $.ajax({
-         async: false,
+         async: true,
          url: "http://localhost/doctorappointment/api/patients/"+patient_id,
          type: "GET",
          beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
