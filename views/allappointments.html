@@ -23,13 +23,15 @@
                                         <th>Scheduled at</th>
                                         <th>Reserved at</th>
                                         <th>Office</th>
-                                        <th>Patient' ID</th>
+                                        <th>Patient's ID</th>
+                                        <th>Doctor's ID</th>
 
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="odd gradeX">
+                                        <td>Trident</td>
                                         <td>Trident</td>
                                         <td>Trident</td>
                                         <td>Trident</td>
@@ -56,6 +58,27 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+<div class="modal fade" id="add-email-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 id="scheduled"><b>Scheduled at</b></h3>
+      <h3 id="reserved"><b>Reserved at</b></h3>
+      <p id="office"><i>Office number</i></p>
+      <p id="p_id"><i>Patient id</i></p>
+      <p id="d_id"><i>Doctor id</i></p>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
 
 <script type="text/javascript">
 
@@ -131,19 +154,15 @@
 
       columns: [
           { "data" : "appointment_id",
-            "render" : function (data,type,row,meta) {
-            return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;"></a>';
-
-
-            }
-
+          "render" : function (data,type,row,meta) {
+        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeAppointment('+data+')"><i class="fa fa-edit"></i></a>';
+        }
         },
-
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
         { "data" : "office"},
-        { "data" : "patient_id"}
-
+        { "data" : "patient_id"},
+        { "data" : "doctor_id"}
 
 
       ],
@@ -153,6 +172,33 @@
 
 
     }); }
+
+
+    function SeeAppointment(appointment_id) {
+
+$("#add-email-template-modal").modal("show");
+
+         $.ajax({
+               async: false,
+               url: "http://localhost/doctorappointment/api/doctors/appointment/"+appointment_id,
+               type: "GET",
+               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+               success: function(data) {
+                 console.log(data);
+
+
+              document.getElementById("scheduled").innerHTML = "Scheduled at: "+data.scheduled_at;
+              document.getElementById("reserved").innerHTML = "Reserved at: "+data.reserved_at;
+              document.getElementById("office").innerHTML = "Office number: "+data.office;
+              document.getElementById("p_id").innerHTML = "Patient: "+data.patient_id;
+              document.getElementById("d_id").innerHTML = "Doctor: "+data.doctor_id;
+
+      }
+
+
+
+      }); }
+
 
 
 </script>
