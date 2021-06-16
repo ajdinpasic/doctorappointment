@@ -51,6 +51,26 @@
 </div>
 <!-- /#page-wrapper -->
 
+<div class="modal fade" id="add-email-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 id="fullname"><b>Fullname</b></h3>
+      <p id="email"><i>Email</i></p>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+
+
 <script type="text/javascript">
    getAllDoctors();
 
@@ -98,7 +118,7 @@
 
       { "data" : "doctor_id",
         "render" : function (data,type,row,meta) {
-        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;"></a>';
+        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctorProfile('+data+')"><i class="fa fa-edit"></i></a>';
 
 
         }
@@ -131,5 +151,32 @@
                   $("#doctors-list-table ").DataTable();
              }
       }); */
+}
+function SeeDoctorProfile(doctor_id) {
+
+$("#add-email-template-modal").modal("show");
+
+     $.ajax({
+           async: false,
+           url: "http://localhost/doctorappointment/api/doctors/"+doctor_id,
+           type: "GET",
+           beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+           success: function(data) {
+             console.log(data);
+
+
+          document.getElementById("fullname").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname;;
+          document.getElementById("email").innerHTML = "Doctor email: "+data.doctor_email;
+
   }
+
+
+
+  }); }
+
+
+
+
+
+
 </script>
