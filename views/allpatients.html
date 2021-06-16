@@ -57,8 +57,8 @@
           <div class="card">
     <div class="card-body">
        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
-      <h3 id="fullname"><b>Fullname</b></h3>
-      <p id="email"><i>Email</i></p>
+      <h3 style="white-space: nowrap;" id="fullname"><b>Fullname</b></h3>
+      <h3 style="white-space: nowrap;" id="email"><i><b>Email</b></i></h3>
     </div>
   </div>
 
@@ -91,7 +91,8 @@
         settings._iRecordsTotal=100000000;
         settings._iRecordsDisplay=10000000; }
         console.log(settings); */
-      },/*
+      },
+      /*
       "language": {
         "lengthMenu": "Display _MENU_ records per page",
        "zeroRecords": "Nothing found - sorry",
@@ -99,6 +100,7 @@
        "infoEmpty": "Showing page _PAGE_",
        "infoFiltered": ""
      }, */
+     responsive:true,
       "ajax" : {
         url : "http://localhost/doctorappointment/api/patients",
         type : "GET",
@@ -130,7 +132,7 @@
 
       { "data" : "patient_id",
         "render" : function (data,type,row,meta) {
-        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="OpenSeePatient('+data+')"><i class="fa fa-edit"></i></a>';
+        return '<div style="min-width: 160px;"><span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="OpenSeePatient('+data+')"><i class="fa fa-edit"></i></a></div>';
 
 
         }
@@ -177,8 +179,8 @@ $("#add-email-template-modal").modal("show");
            console.log(data);
 
 
-        document.getElementById("fullname").innerHTML = "Patient full name: "+data.patient_name+" "+data.patient_surname;;
-        document.getElementById("email").innerHTML = "Patient email: "+data.patient_email;
+        document.getElementById("fullname").innerHTML = "Full name: "+data.patient_name+" "+data.patient_surname;;
+        document.getElementById("email").innerHTML = " E-mail: "+data.patient_email;
 
 }
 

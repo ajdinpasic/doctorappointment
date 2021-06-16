@@ -84,8 +84,8 @@
 
       <h3 id="problem"><b>Problem description</b></h3>
       <h3 id="prescription"><b>Prescription<b></h3>
-      <p id="type"><i>Type</i></p>
-      <p id="detail_id"><i>Detail id</i></p>
+      <h3 style="white-space: nowrap;" id="type"><b>Type</b></h3>
+      <p style="white-space: nowrap;" id="detail_id"><i><b>Detail id</b></i></p>
 
     </div>
   </div>
@@ -103,8 +103,8 @@
           <div class="card">
     <div class="card-body">
        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
-      <h3 id="fullname"><b>Fullname</b></h3>
-      <p id="email"><i>Email</i></p>
+      <h3 style="white-space: nowrap;"id="fullname"><b>Fullname</b></h3>
+      <h3 style="white-space: nowrap;"id="email"><b><i>Email</i></b></h3>
     </div>
   </div>
 
@@ -123,7 +123,7 @@
     <div class="card-body">
        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
       <h3 id="doctor_fullname"><b>Fullname</b></h3>
-      <p id="doctor_email"><i>Email</i></p>
+      <h3 id="doctor_email"><b><i>Email</i></b></h3>
     </div>
   </div>
 
@@ -244,7 +244,10 @@
           settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
         settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records');
         }
-      },/*
+      },
+    responsive:true,
+
+      /*
       "language": {
         "lengthMenu": "Display _MENU_ records per page",
        "zeroRecords": "Nothing found - sorry",
@@ -289,7 +292,7 @@
         { "data" : "office"},
         { "data" : "patient_id",
         "render" : function (data,type,row,meta) {
-      return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeePatient('+data+')"><i class="fa fa-edit"></i></a>';
+      return '<div style="min-width: 200px;"><span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeePatient('+data+')"><i class="fa fa-edit"></i></a></div>';
       }
 
       },
@@ -327,7 +330,7 @@ $("#add-email-template-modal").modal("show");
               document.getElementById("detail_id").innerHTML = "Detail id: "+data.app_detail_id;
               document.getElementById("problem").innerHTML = "Problem description: "+data.p;
               document.getElementById("prescription").innerHTML = "Prescription: "+data.prescription;
-              document.getElementById("type").innerHTML = "Type of appointment: "+data.type;
+              document.getElementById("type").innerHTML = "Type: "+data.type;
 
 
       }
@@ -349,8 +352,8 @@ $("#add-email-template-modal").modal("show");
                  console.log(data);
 
 
-              document.getElementById("fullname").innerHTML = "Patient full name: "+data.patient_name+" "+data.patient_surname;;
-              document.getElementById("email").innerHTML = "Patient email: "+data.patient_email;
+              document.getElementById("fullname").innerHTML = "Full name: "+data.patient_name+" "+data.patient_surname;;
+              document.getElementById("email").innerHTML = "E-mail: "+data.patient_email;
 
       }
 
@@ -371,8 +374,8 @@ $("#add-email-template-modal").modal("show");
                    console.log(data);
 
 
-                document.getElementById("doctor_fullname").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname;;
-                document.getElementById("doctor_email").innerHTML = "Doctor email: "+data.doctor_email;
+                document.getElementById("doctor_fullname").innerHTML = "Full name: "+data.doctor_name+" "+data.doctor_surname;;
+                document.getElementById("doctor_email").innerHTML = "E-mail: "+data.doctor_email;
 
         }
 

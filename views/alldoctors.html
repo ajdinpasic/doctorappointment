@@ -58,8 +58,8 @@
           <div class="card">
     <div class="card-body">
        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
-      <h3 id="fullname"><b>Fullname</b></h3>
-      <p id="email"><i>Email</i></p>
+      <h3 style="white-space: nowrap;" id="fullname"><b>Fullname</b></h3>
+      <h3 style="white-space: nowrap;" id="email"><i><b>Email</b></i></h3>
     </div>
   </div>
 
@@ -87,6 +87,7 @@
           settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
         settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records'); }
       },
+      responsive:true,
       "ajax" : {
         url : "http://localhost/doctorappointment/api/doctors",
         type : "GET",
@@ -118,7 +119,7 @@
 
       { "data" : "doctor_id",
         "render" : function (data,type,row,meta) {
-        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctorProfile('+data+')"><i class="fa fa-edit"></i></a>';
+        return '<div style="min-width: 160px;"><span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctorProfile('+data+')"><i class="fa fa-edit"></i></a></div>';
 
 
         }
@@ -165,8 +166,8 @@ $("#add-email-template-modal").modal("show");
              console.log(data);
 
 
-          document.getElementById("fullname").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname;;
-          document.getElementById("email").innerHTML = "Doctor email: "+data.doctor_email;
+          document.getElementById("fullname").innerHTML = "Full name: "+data.doctor_name+" "+data.doctor_surname;;
+          document.getElementById("email").innerHTML = "E-mail: "+data.doctor_email;
 
   }
 
