@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-block">
                     <div class="user-image">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
+                        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
                     </div>
                     <h6 class="f-w-600 m-t-25 m-b-10" id="b"></h6>
                     <p id="c"class="text-muted"></p>
@@ -139,10 +139,12 @@ var token_id=token.doctor_id;
            }
 
 if (window.localStorage.getItem("token")) {
-  getDoctor(); }
+  getDoctor();
+}
 
  function getDoctor() {
     $.ajax({
+      async: true,
          url: "http://localhost/doctorappointment/api/doctors/"+token_id,
          type: "GET",
          beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
