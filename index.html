@@ -10,6 +10,7 @@
         <title>Startmin - Bootstrap Admin Theme</title>
 
         <!-- Bootstrap Core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
@@ -19,7 +20,7 @@
         <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
         <link href="./assets/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
         <link href="./assets/css/dataTables/dataTables.responsive.css" rel="stylesheet">
-        
+
 
         <!-- Timeline CSS -->
         <link href="./assets/css/timeline.css" rel="stylesheet">
@@ -43,7 +44,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body style="display:none;">
+     <body style="display:none;">
 
         <div id="wrapper">
 
@@ -124,7 +125,9 @@
                             <i class="fa fa-user fa-fw"></i> User <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#user"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <li class="admin_stuff"><a href="#admin"><i class="fa fa-user fa-fw"></i>  Profile</a>
+                            </li>
+                            <li class="user_stuff"><a href="#user"><i class="fa fa-user fa-fw"></i>  Profile</a>
                             </li>
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
@@ -143,36 +146,53 @@
 
                                 <!-- /input-group -->
                             </li>
-                            <li>
-                                <a href="#dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Panel</a>
+                            <li class="admin_stuff">
+                                <a href="#admin_dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Panel</a>
+                            </li>
+                            <li class="user_stuff">
+                                <a href="#user_dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Panel</a>
                             </li>
 
-                            <li>
-                                <a href="#alldoctors"><i class="fa fa-table fa-fw"></i> Doctors</a>
+                            <li li class="admin_stuff">
+                                <a href="#admin_doctors"><i class="fa fa-user-md fa-fw"></i> Doctors</a>
                             </li>
-                            <li>
-                                <a href="#allappointments"><i class="fa fa-table fa-fw"></i> Appointments</a>
+                            <li li class="user_stuff">
+                                <a href="#user_doctors"><i class="fa fa-user-md fa-fw"></i> Doctors</a>
                             </li>
-                            <li>
-                                <a href="#allpatients"><i class="fa fa-table fa-fw"></i> Patients</a>
+
+                            <li li class="admin_stuff">
+                                <a href="#admin_appointments"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
                             </li>
-                            <li>
-                                <a href="#alldetails"><i class="fa fa-table fa-fw"></i> Appointment details</a>
+                            <li li class="user_stuff">
+                                <a href="#usert_appointments"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
                             </li>
+                            <li li class="admin_stuff">
+                                <a href="#admin_patients"><i class="fa fa-stethoscope fa-fw"></i> Patients</a>
+                            </li>
+                            <li li class="user_stuff">
+                                <a href="#user_payments"><i class="fa fa-money fa-fw"></i> Payments</a>
+                            </li>
+
 
 
                 </div>
             </nav>
             <main id="jqueryspapp" role="main">
-              <section id="dashboard" data-load="dashboard.html" ></section>
+              <section id="admin_dashboard" data-load="admin_dashboard.html" ></section>
               <section id="tables" data-load="tables.html" ></section>
               <section id="notifications" data-load="notifications.html" ></section>
-              <section id="alldoctors" data-load="alldoctors.html" ></section>
-              <section id="allappointments" data-load="allappointments.html" ></section>
-                <section id="allpatients" data-load="allpatients.html" ></section>
-                <section id="user" data-load="user.html" ></section>
+              <section id="admin_doctors" data-load="admin_doctors.html" ></section>
+              <section id="admin_appointments" data-load="admin_appointments.html" ></section>
+                <section id="admin_patients" data-load="admin_patients.html" ></section>
+                <section id="admin" data-load="admin.html" ></section>
                 <section id="alldetails" data-load="alldetails.html" ></section>
 
+
+                <section id="user_dashboard" data-load="user_dashboard.html" ></section>
+                <section id="user_doctors" data-load="user_doctors.html" ></section>
+                <section id="usert_appointments" data-load="user_appointments.html" ></section>
+                <section id="user_payments" data-load="user_payments.html" ></section>
+                <section id="user" data-load="user.html" ></section>
 
 
             </main>
@@ -209,12 +229,23 @@
           <script src="//cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
 
 
-
+        <script src="./assets/js/utils.js"></script>
         <script type="text/javascript">
 
           $(document).ready(function() {
-            var app = $.jQuerySPApp({defaultView  : "dashboard"}); // initialize
+            if (!window.localStorage.getItem("token")) {
 
+
+               window.location = "login.html";
+
+                   }
+            var user_token = parseJwt(window.localStorage.getItem("token"));
+            if (user_token.role == "admin") {
+            var app = $.jQuerySPApp({defaultView  : "admin_dashboard"}); // initialize
+        } else {
+
+            var app = $.jQuerySPApp({defaultView  : "user_dashboard"});
+         }
 
 
            //app.route({view: 'dashboard', load: 'dashboard.html' });
@@ -227,12 +258,21 @@
 
              if (!window.localStorage.getItem("token")) {
 
+
                 window.location = "login.html";
 
                     }
             else {
-              $('body').show();
+
+              if (user_token.role == "admin"){
+                $(".user_stuff").remove();
+
+
+            } else {
+              $(".admin_stuff").remove();
             }
+              $('body').show();
+          }
           });
           function doLogout() {
             window.localStorage.clear();
