@@ -1,0 +1,439 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+              <h1 class="page-header">Click below to add new detail about specific appointment</h1>
+          </div>
+            <!-- /.col-lg-12 -->
+</div>
+        <!-- /.row -->
+        <button type="button" style="background-color:green;"class="btn btn-primary btn-lg" data-toggle="modal" data-target="#register-new-detail-modal">
+            Register new apointment detail
+        </button> <br> <br>
+        <!-- /.row -->
+
+    <!-- /.container-fluid -->
+
+<!-- staropravo -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">List of all appointments </h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+        <!-- /.row -->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="doctors-appointments-list-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Appointment Id</th>
+                                        <th>Scheduled at</th>
+                                        <th>Reserved at</th>
+                                        <th>Office</th>
+                                        <th>Patient's ID</th>
+                                        <th>Doctor's ID</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+                                        <td>Trident</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+<div class="modal fade" id="add-email-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/appointment-512.png" width="200" height="200" class="img-radius" alt="User-Profile-Image">
+
+      <h3 id="problem"><b>Problem description</b></h3>
+      <h3 id="prescription"><b>Prescription<b></h3>
+      <h3 style="white-space: nowrap;" id="type"><b>Type</b></h3>
+      <p style="white-space: nowrap;" id="detail_id"><i><b>Detail id</b></i></p>
+
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+<div class="modal fade" id="see-patient-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 style="white-space: nowrap;"id="fullname"><b>Fullname</b></h3>
+      <h3 style="white-space: nowrap;"id="email"><b><i>Email</i></b></h3>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+
+<div class="modal fade" id="see-doctor-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="card">
+    <div class="card-body">
+       <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+      <h3 id="doctor_fullname"><b>Fullname</b></h3>
+      <h3 id="doctor_email"><b><i>Email</i></b></h3>
+    </div>
+  </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div> </div>
+
+<div class="modal fade" id="register-new-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      Register new appointment
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form role="form" id="register-new-detail">
+                              <div class="form-group-test">
+                                <label style="display: block;margin: .4rem 0;">Select the date</label>
+
+                                <input style="margin: .4rem 0;" type="datetime-local" id="date" name="scheduled_at"
+
+                                       min="2021-06-01T00:00" max="2022-06-01T00:00">
+                                       </div>
+                                       <div>
+                                  <label>Select the office</label>
+                                  <select multiple class="form-control" name="office" id="office">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                      <option>6</option>
+                                      <option>7</option>
+                                      <option>8</option>
+                                      <option>9</option>
+                                      <option>10</option>
+
+
+                                  </select>
+                              </div>
+                              <div class="form-group-test">
+                                  <label>Select the doctor</label>
+                                  <select multiple class="form-control" name="doctor_id" id="doctor_id">
+                                      <option>here</option>
+
+                                  </select>
+                              </div>
+                              <button type="submit" onClick="registerAppointment()" class="btn btn-default">Submit Button</button>
+                              <button type="reset" class="btn btn-default">Reset Button</button>
+                            </form>
+                        </div>
+
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+                      <!-- /.row (nested) -->
+                  </div>
+                  <!-- /.panel-body -->
+              </div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="./assets/js/utils.js"></script>
+<script type="text/javascript"> /*
+  if(sessionStorage.getItem("showmsg")=='detail'){
+   toastr.success("Detail registered successfully");
+
+     sessionStorage.removeItem("showmsg");
+     setTimeout(function(){
+              window.location = 'index.html';
+           }, 1500);
+} */
+  // staro pravo odavde vaznooo
+
+   getAllAppointments();
+
+  /* function getAllAppointments() {
+    $.ajax({
+         url: "http://localhost/doctorappointment/api/doctor/appointments",
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+         success: function(data) {
+            console.log(data);
+                var html ="";
+                for(var i =0 ; i<data.length; i++) {
+                  html +='<tr class="odd">'
+                    +'<td>'+data[i].scheduled_at+'</td>'
+                    +'<td>'+data[i].reserved_at+'</td>'
+                    +'<td>'+data[i].office+'</td>';
+                }
+                  $("#doctors-appointments-list-table tbody").html(html);
+             }
+      });
+  } */
+
+  function getAllAppointments() {
+
+    $("#doctors-appointments-list-table").DataTable({
+
+      processing : true,
+      serverSide : true,
+      bDestory : true,
+    //  pagingType : "simple",
+      searching : false,
+      ordering : false,
+      preDrawCallback : function (settings) {
+        if (settings.jqXHR) {
+          settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
+        settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records');
+        }
+      },
+    responsive:true,
+
+      /*
+      "language": {
+        "lengthMenu": "Display _MENU_ records per page",
+       "zeroRecords": "Nothing found - sorry",
+       "info": "Showing page _PAGE_",
+       "infoEmpty": "Showing page _PAGE_",
+       "infoFiltered": ""
+     }, */
+      "ajax" : {
+        url : "http://localhost/doctorappointment/api/patient/appointments",
+        type : "GET",
+        beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+        dataSrc: function (resp) {
+          console.log(resp);
+          return resp;
+        },
+        data :  function (d) {
+        /*  d.offset=d.start;
+          d.limit=d.length;
+          d.search=d.search.value;
+          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data); */
+
+          delete d.start;
+          delete d.length;
+          delete d.column;
+          delete d.draw;
+
+        } },
+        /*initComplete: function (settings){
+          settings._iRecordsTotal=2;
+          settings._iRecordsDisplay=2;
+          settings.iDraw=2;
+        }, */
+
+      columns: [
+          { "data" : "appointment_id",
+          "render" : function (data,type,row,meta) {
+        return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeAppointment('+data+')"><i class="fa fa-edit"></i></a>';
+        }
+        },
+        { "data" : "scheduled_at"},
+        { "data" : "reserved_at"},
+        { "data" : "office"},
+        { "data" : "patient_id",
+        "render" : function (data,type,row,meta) {
+      return '<div style="min-width: 200px;"><span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeePatient('+data+')"><i class="fa fa-edit"></i></a></div>';
+      }
+
+      },
+        { "data" : "doctor_id",
+        "render" : function (data,type,row,meta) {
+      return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctor('+data+')"><i class="fa fa-edit"></i></a>';
+      }
+
+
+      }
+
+
+      ],
+    }).on('xhr.dt',function(e,settings,json,xhr) {
+      console.log(settings);
+
+
+
+    }); }
+
+
+    function SeeAppointment(appointment_id) {
+
+$("#add-email-template-modal").modal("show");
+
+         $.ajax({
+               async: true,
+               url: "http://localhost/doctorappointment/api/patient/details/"+appointment_id,
+               type: "GET",
+               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+               success: function(data) {
+                 console.log(data);
+
+
+              document.getElementById("detail_id").innerHTML = "Detail id: "+data.app_detail_id;
+              document.getElementById("problem").innerHTML = "Problem description: "+data.p;
+              document.getElementById("prescription").innerHTML = "Prescription: "+data.prescription;
+              document.getElementById("type").innerHTML = "Type: "+data.type;
+
+
+      }
+
+
+
+      }); }
+
+      function SeePatient(patient_id) {
+
+      $("#see-patient-profile-modal").modal("show");
+
+         $.ajax({
+               async: true,
+               url: "http://localhost/doctorappointment/api/patients/"+patient_id,
+               type: "GET",
+               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+               success: function(data) {
+                 console.log(data);
+
+
+              document.getElementById("fullname").innerHTML = "Full name: "+data.patient_name+" "+data.patient_surname;;
+              document.getElementById("email").innerHTML = "E-mail: "+data.patient_email;
+
+      }
+
+
+
+      }); }
+
+      function SeeDoctor(doctor_id) {
+
+      $("#see-doctor-profile-modal").modal("show");
+
+           $.ajax({
+                 async: true,
+                 url: "http://localhost/doctorappointment/api/doctors/"+doctor_id,
+                 type: "GET",
+                 beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+                 success: function(data) {
+                   console.log(data);
+
+
+                document.getElementById("doctor_fullname").innerHTML = "Full name: "+data.doctor_name+" "+data.doctor_surname;;
+                document.getElementById("doctor_email").innerHTML = "E-mail: "+data.doctor_email;
+
+        }
+
+
+
+        }); }
+
+       function registerAppointment() {
+
+         registerDetail=jsonize_form("#register-new-detail");
+         sessionStorage.setItem("showmsg", "detail");
+         console.log(registerDetail);
+         $.ajax({
+              url: "http://localhost/doctorappointment/api/patients/appointments/register",
+              type: "POST",
+              data: registerDetail,
+
+              beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+              success: function(data) {
+
+
+               console.log(data);
+              // $("#register-new-detail").trigger("reset");
+               $("#register-new-detail-modal").modal("hide");
+
+
+               },
+               error:function (jqXHR, textStatus, errorThrown) {
+                 console.log(jqXHR);
+
+               }
+           });  }
+          test();
+
+           function test() {
+
+           $.ajax({
+               async: true,
+                url: "http://localhost/doctorappointment/api/doctors",
+                type: "GET",
+                beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+                success: function(data) {
+                   console.log(data);
+                       var html ="";
+                       for(var i =0 ; i<data.length; i++) {
+                         html +=
+                           '<option>'+data[i].doctor_id+'</option>';
+
+                       }
+                         $("#doctor_id").html(html);
+                       //  $("#appointment_id").DataTable();
+
+                    }
+             }); }
+
+
+
+
+</script>
