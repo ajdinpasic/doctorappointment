@@ -44,10 +44,10 @@
                             <form id="doctor-login-form" role="form">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input  class="form-control" placeholder="E-mail" name="doctor_email" type="email" autofocus required >
+                                        <input  class="form-control" id="test1"placeholder="E-mail" name="doctor_email" type="email" autofocus required >
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="" required >
+                                        <input class="form-control" id="test2"placeholder="Password" name="password" type="password" value="" required >
                                     </div>
 
                                     <!-- Change this to a button or input when using this as a form -->
@@ -57,6 +57,20 @@
                                     </div>
                                     <div class="form-group pull-left">
                                       <a href="doctorforgot.html">Forgot password?</a>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Log in as doctor or patient</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="doctor" value="doctor" checked>Doctor
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="patient" value="patient">Patient
+                                            </label>
+                                        </div>
 
                                     </div>
 
@@ -96,6 +110,10 @@
 
 
             $("#buttonForLogin").prop('disabled',true);
+            if(document.getElementById('doctor').checked) {
+
+
+
 
             $.post( "http://localhost/doctorappointment/api/doctors/login", jsonize_form("#doctor-login-form") ).done(function( data ) {
 
@@ -108,9 +126,40 @@
     toastr.error(error.responseJSON.message );
 
   });
+} else if(document.getElementById('patient').checked) {
+
+  var test = {
+            "patient_email" : $("#test1").val(),
+            "password" : $("#test2").val()
+          };
 
 
-          }
+
+
+$.post( "http://localhost/doctorappointment/api/patients/login", test ).done(function( data ) {
+
+
+window.localStorage.setItem("token",data.token);
+window.location = "index.html";
+}).fail(function(error) {
+$("#buttonForLogin").prop('disabled',false);
+
+toastr.error(error.responseJSON.message );
+
+});
+
+
+
+
+}
+
+}
+
+
+
+
+
+
         </script>
 
 
