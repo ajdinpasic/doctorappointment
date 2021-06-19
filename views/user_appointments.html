@@ -38,7 +38,7 @@
                                         <th>Scheduled at</th>
                                         <th>Reserved at</th>
                                         <th>Office</th>
-                                        <th>Patient's ID</th>
+
                                         <th>Doctor's ID</th>
 
 
@@ -50,7 +50,7 @@
                                         <td>Trident</td>
                                         <td>Trident</td>
                                         <td>Trident</td>
-                                        <td>Trident</td>
+
                                         <td>Trident</td>
 
                                     </tr>
@@ -292,12 +292,7 @@
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
         { "data" : "office"},
-        { "data" : "patient_id",
-        "render" : function (data,type,row,meta) {
-      return '<div style="min-width: 200px;"><span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeePatient('+data+')"><i class="fa fa-edit"></i></a></div>';
-      }
-
-      },
+        
         { "data" : "doctor_id",
         "render" : function (data,type,row,meta) {
       return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctor('+data+')"><i class="fa fa-edit"></i></a>';
@@ -341,27 +336,7 @@ $("#add-email-template-modal").modal("show");
 
       }); }
 
-      function SeePatient(patient_id) {
 
-      $("#see-patient-profile-modal").modal("show");
-
-         $.ajax({
-               async: true,
-               url: "http://localhost/doctorappointment/api/patients/"+patient_id,
-               type: "GET",
-               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-               success: function(data) {
-                 console.log(data);
-
-
-              document.getElementById("fullname").innerHTML = "Full name: "+data.patient_name+" "+data.patient_surname;;
-              document.getElementById("email").innerHTML = "E-mail: "+data.patient_email;
-
-      }
-
-
-
-      }); }
 
       function SeeDoctor(doctor_id) {
 
