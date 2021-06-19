@@ -106,11 +106,11 @@ Flight::route('/patients/*', function(){
       $token= @$headers["Authentication"];
 
       try {
-        $doctor = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
-         if (!isset($doctor["doctor_id"])) {
+        $patient = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
+         if (!isset($patient["patient_id"])) {
            throw new Exception("This is not for you", 403);
          }
-         Flight::set('doctor', $doctor);
+         Flight::set('patient', $patient);
          return TRUE;
 
       } catch (Exception $e) {
