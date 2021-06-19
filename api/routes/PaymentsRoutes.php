@@ -9,7 +9,6 @@ require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
  *    				 @OA\Property(property="amount", required="true", type="int", example="100",	description="Price of the appointment" ),
- *     				 @OA\Property(property="payment_date", required="true", type="timestamp", example="2021-03-13 11:37:58",	description="Date of the payment" ),
  *     				 @OA\Property(property="serial_number", required="true", type="string", example="N77T10",	description="Serial number of the credit card" ),
  *    				 @OA\Property(property="appointment_id", required="true", type="int", example="1",	description="Id of appointment" )
  *          )

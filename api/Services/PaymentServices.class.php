@@ -19,7 +19,7 @@ class PaymentService extends BaseService {
   if(!isset($appointment["appointment_id"])) throw new Exception("Payment does not exits",400);
   $payment = $this->payment_dao->insertEntity([
     "amount" => $payment["amount"],
-    "payment_date" => $payment["payment_date"],
+    "payment_date" => date(Config::DATE_FORMAT),
     "serial_number" => $payment["serial_number"],
     "patient_id" => $patient_id,
     "appointment_id" => $payment["appointment_id"]
