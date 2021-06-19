@@ -1,5 +1,6 @@
+class AUtils {
 
-function jsonize_form(selector) {
+static jsonize_form(selector) {
   var data= $(selector).serializeArray();
 
   var form_data = {};
@@ -10,7 +11,8 @@ function jsonize_form(selector) {
   }console.log(data);
   return form_data;
 }
-function parseJwt (token) {
+
+static parseJwt (token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
@@ -18,4 +20,5 @@ function parseJwt (token) {
     }).join(''));
 
     return JSON.parse(jsonPayload);
-};
+}
+}
