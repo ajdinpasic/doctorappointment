@@ -129,6 +129,7 @@
 
 var token = parseJwt(window.localStorage.getItem("token"));
 var token_id=token.doctor_id;
+//console.log(token);
 
   if(sessionStorage.getItem("showmsg")=='1'){
              toastr.success("Updated successfully");
