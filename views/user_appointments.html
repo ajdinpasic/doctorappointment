@@ -292,7 +292,7 @@
         { "data" : "scheduled_at"},
         { "data" : "reserved_at"},
         { "data" : "office"},
-        
+
         { "data" : "doctor_id",
         "render" : function (data,type,row,meta) {
       return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="SeeDoctor('+data+')"><i class="fa fa-edit"></i></a>';
@@ -362,7 +362,7 @@ $("#add-email-template-modal").modal("show");
 
        function registerAppointment() {
 
-         registerDetail=jsonize_form("#register-new-detail");
+         registerDetail=AUtils.jsonize_form("#register-new-detail");
          sessionStorage.setItem("showmsg", "detail");
          console.log(registerDetail);
          $.ajax({

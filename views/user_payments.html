@@ -349,7 +349,7 @@ $("#add-email-template-modal").modal("show");
 
        function registerPayment() {
 
-         registerDetail=jsonize_form("#register-new-detail");
+         registerDetail=AUtils.jsonize_form("#register-new-detail");
          sessionStorage.setItem("showmsg", "detail");
          console.log(registerDetail);
          $.ajax({

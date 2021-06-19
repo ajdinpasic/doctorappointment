@@ -127,7 +127,7 @@
 
 
 
-var token = parseJwt(window.localStorage.getItem("token"));
+var token = AUtils.parseJwt(window.localStorage.getItem("token"));
 var token_id=token.doctor_id;
 //console.log(token);
 
@@ -161,7 +161,7 @@ if (window.localStorage.getItem("token")) {
 
 function updateDoctorProfile() {
 
-  updatedProfile=jsonize_form("#update-doctor-profile");
+  updatedProfile=AUtils.jsonize_form("#update-doctor-profile");
   sessionStorage.setItem("showmsg", "1");
   console.log(updatedProfile);
   $.ajax({

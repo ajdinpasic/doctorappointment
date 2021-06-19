@@ -73,7 +73,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var user_token = parseJwt(window.localStorage.getItem("token"));
+    var user_token = AUtils.parseJwt(window.localStorage.getItem("token"));
     if (user_token.role != "admin") {
 
        window.location = "index.html";

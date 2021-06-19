@@ -385,7 +385,7 @@ $("#add-email-template-modal").modal("show");
 
        function registerDetail() {
 
-         registerDetail=jsonize_form("#register-new-detail");
+         registerDetail=Autils.jsonize_form("#register-new-detail");
          sessionStorage.setItem("showmsg", "detail");
          console.log(registerDetail);
          $.ajax({

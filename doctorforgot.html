@@ -81,7 +81,7 @@
 
              "doctor_email" : $("#email").val()
           }; */
-          $.post( "http://localhost/doctorappointment/api/doctors/forget", jsonize_form("#doctor-forgot-form") ).done(function( data ) {
+          $.post( "http://localhost/doctorappointment/api/doctors/forget", AUtils.jsonize_form("#doctor-forgot-form") ).done(function( data ) {
           console.log(data);
         alert("Check out your email");
 }).fail(function(error) {

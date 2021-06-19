@@ -115,7 +115,7 @@
 
 
 
-            $.post( "http://localhost/doctorappointment/api/doctors/login", jsonize_form("#doctor-login-form") ).done(function( data ) {
+            $.post( "http://localhost/doctorappointment/api/doctors/login", AUtils.jsonize_form("#doctor-login-form") ).done(function( data ) {
 
 
     window.localStorage.setItem("token",data.token);

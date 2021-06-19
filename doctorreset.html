@@ -81,7 +81,7 @@
              "token" :  urlParams.get('token'),
              "password" : $("#password").val()
           }; */
-          $.post( "http://localhost/doctorappointment/api/doctors/reset", jsonize_form("#doctor-reset-form") ).done(function( data ) {
+          $.post( "http://localhost/doctorappointment/api/doctors/reset", AUtils.jsonize_form("#doctor-reset-form") ).done(function( data ) {
           console.log(data);
         alert("Password changed");
         window.location="index.html";

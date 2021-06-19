@@ -87,7 +87,7 @@
                "doctor_email" : $("#email").val(),
                "password" :$("#password").val()
             }; */
-            $.post( "http://localhost/doctorappointment/api/doctors/register", jsonize_form("#register-doctor-form") ).done(function( data ) {
+            $.post( "http://localhost/doctorappointment/api/doctors/register", AUtils.jsonize_form("#register-doctor-form") ).done(function( data ) {
             console.log(data);
           alert(data);
         window.location ="login.html";
