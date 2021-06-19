@@ -17,9 +17,11 @@ class AppointmentsDao extends BaseDao {
       return $this->query("SELECT * FROM appointments WHERE doctor_id = :doctor_id",["doctor_id"=> $doctor_id]); }
     }
 
-    public function getAllAppointmentsForPatient($patient_id) {
-      //echo($doctor_id); die;
-      return $this->query("SELECT * FROM appointments WHERE patient_id = :patient_id",["patient_id"=> $patient_id]);
+    public function getAllAppointmentsForPatient($patient_id,$total=FALSE) {
+      if ($total) {
+        return $this->query("SELECT COUNT(*) AS total FROM appointments WHERE patient_id = :patient_id",["patient_id"=> $patient_id]);
+      } else {
+      return $this->query("SELECT * FROM appointments WHERE patient_id = :patient_id",["patient_id"=> $patient_id]); }
     }
 
     public function getAppointmentByPatient($id) {
