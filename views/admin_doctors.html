@@ -72,6 +72,13 @@
 
 
 <script type="text/javascript">
+  $(document).ready(function() {
+    var user_token = parseJwt(window.localStorage.getItem("token"));
+    if (user_token.role != "admin") {
+
+       window.location = "index.html";
+
+           }
    getAllDoctors();
 
   function getAllDoctors() {
@@ -176,7 +183,7 @@ $("#add-email-template-modal").modal("show");
   }); }
 
 
-
+});
 
 
 
