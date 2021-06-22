@@ -37,7 +37,7 @@
                                 <i class="fa fa-suitcase"></i>
                                 <p>189</p>
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#update-doctor-profile-modal">
+                            <button onclick="disp()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#update-doctor-profile-modal">
                                 Edit your profile
                             </button>
                         </div>
@@ -131,59 +131,35 @@ var token = AUtils.parseJwt(window.localStorage.getItem("token"));
 var token_id=token.doctor_id;
 //console.log(token);
 
-  if(sessionStorage.getItem("showmsg")=='1'){
-             toastr.success("Updated successfully");
-             sessionStorage.removeItem("showmsg");
-             setTimeout(function(){
-                     window.location = 'index.html';
-                  }, 1500);
-           }
 
-if (window.localStorage.getItem("token")) {
+
   getDoctor();
-}
+
 
  function getDoctor() {
-    $.ajax({
-      async: true,
-         url: "http://localhost/doctorappointment/api/doctors/"+token_id,
-         type: "GET",
-         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-         success: function(data) {
-            console.log(data);
-            //console.log(aaa.doctor_id);
-                document.getElementById("a").innerHTML = "Doctor Id: "+data.doctor_id
-                document.getElementById("b").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname
-                document.getElementById("c").innerHTML = "Doctor email: "+data.doctor_email
-             }
 
-      }); }
+RestClient.get("http://localhost/doctorappointment/api/doctors/"+token_id,function(data){
+  document.getElementById("a").innerHTML = "Doctor Id: "+data.doctor_id
+  document.getElementById("b").innerHTML = "Doctor full name: "+data.doctor_name+" "+data.doctor_surname
+  document.getElementById("c").innerHTML = "Doctor email: "+data.doctor_email
+
+});
+
+     }
 
 function updateDoctorProfile() {
-
+  sessionStorage.setItem("update","update");
   updatedProfile=AUtils.jsonize_form("#update-doctor-profile");
-  sessionStorage.setItem("showmsg", "1");
-  console.log(updatedProfile);
-  $.ajax({
-       url: "http://localhost/doctorappointment/api/doctors/"+token_id,
-       type: "PUT",
-       data: JSON.stringify(updatedProfile),
-       contentType: 'application/json',
-       beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-       success: function(data) {
-
-
-        //getDoctor();
-        $("#update-doctor-profile").trigger("reset");
+  RestClient.put("http://localhost/doctorappointment/api/doctors/"+token_id,updatedProfile,function(data){
         $("#update-doctor-profile-modal").modal("hide");
+        window.location.href='index.html';
 
+  });
+    }
 
-        },
-        error:function (jqXHR, textStatus, errorThrown) {
-          console.log(jqXHR);
-
-        }
-    });  }
+    function disp() {
+      toastr.warning("You are about to change your profile");
+    }
 
 
 </script>
