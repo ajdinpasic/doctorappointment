@@ -190,15 +190,15 @@
 
      window.location = "index.html";
 
-         }
-  if(sessionStorage.getItem("showmsg")=='done'){
+   }
+/*  if(sessionStorage.getItem("showmsg")=='done'){
    toastr.success("Detail registered successfully");
 
      sessionStorage.removeItem("showmsg");
      setTimeout(function(){
               window.location = 'index.html';
-           }, 1500);
-}
+}, 1500);
+}  */
   // staro pravo odavde vaznooo
 
    getAllAppointments();
@@ -338,11 +338,13 @@ RestClient.get("http://localhost/doctorappointment/api/payments/"+appointment_id
 
 
        function registerPayment() {
-
+          sessionStorage.setItem("success","success");
          registerPayment=AUtils.jsonize_form("#register-new-detail");
          RestClient.post("http://localhost/doctorappointment/api/payments",registerPayment,function(data) {
 
            $("#register-new-detail-modal").modal("hide");
+
+           window.location.href = 'index.html';
 
          });
 
