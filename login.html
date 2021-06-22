@@ -53,10 +53,10 @@
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button id="buttonForLogin" type="submit" disabled="disabled" onclick="doLogin();"  class="btn btn-lg btn-success btn-block">Login</button>
                                     <div class="form-group pull-right">
-                                      <a href="doctorregister.html">Don't have an account?</a>
+                                      <a href="register.html">Don't have an account?</a>
                                     </div>
                                     <div class="form-group pull-left">
-                                      <a href="doctorforgot.html">Forgot password?</a>
+                                      <a href="forgot.html">Forgot password?</a>
 
                                     </div>
                                     <div class="form-group">
@@ -113,13 +113,10 @@
             $("#buttonForLogin").prop('disabled',true);
             if(document.getElementById('doctor').checked) {
               creditentials=AUtils.jsonize_form("#doctor-login-form");
+              toastr.info("Proceding as doctor");
               RestClient.post("http://localhost/doctorappointment/api/doctors/login",creditentials,function (data){
                 window.localStorage.setItem("token",data.token);
                 window.location = "index.html";
-              },function(jqHXR,textStatus,errorThrown){
-                toastr.error(error.responseJSON.message );
-                $("#buttonForLogin").prop('disabled',false);
-
               });
 
 } else if(document.getElementById('patient').checked) {
@@ -130,13 +127,10 @@
           };
 
           creditentials=test;
+          toastr.info("Proceding as patient");
           RestClient.post("http://localhost/doctorappointment/api/patients/login",creditentials,function (data){
             window.localStorage.setItem("token",data.token);
             window.location = "index.html";
-          },function(jqHXR,textStatus,errorThrown){
-            toastr.error(error.responseJSON.message );
-            $("#buttonForLogin").prop('disabled',false);
-
           });
 
 
