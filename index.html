@@ -256,6 +256,16 @@
             // run app
             app.run();
 
+            if(sessionStorage.getItem("success")=='success'){
+             toastr.success("Registered successfully");
+
+               sessionStorage.removeItem("success"); }
+               
+               if(sessionStorage.getItem("update")=='update'){
+                toastr.success("Updated successfully");
+
+                  sessionStorage.removeItem("update"); }
+
              if (!window.localStorage.getItem("token")) {
 
 
@@ -275,6 +285,7 @@
           }
           });
           function doLogout() {
+
             window.localStorage.clear();
             window.location="login.html";
           }
