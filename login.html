@@ -91,6 +91,7 @@
        <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
        <script src="./assets/js/validation.js"></script>
        <script src="./assets/js/utils.js"></script>
+       <script src="./assets/js/RestClient.js"></script>
         <script type="text/javascript">
 
 
@@ -111,21 +112,16 @@
 
             $("#buttonForLogin").prop('disabled',true);
             if(document.getElementById('doctor').checked) {
+              creditentials=AUtils.jsonize_form("#doctor-login-form");
+              RestClient.post("http://localhost/doctorappointment/api/doctors/login",creditentials,function (data){
+                window.localStorage.setItem("token",data.token);
+                window.location = "index.html";
+              },function(jqHXR,textStatus,errorThrown){
+                toastr.error(error.responseJSON.message );
+                $("#buttonForLogin").prop('disabled',false);
 
+              });
 
-
-
-            $.post( "http://localhost/doctorappointment/api/doctors/login", AUtils.jsonize_form("#doctor-login-form") ).done(function( data ) {
-
-
-    window.localStorage.setItem("token",data.token);
-    window.location = "index.html";
-  }).fail(function(error) {
-    $("#buttonForLogin").prop('disabled',false);
-
-    toastr.error(error.responseJSON.message );
-
-  });
 } else if(document.getElementById('patient').checked) {
 
   var test = {
@@ -133,22 +129,15 @@
             "password" : $("#test2").val()
           };
 
+          creditentials=test;
+          RestClient.post("http://localhost/doctorappointment/api/patients/login",creditentials,function (data){
+            window.localStorage.setItem("token",data.token);
+            window.location = "index.html";
+          },function(jqHXR,textStatus,errorThrown){
+            toastr.error(error.responseJSON.message );
+            $("#buttonForLogin").prop('disabled',false);
 
-
-
-$.post( "http://localhost/doctorappointment/api/patients/login", test ).done(function( data ) {
-
-
-window.localStorage.setItem("token",data.token);
-window.location = "index.html";
-}).fail(function(error) {
-$("#buttonForLogin").prop('disabled',false);
-
-toastr.error(error.responseJSON.message );
-
-});
-
-
+          });
 
 
 }
