@@ -31,7 +31,7 @@
 
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="doctors-appointments-list-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table id="patient-payments-list-table"class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>Appointment Id</th>
@@ -74,7 +74,7 @@
 </div>
 <!-- /#page-wrapper -->
 
-<div class="modal fade" id="add-email-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="view-payment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -159,7 +159,7 @@
                               </div>
 
                               <div class="form-group-test">
-                                  <label>Select the doctor</label>
+                                  <label>Select the appointment</label>
                                   <select multiple class="form-control" name="appointment_id" id="appointment_id">
                                       <option>here</option>
 
@@ -184,18 +184,25 @@
     <!-- /.modal-dialog -->
 </div>
 <script src="./assets/js/utils.js"></script>
-<script type="text/javascript"> /*
-  if(sessionStorage.getItem("showmsg")=='detail'){
+<script type="text/javascript">
+  var user_token = AUtils.parseJwt(window.localStorage.getItem("token"));
+  if (user_token.role != "user") {
+
+     window.location = "index.html";
+
+         }
+  if(sessionStorage.getItem("showmsg")=='done'){
    toastr.success("Detail registered successfully");
 
      sessionStorage.removeItem("showmsg");
      setTimeout(function(){
               window.location = 'index.html';
            }, 1500);
-} */
+}
   // staro pravo odavde vaznooo
 
    getAllAppointments();
+   SeeAppointmentsForForm();
 
   /* function getAllAppointments() {
     $.ajax({
@@ -218,7 +225,7 @@
 
   function getAllAppointments() {
 
-    $("#doctors-appointments-list-table").DataTable({
+    $("#patient-payments-list-table").DataTable({
 
       processing : true,
       serverSide : true,
@@ -299,29 +306,17 @@
     function SeePayment(appointment_id) {
     //console.log("test");
 
-$("#add-email-template-modal").modal("show");
-
-         $.ajax({
-               async: true,
-               url: "http://localhost/doctorappointment/api/payments/"+appointment_id,
-               type: "GET",
-               beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-               success: function(data) {
-                 console.log(data);
-
-
-              document.getElementById("a").innerHTML = "Detail id: "+data.payment_id;
-              document.getElementById("b").innerHTML = "Problem description: "+data.amount;
-              document.getElementById("c").innerHTML = "Prescription: "+data.payment_date;
-              document.getElementById("d").innerHTML = "Type: "+data.serial_number;
-              document.getElementById("e").innerHTML = "Type: "+data.appointment_id;
+$("#view-payment-modal").modal("show");
+RestClient.get("http://localhost/doctorappointment/api/payments/"+appointment_id,function(data){
+  document.getElementById("a").innerHTML = "Detail id: "+data.payment_id;
+  document.getElementById("b").innerHTML = "Problem description: "+data.amount;
+  document.getElementById("c").innerHTML = "Prescription: "+data.payment_date;
+  document.getElementById("d").innerHTML = "Type: "+data.serial_number;
+  document.getElementById("e").innerHTML = "Type: "+data.appointment_id;
+});
 
 
-      }
-
-
-
-    }); }
+}
 
 
 
@@ -329,71 +324,47 @@ $("#add-email-template-modal").modal("show");
 
       $("#see-doctor-profile-modal").modal("show");
 
-           $.ajax({
-                 async: true,
-                 url: "http://localhost/doctorappointment/api/doctors/"+doctor_id,
-                 type: "GET",
-                 beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-                 success: function(data) {
-                   console.log(data);
+      RestClient.get("http://localhost/doctorappointment/api/doctors/"+doctor_id,function(data){
+
+        document.getElementById("doctor_fullname").innerHTML = "Full name: "+data.doctor_name+" "+data.doctor_surname;;
+        document.getElementById("doctor_email").innerHTML = "E-mail: "+data.doctor_email;
+
+      });
 
 
-                document.getElementById("doctor_fullname").innerHTML = "Full name: "+data.doctor_name+" "+data.doctor_surname;;
-                document.getElementById("doctor_email").innerHTML = "E-mail: "+data.doctor_email;
 
         }
 
 
 
-        }); }
-
        function registerPayment() {
 
-         registerDetail=AUtils.jsonize_form("#register-new-detail");
-         sessionStorage.setItem("showmsg", "detail");
-         console.log(registerDetail);
-         $.ajax({
-              url: "http://localhost/doctorappointment/api/payments",
-              type: "POST",
-              data: registerDetail,
+         registerPayment=AUtils.jsonize_form("#register-new-detail");
+         RestClient.post("http://localhost/doctorappointment/api/payments",registerPayment,function(data) {
 
-              beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-              success: function(data) {
+           $("#register-new-detail-modal").modal("hide");
+
+         });
+
+       }
 
 
-               console.log(data);
-              // $("#register-new-detail").trigger("reset");
-               $("#register-new-detail-modal").modal("hide");
 
+           function SeeAppointmentsForForm() {
 
-               },
-               error:function (jqXHR, textStatus, errorThrown) {
-                 console.log(jqXHR);
+             RestClient.get("http://localhost/doctorappointment/api/patient/appointments",function(data){
+
+               var html ="";
+               for(var i =0 ; i<data.length; i++) {
+                 html +=
+                   '<option>'+data[i].appointment_id+'</option>';
 
                }
-           });  }
-          test();
+                 $("#appointment_id").html(html);
 
-           function test() {
+             });
 
-           $.ajax({
-               async: true,
-                url: "http://localhost/doctorappointment/api/patient/appointments",
-                type: "GET",
-                beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-                success: function(data) {
-                   console.log(data);
-                       var html ="";
-                       for(var i =0 ; i<data.length; i++) {
-                         html +=
-                           '<option>'+data[i].appointment_id+'</option>';
-
-                       }
-                         $("#appointment_id").html(html);
-                       //  $("#appointment_id").DataTable();
-
-                    }
-             }); }
+            }
 
 
 

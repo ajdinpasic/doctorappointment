@@ -605,3 +605,11 @@
                 <!-- /.container-fluid -->
             </div>
             <!-- /#page-wrapper -->
+<script type="text/javascript">
+  var user_token = AUtils.parseJwt(window.localStorage.getItem("token"));
+  if (user_token.role != "user") {
+
+     window.location = "index.html";
+
+         }
+</script>
