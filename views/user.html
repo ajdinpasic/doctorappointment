@@ -1,0 +1,170 @@
+
+<link href="./assets/css/user.css" rel="stylesheet">
+<div id="page-wrapper">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card user-card">
+                <div class="card-header">
+                    <h5 style="white-space: nowrap;" id="a"></h5>
+                </div>
+                <div class="card-block">
+                    <div class="user-image">
+                        <img src="./assets/user profile.png" class="img-radius" alt="User-Profile-Image">
+                    </div>
+                    <h6 style="white-space: nowrap;" class="f-w-600 m-t-25 m-b-10" id="b"></h6>
+                    <p style="white-space: nowrap;" id="c"class="text-muted"></p>
+                    <hr>
+                    <p class="text-muted m-t-15">Activity Level: 87%</p>
+                    <ul class="list-unstyled activity-leval">
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <div class="bg-c-blue counter-block m-t-10 p-20">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fa fa-comment"></i>
+                                <p>1256</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-user"></i>
+                                <p>8562</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-suitcase"></i>
+                                <p>189</p>
+                            </div>
+                            <button onclick="disp()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#update-patient-profile-modal">
+                                Edit your profile
+                            </button>
+                        </div>
+                    </div>
+                    <p class="m-t-15 text-muted">User has agreed to privacy policy and accepts the terms and conditions on this website </p>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+          </div>
+
+
+
+
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+
+
+    <! -- modal -->
+
+    <div class="modal fade" id="update-patient-profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          Edit your profile
+                      </div>
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-lg-6">
+                                  <form role="form" id="update-patient-profile">
+                                      <div class="form-group">
+                                          <label>Update your name</label>
+                                          <input type="text" name="patient_name" class="form-control" placeholder="Enter new name">
+
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Update your surname</label>
+                                          <input type="text" name="patient_surname" class="form-control" placeholder="Enter new surname">
+                                      </div>
+
+
+
+
+
+
+                                      <button type="submit" onClick="updatePatientProfile();" class="btn btn-default">Submit Button</button>
+                                      <button type="reset" class="btn btn-default">Reset Button</button>
+                                  </form>
+                              </div>
+                              <!-- /.col-lg-6 (nested) -->
+
+                              <!-- /.col-lg-6 (nested) -->
+                          </div>
+                          <!-- /.row (nested) -->
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+<script src="./assets/js/utils.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+var token = AUtils.parseJwt(window.localStorage.getItem("token"));
+if (token.role != "user") {
+
+   window.location = "index.html";
+
+       }
+var token_id=token.patient_id;
+//console.log(token);
+
+
+
+  getPatient();
+
+
+ function getPatient() {
+
+RestClient.get("http://localhost/doctorappointment/api/patients/"+token_id,function(data){
+  document.getElementById("a").innerHTML = "Doctor Id: "+data.patient_id
+  document.getElementById("b").innerHTML = "Doctor full name: "+data.patient_name+" "+data.patient_surname
+  document.getElementById("c").innerHTML = "Doctor email: "+data.patient_email
+
+});
+
+     }
+
+function updatePatientProfile() {
+  sessionStorage.setItem("update","update");
+  updatedProfile=AUtils.jsonize_form("#update-patient-profile");
+  RestClient.put("http://localhost/doctorappointment/api/patients/"+token_id,updatedProfile,function(data){
+        $("#update-patient-profile-modal").modal("hide");
+        window.location.href='index.html';
+
+  });
+    }
+
+    function disp() {
+      toastr.warning("You are about to change your profile");
+    }
+
+
+</script>
