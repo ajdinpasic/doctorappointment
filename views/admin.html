@@ -125,9 +125,12 @@
 
 
 
-
-
 var token = AUtils.parseJwt(window.localStorage.getItem("token"));
+if (token.role != "admin") {
+
+   window.location = "index.html";
+
+       }
 var token_id=token.doctor_id;
 //console.log(token);
 

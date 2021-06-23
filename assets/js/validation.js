@@ -29,7 +29,7 @@ $(document).ready(function() {
             required: "You need to enter a password"
           }
         }
-    }); 
+    });
 
 
 });
