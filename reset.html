@@ -29,6 +29,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+        body {
+  background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcNDQ0NBw0HBwgNBw0HDQcHBw8ICQcNFREWFhURExUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDw0NDisZFRkrNysrKystKysrKy0rKzcrKy0tKysrKysrKy0tKy0tKysrKysrKysrKysrKysrKysrK//AABEIALwBDAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAABAgAGB//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABkBAQEBAQEBAAAAAAAAAAAAAAIBBgUAA//EABURAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIRAxEAPwDzxmZtnzZmLzzQsRKGGCKiUoYY0VBONDGInDC0MGlDDGioNONDGkVBpRoYyohRoqCKgnGioIqDTjGNDBOQxUEVBpRoqCKgnI0VBFQacMLESjkWZncZllQQosJjQwThhjQwaUMUIqIcaKgihKNDGhg04YYyoNKNFQRQnGioFQaUjKgioNONCxgnIYqCKiUo0VGMGnGio0I05DDGhg04YWhEpHHkKjuMuxYxDhhjQwaUMVBFDTjKgioJyNDGioNKNFQQwacMVBFRCjKgioJRoqCKgnGioFQacjQxoqCcaKjSEaUaKgioJyNFSNDBpwwxoUKQwscE446KgLuMvDDGiolONDGipBpRoYyhORooRUGlGioIoacZUEVBpRoqCKgnGioIqDSjRUaFKcaKgioJyNFQRUGlIYY0ME4YY0hg04YY0VBONFQQwaUMUIoTkcaYxjusvDIY0VBpRooRUE40VBFRKcaKgioJRoqCKg040VBFQSjRUEUNORoqNIYJRoqBUE5GioIqJThhjQhSkMMaFKchioIqCcaKEVBONFQRUGlGVgihOONioIqO7WXjRUEUJRoqCKg05GVBFQaUaKEVBONFRoRKNFRoYlOGGNDBpQwxjBORoqCKgnGkVGhg05CY0MGlIYqCKg040VBFQTjRUEVINKNFMYNOGERSHHGxUEVHcrLQwwRUQ5GigqDTjKgihKNFQSKgnDDGhEoYWhgnDDGI0o0VBFRDkMMjQwachMaGCUhhjRUGnGioIqCcaKEVBpxoqNDBpSNFRoYJyGFpChyONimhjuMtGioIqCcaKEVBpRoqCKiU4YY0MEoYY0MGnIYY0MEoTGhgnIYY0MGnDDGhgnDDGiolKRoqCKgHGioFRKcaKjSGDSkJgioJyGGNDBpyGFiJyONio0Md1loyoIqDSjRTQwacMMaGCUMLQxKchMaGCcMMaGDSkaKjQyCcMVBFQacjQxoqCcjRUEVBpRoqCKgnI0VBFSDThkLGCUhMaGIcMLQwachhaQicjjoYxjustI0VBFDSjRUaGCcMMaGCUMMYwacMLQjSkMMaGCchioIqJTkZUgioJyNFQRUGlGioIqCcjRUEVBpwwxoYNOQwxoYJQxUEihpyNDGipBpyNDjRSHI42GNDHcZWGGNDBpwwxjEKGGNDBOQxUEMEoTGME5DDI0VBpxooKgnI0VBFQacjSKgioJSNFRoYlORoqNCNOQmRoYJSGKkEVBpyNDGVBpyNIoKg05GihFYJyONhEVHdrKwwxoYNOGGNDBpQqkEMSnDCxg0oYZGME4YoQwacMVBFQacaKgioNKGGCKgnGipAqCcMMYwacMMaGDShioClOGKgioNONFQRUE40UIoSkf/Z) no-repeat center center fixed;
+  background-size: cover
+}
+        </style>
     </head>
     <body>
 
@@ -44,8 +50,9 @@
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <input id="password" class="form-control" placeholder="Password" name="password" type="password" autofocus>
-                                        <input id="token" class="form-control" placeholder="Token" name="token" type="text" autofocus>
+                                      <input id="input1" class="form-control" placeholder="Token" name="token" type="text" autofocus required>
+                                        <input id="input2" class="form-control" placeholder="Password" name="password" type="password" autofocus required>
+
                                     </div>
 
 
@@ -53,6 +60,18 @@
                                     <button id="buttonForReset" onclick="doReset();" class="btn btn-lg btn-success btn-block">Reset password</button>
 
 
+                                    <div class="form-group">
+                                        <label>Patient or doctor</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="doctor" value="doctor" checked>Doctor
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="patient" value="patient">Patient
+                                            </label>
+                                        </div>
 
 
 
@@ -70,30 +89,38 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
         <script src="./assets/js/utils.js"></script>
+        <script src="./assets/js/resetvalidation.js"></script>
+        <script src="./assets/js/RestClient.js"></script>
         <script type="text/javascript">
 
         function doReset() {
           $("#buttonForReset").prop('disabled',true);
-          var urlParams = new URLSearchParams(window.location.search);
+          if(document.getElementById('doctor').checked) {
+          toastr.info("Redirecting to log in , please sign in!");
+          creditentials=AUtils.jsonize_form("#doctor-reset-form")
+          RestClient.post("http://localhost/doctorappointment/api/doctors/reset",creditentials,function(data){
+            window.location="index.html";
+          });
 
-        /*  var resetInfo = {
 
-             "token" :  urlParams.get('token'),
-             "password" : $("#password").val()
-          }; */
-          $.post( "http://localhost/doctorappointment/api/doctors/reset", AUtils.jsonize_form("#doctor-reset-form") ).done(function( data ) {
-          console.log(data);
-        alert("Password changed");
-        window.location="index.html";
-}).fail(function(error) {
-  $("#buttonForReset").prop('disabled',false);
-  console.log(error);
-  toastr.error(error.responseJSON.message );
-  //window.location="login.html";
+          }else if(document.getElementById('patient').checked) {
 
-});
+            toastr.info("Redirecting to log in , please sign in!");
+            var resetInfo = {
+
+                 "token" :  $("#input1").val(),
+                 "password" : $("#input2").val()
+              };
+            creditentials=resetInfo;
+            RestClient.post("http://localhost/doctorappointment/api/patients/reset",creditentials,function(data){
+              window.location="index.html";
+            });
+          }
+
         }
+
         </script>
 
 

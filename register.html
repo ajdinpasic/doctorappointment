@@ -29,6 +29,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+        body {
+  background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcNDQ0NBw0HBwgNBw0HDQcHBw8ICQcNFREWFhURExUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDw0NDisZFRkrNysrKystKysrKy0rKzcrKy0tKysrKysrKy0tKy0tKysrKysrKysrKysrKysrKysrK//AABEIALwBDAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAABAgAGB//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABkBAQEBAQEBAAAAAAAAAAAAAAIBBgUAA//EABURAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIRAxEAPwDzxmZtnzZmLzzQsRKGGCKiUoYY0VBONDGInDC0MGlDDGioNONDGkVBpRoYyohRoqCKgnGioIqDTjGNDBOQxUEVBpRoqCKgnI0VBFQacMLESjkWZncZllQQosJjQwThhjQwaUMUIqIcaKgihKNDGhg04YYyoNKNFQRQnGioFQaUjKgioNONCxgnIYqCKiUo0VGMGnGio0I05DDGhg04YWhEpHHkKjuMuxYxDhhjQwaUMVBFDTjKgioJyNDGioNKNFQQwacMVBFRCjKgioJRoqCKgnGioFQacjQxoqCcaKjSEaUaKgioJyNFSNDBpwwxoUKQwscE446KgLuMvDDGiolONDGipBpRoYyhORooRUGlGioIoacZUEVBpRoqCKgnGioIqDSjRUaFKcaKgioJyNFQRUGlIYY0ME4YY0hg04YY0VBONFQQwaUMUIoTkcaYxjusvDIY0VBpRooRUE40VBFRKcaKgioJRoqCKg040VBFQSjRUEUNORoqNIYJRoqBUE5GioIqJThhjQhSkMMaFKchioIqCcaKEVBONFQRUGlGVgihOONioIqO7WXjRUEUJRoqCKg05GVBFQaUaKEVBONFRoRKNFRoYlOGGNDBpQwxjBORoqCKgnGkVGhg05CY0MGlIYqCKg040VBFQTjRUEVINKNFMYNOGERSHHGxUEVHcrLQwwRUQ5GigqDTjKgihKNFQSKgnDDGhEoYWhgnDDGI0o0VBFRDkMMjQwachMaGCUhhjRUGnGioIqCcaKEVBpxoqNDBpSNFRoYJyGFpChyONimhjuMtGioIqCcaKEVBpRoqCKiU4YY0MEoYY0MGnIYY0MEoTGhgnIYY0MGnDDGhgnDDGiolKRoqCKgHGioFRKcaKjSGDSkJgioJyGGNDBpyGFiJyONio0Md1loyoIqDSjRTQwacMMaGCUMLQxKchMaGCcMMaGDSkaKjQyCcMVBFQacjQxoqCcjRUEVBpRoqCKgnI0VBFSDThkLGCUhMaGIcMLQwachhaQicjjoYxjustI0VBFDSjRUaGCcMMaGCUMMYwacMLQjSkMMaGCchioIqJTkZUgioJyNFQRUGlGioIqCcjRUEVBpwwxoYNOQwxoYJQxUEihpyNDGipBpyNDjRSHI42GNDHcZWGGNDBpwwxjEKGGNDBOQxUEMEoTGME5DDI0VBpxooKgnI0VBFQacjSKgioJSNFRoYlORoqNCNOQmRoYJSGKkEVBpyNDGVBpyNIoKg05GihFYJyONhEVHdrKwwxoYNOGGNDBpQqkEMSnDCxg0oYZGME4YoQwacMVBFQacaKgioNKGGCKgnGipAqCcMMYwacMMaGDShioClOGKgioNONFQRUE40UIoSkf/Z) no-repeat center center fixed;
+  background-size: cover
+}
+        </style>
     </head>
     <body style>
 
@@ -43,22 +49,36 @@
                             <form id="register-doctor-form" role="form">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input  class="form-control" placeholder="Name" name="doctor_name" type="text" autofocus required>
+                                        <input  id="input1" class="form-control" placeholder="Name" name="doctor_name" type="text" autofocus required>
                                     </div>
                                     <div class="form-group">
-                                        <input  class="form-control" placeholder="Surname" name="doctor_surname" type="text" required>
+                                        <input  id="input2" class="form-control" placeholder="Surname" name="doctor_surname" type="text" required>
                                     </div>
                                     <div class="form-group">
-                                        <input  class="form-control" placeholder="E-mail" name="doctor_email" type="email" required>
+                                        <input  id="input3" class="form-control" placeholder="E-mail" name="doctor_email" type="email" required>
                                     </div>
                                     <div class="form-group">
-                                        <input  class="form-control" placeholder="Password" name="password" type="password" value="" required>
+                                        <input  id="input4" class="form-control" placeholder="Password" name="password" type="password" value="" required>
                                     </div>
 
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button id="buttonForRegister" type ="submit" onClick="doRegister()" disabled="disabled" class="btn btn-lg btn-success btn-block">Register</button>
                                     <div class="form-group pull-right">
                                       <a href="login.html">Already have an account? Log in!</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Register as doctor or patient</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="doctor" value="doctor" checked>Doctor
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="patient" value="patient">Patient
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </fieldset>
                             </form>
@@ -75,29 +95,40 @@
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-        <script src="./assets/js/anothervalidation.js"></script>
+        <script src="./assets/js/registervalidation.js"></script>
         <script src="./assets/js/utils.js"></script>
+        <script src="./assets/js/RestClient.js"></script>
         <script type="text/javascript">
         function doRegister() {
 
             $("#buttonForRegister").prop('disabled',true);
-          /*  var registerInfo = {
-              "doctor_name" : $("#name").val(),
-              "doctor_surname" : $("#surname").val(),
-               "doctor_email" : $("#email").val(),
-               "password" :$("#password").val()
-            }; */
-            $.post( "http://localhost/doctorappointment/api/doctors/register", AUtils.jsonize_form("#register-doctor-form") ).done(function( data ) {
-            console.log(data);
-          alert(data);
-        window.location ="login.html";
-  }).fail(function(error) {
-    $("#buttonForRegister").prop('disabled',false);
-    console.log(error);
-    toastr.error(error.responseJSON.message );
+            if(document.getElementById('doctor').checked) {
+              toastr.info("Redirecting to log in , please sign in!");
+              creditentials=AUtils.jsonize_form("#register-doctor-form");
+              RestClient.post("http://localhost/doctorappointment/api/doctors/register",creditentials,function(data){
+                window.location="login.html";
+
+              });
+            } else if (document.getElementById('patient').checked) {
+              toastr.info("Redirecting to log in , please sign in!");
+
+            var registerInfo = {
+              "patient_name" : $("#input1").val(),
+              "patient_surname" : $("#input2").val(),
+               "patient_email" : $("#input3").val(),
+               "password" :$("#input4").val()
+            };
+            creditentials=registerInfo;
+            RestClient.post("http://localhost/doctorappointment/api/patients/register",creditentials,function(data){
+
+              window.location ="login.html";
+
+
+
+
 
   });
-        }
+} }
     /*
         $(function(){
           if(window.localStorage.getItem("token")) {

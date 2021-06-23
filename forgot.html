@@ -29,6 +29,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+        body {
+  background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcNDQ0NBw0HBwgNBw0HDQcHBw8ICQcNFREWFhURExUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDw0NDisZFRkrNysrKystKysrKy0rKzcrKy0tKysrKysrKy0tKy0tKysrKysrKysrKysrKysrKysrK//AABEIALwBDAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAABAgAGB//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABkBAQEBAQEBAAAAAAAAAAAAAAIBBgUAA//EABURAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIRAxEAPwDzxmZtnzZmLzzQsRKGGCKiUoYY0VBONDGInDC0MGlDDGioNONDGkVBpRoYyohRoqCKgnGioIqDTjGNDBOQxUEVBpRoqCKgnI0VBFQacMLESjkWZncZllQQosJjQwThhjQwaUMUIqIcaKgihKNDGhg04YYyoNKNFQRQnGioFQaUjKgioNONCxgnIYqCKiUo0VGMGnGio0I05DDGhg04YWhEpHHkKjuMuxYxDhhjQwaUMVBFDTjKgioJyNDGioNKNFQQwacMVBFRCjKgioJRoqCKgnGioFQacjQxoqCcaKjSEaUaKgioJyNFSNDBpwwxoUKQwscE446KgLuMvDDGiolONDGipBpRoYyhORooRUGlGioIoacZUEVBpRoqCKgnGioIqDSjRUaFKcaKgioJyNFQRUGlIYY0ME4YY0hg04YY0VBONFQQwaUMUIoTkcaYxjusvDIY0VBpRooRUE40VBFRKcaKgioJRoqCKg040VBFQSjRUEUNORoqNIYJRoqBUE5GioIqJThhjQhSkMMaFKchioIqCcaKEVBONFQRUGlGVgihOONioIqO7WXjRUEUJRoqCKg05GVBFQaUaKEVBONFRoRKNFRoYlOGGNDBpQwxjBORoqCKgnGkVGhg05CY0MGlIYqCKg040VBFQTjRUEVINKNFMYNOGERSHHGxUEVHcrLQwwRUQ5GigqDTjKgihKNFQSKgnDDGhEoYWhgnDDGI0o0VBFRDkMMjQwachMaGCUhhjRUGnGioIqCcaKEVBpxoqNDBpSNFRoYJyGFpChyONimhjuMtGioIqCcaKEVBpRoqCKiU4YY0MEoYY0MGnIYY0MEoTGhgnIYY0MGnDDGhgnDDGiolKRoqCKgHGioFRKcaKjSGDSkJgioJyGGNDBpyGFiJyONio0Md1loyoIqDSjRTQwacMMaGCUMLQxKchMaGCcMMaGDSkaKjQyCcMVBFQacjQxoqCcjRUEVBpRoqCKgnI0VBFSDThkLGCUhMaGIcMLQwachhaQicjjoYxjustI0VBFDSjRUaGCcMMaGCUMMYwacMLQjSkMMaGCchioIqJTkZUgioJyNFQRUGlGioIqCcjRUEVBpwwxoYNOQwxoYJQxUEihpyNDGipBpyNDjRSHI42GNDHcZWGGNDBpwwxjEKGGNDBOQxUEMEoTGME5DDI0VBpxooKgnI0VBFQacjSKgioJSNFRoYlORoqNCNOQmRoYJSGKkEVBpyNDGVBpyNIoKg05GihFYJyONhEVHdrKwwxoYNOGGNDBpQqkEMSnDCxg0oYZGME4YoQwacMVBFQacaKgioNKGGCKgnGipAqCcMMYwacMMaGDShioClOGKgioNONFQRUE40UIoSkf/Z) no-repeat center center fixed;
+  background-size: cover
+}
+        </style>
     </head>
     <body>
 
@@ -44,7 +50,7 @@
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <input id="email" class="form-control" placeholder="E-mail" name="doctor_email" type="email" autofocus>
+                                        <input  id="input1"class="form-control" placeholder="E-mail" name="doctor_email" type="email" autofocus required>
                                     </div>
 
 
@@ -53,6 +59,21 @@
 
                                     <div class="form-group pull-right">
                                       <a href="login.html">Back to login</a>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Patient or doctor</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="doctor" value="doctor" checked>Doctor
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="identity" id="patient" value="patient">Patient
+                                            </label>
+                                        </div>
 
                                     </div>
 
@@ -72,25 +93,37 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
         <script src="./assets/js/utils.js"></script>
+        <script src="./assets/js/forgotvalidation.js"></script>
         <script src="./assets/js/RestClient.js"></script>
         <script type="text/javascript">
 
         function doForgot() {
           $("#buttonForForgot").prop('disabled',true);
-          /*var forgotInfo = {
+          if(document.getElementById('doctor').checked) {
+            toastr.warning("Preparing for password reset!");
+              creditentials=AUtils.jsonize_form("#doctor-forgot-form")
+              RestClient.post("http://localhost/doctorappointment/api/doctors/forget",creditentials,function(data){
+              window.location = "reset.html";
 
-             "doctor_email" : $("#email").val()
-          }; */
-          creditentials=AUtils.jsonize_form("#doctor-forgot-form")
-          RestClient.post("http://localhost/doctorappointment/api/doctors/forget",creditentials,function(data){
-
-            console.log("test");
-            window.location = "reset.html";
+              });
 
 
-          });
 
+          } else if(document.getElementById('patient').checked) {
+            toastr.warning("Preparing for password reset!");
+            var forgotInfo = {
+
+               "patient_email" : $("#input1").val()
+            };
+            creditentials=forgotInfo;
+            RestClient.post("http://localhost/doctorappointment/api/patients/forget",creditentials,function(data) {
+              window.location = "reset.html";
+            });
+
+
+}
         }
         </script>
 
