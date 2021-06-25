@@ -39,7 +39,7 @@ class DoctorService extends BaseService {
 
         "type" => "doctor",
         "created_at" => date(Config::DATE_FORMAT),
-        "role" => "user"
+        "role" => "admin"
 
       ]);
 

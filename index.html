@@ -129,7 +129,7 @@
                             </li>
                             <li class="user_stuff"><a href="#user"><i class="fa fa-user fa-fw"></i>  Profile</a>
                             </li>
-                            
+
                             <li class="divider"></li>
                             <li><a onClick="doLogout()" href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
@@ -237,14 +237,14 @@
 
                window.location = "login.html";
 
-                   }
+             }
             var user_token = AUtils.parseJwt(window.localStorage.getItem("token"));
             if (user_token.role == "admin") {
             var app = $.jQuerySPApp({defaultView  : "admin_dashboard"}); // initialize
         } else {
 
             var app = $.jQuerySPApp({defaultView  : "user_dashboard"});
-         }
+         } 
 
 
            //app.route({view: 'dashboard', load: 'dashboard.html' });
