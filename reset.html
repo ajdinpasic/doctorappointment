@@ -100,7 +100,7 @@
           if(document.getElementById('doctor').checked) {
           toastr.info("Redirecting to log in , please sign in!");
           creditentials=AUtils.jsonize_form("#doctor-reset-form")
-          RestClient.post("http://localhost/doctorappointment/api/doctors/reset",creditentials,function(data){
+          RestClient.post("api/doctors/reset",creditentials,function(data){
             window.location="index.html";
           });
 
@@ -114,7 +114,7 @@
                  "password" : $("#input2").val()
               };
             creditentials=resetInfo;
-            RestClient.post("http://localhost/doctorappointment/api/patients/reset",creditentials,function(data){
+            RestClient.post("api/patients/reset",creditentials,function(data){
               window.location="index.html";
             });
           }

@@ -37,16 +37,7 @@
     public function getPatientById($id) {
       return $this->query_unique("SELECT * FROM patients WHERE patient_id = :patient_id",["patient_id" => $id]);
     }
-    /*
-    public function getAllPatients() {
-      return $this->query("SELECT * FROM patients",[]);
-    }
-    public function updatePatientById($id,$patient) {
-      $this->update($id,"patients",$patient,"patient_id");
-    }
-    public function addPatient($patient) {
-      return $this->insert("patients",$patient);
-    } */
+  
 
 
 

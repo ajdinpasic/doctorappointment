@@ -191,37 +191,12 @@
      window.location = "index.html";
 
    }
-/*  if(sessionStorage.getItem("showmsg")=='done'){
-   toastr.success("Detail registered successfully");
 
-     sessionStorage.removeItem("showmsg");
-     setTimeout(function(){
-              window.location = 'index.html';
-}, 1500);
-}  */
-  // staro pravo odavde vaznooo
 
    getAllAppointments();
    SeeAppointmentsForForm();
 
-  /* function getAllAppointments() {
-    $.ajax({
-         url: "http://localhost/doctorappointment/api/doctor/appointments",
-         type: "GET",
-         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-         success: function(data) {
-            console.log(data);
-                var html ="";
-                for(var i =0 ; i<data.length; i++) {
-                  html +='<tr class="odd">'
-                    +'<td>'+data[i].scheduled_at+'</td>'
-                    +'<td>'+data[i].reserved_at+'</td>'
-                    +'<td>'+data[i].office+'</td>';
-                }
-                  $("#doctors-appointments-list-table tbody").html(html);
-             }
-      });
-  } */
+
 
   function getAllAppointments() {
 
@@ -241,14 +216,7 @@
       },
     responsive:true,
 
-      /*
-      "language": {
-        "lengthMenu": "Display _MENU_ records per page",
-       "zeroRecords": "Nothing found - sorry",
-       "info": "Showing page _PAGE_",
-       "infoEmpty": "Showing page _PAGE_",
-       "infoFiltered": ""
-     }, */
+
       "ajax" : {
         url : "http://localhost/doctorappointment/api/patient/appointments",
         type : "GET",
@@ -258,10 +226,7 @@
           return resp;
         },
         data :  function (d) {
-        /*  d.offset=d.start;
-          d.limit=d.length;
-          d.search=d.search.value;
-          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data); */
+
 
           delete d.start;
           delete d.length;
@@ -269,11 +234,7 @@
           delete d.draw;
 
         } },
-        /*initComplete: function (settings){
-          settings._iRecordsTotal=2;
-          settings._iRecordsDisplay=2;
-          settings.iDraw=2;
-        }, */
+
 
       columns: [
           { "data" : "appointment_id",
@@ -304,7 +265,7 @@
 
 
     function SeePayment(appointment_id) {
-    //console.log("test");
+
 
 $("#view-payment-modal").modal("show");
 RestClient.get("http://localhost/doctorappointment/api/payments/"+appointment_id,function(data){

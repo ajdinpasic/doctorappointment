@@ -20,18 +20,7 @@ class AppointmentService extends BaseService {
   public function getAllAppointmentsPatientService($id,$total=FALSE) {
     return $this->dao->getAllAppointmentsForPatient($id,$total);
   }
-/*
-  public function getAppointmentByPatientOrDoctor($patient_id,$doctor_id) {
 
-    if ($patient_id) {
-      return $this->dao->getAppointmentByPatient($patient_id);
-    }
-    else if ($doctor_id) {
-
-    return $this->dao->getAppointmentByDoctor($doctor_id);
-  }
-
-} */
   public function register($patient_id,$appointment) {
 
   $doctor=$this->doctor_dao->getEntity(strtolower($appointment["doctor_id"]));

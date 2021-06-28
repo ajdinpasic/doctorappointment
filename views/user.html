@@ -134,7 +134,7 @@ if (token.role != "user") {
 
        }
 var token_id=token.patient_id;
-//console.log(token);
+
 
 
 
@@ -143,7 +143,7 @@ var token_id=token.patient_id;
 
  function getPatient() {
 
-RestClient.get("http://localhost/doctorappointment/api/patients/"+token_id,function(data){
+RestClient.get("api/patients/"+token_id,function(data){
   document.getElementById("a").innerHTML = "Doctor Id: "+data.patient_id
   document.getElementById("b").innerHTML = "Doctor full name: "+data.patient_name+" "+data.patient_surname
   document.getElementById("c").innerHTML = "Doctor email: "+data.patient_email

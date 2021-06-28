@@ -207,30 +207,13 @@
      window.location = "index.html";
 
          }
-  
-  // staro pravo odavde vaznooo
+
+
 
    getAllAppointments();
    seeDoctorforForm();
 
-  /* function getAllAppointments() {
-    $.ajax({
-         url: "http://localhost/doctorappointment/api/doctor/appointments",
-         type: "GET",
-         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-         success: function(data) {
-            console.log(data);
-                var html ="";
-                for(var i =0 ; i<data.length; i++) {
-                  html +='<tr class="odd">'
-                    +'<td>'+data[i].scheduled_at+'</td>'
-                    +'<td>'+data[i].reserved_at+'</td>'
-                    +'<td>'+data[i].office+'</td>';
-                }
-                  $("#doctors-appointments-list-table tbody").html(html);
-             }
-      });
-  } */
+
 
   function getAllAppointments() {
 
@@ -250,14 +233,7 @@
       },
     responsive:true,
 
-      /*
-      "language": {
-        "lengthMenu": "Display _MENU_ records per page",
-       "zeroRecords": "Nothing found - sorry",
-       "info": "Showing page _PAGE_",
-       "infoEmpty": "Showing page _PAGE_",
-       "infoFiltered": ""
-     }, */
+
       "ajax" : {
         url : "http://localhost/doctorappointment/api/patient/appointments",
         type : "GET",
@@ -267,10 +243,7 @@
           return resp;
         },
         data :  function (d) {
-        /*  d.offset=d.start;
-          d.limit=d.length;
-          d.search=d.search.value;
-          d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data); */
+
 
           delete d.start;
           delete d.length;
@@ -278,11 +251,7 @@
           delete d.draw;
 
         } },
-        /*initComplete: function (settings){
-          settings._iRecordsTotal=2;
-          settings._iRecordsDisplay=2;
-          settings.iDraw=2;
-        }, */
+
 
       columns: [
           { "data" : "appointment_id",
@@ -355,7 +324,7 @@ RestClient.get("http://localhost/doctorappointment/api/patient/details/"+appoint
 
            function seeDoctorforForm() {
 
-             RestClient.get("http://localhost/doctorappointment/api/doctors",function(data){
+             RestClient.get("api/doctors",function(data){
                var html ="";
                for(var i =0 ; i<data.length; i++) {
                  html +=

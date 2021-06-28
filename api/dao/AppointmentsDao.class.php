@@ -10,7 +10,7 @@ class AppointmentsDao extends BaseDao {
 
 
     public function getAllAppointmentsForDoctor($doctor_id,$total=FALSE) {
-      //echo($doctor_id); die;
+      
       if ($total) {
         return $this->query("SELECT COUNT(*) AS total FROM appointments WHERE doctor_id = :doctor_id",["doctor_id"=> $doctor_id]);
       } else {
@@ -41,22 +41,7 @@ class AppointmentsDao extends BaseDao {
 
 
 
-    /*
-    public function getAppointmentById($id) {
-      return $this->query_unique("SELECT * FROM appointments WHERE appointment_id =:id",["id" => $id]);
-    }
-    public function getAppointmentByPatientId($id) {
-      return $this->query_unique("SELECT * FROM appointments WHERE patient_id =:id",["id" => $id]);
-    }
-    public function getAppointmentByDoctorId($id) {
-      return $this->query_unique("SELECT * FROM appointments WHERE doctor_id =:id",["id" => $id]);
-    }
-    public function updateAppointmentById($id,$appointment) {
-      $this->update($id,"appointments",$appointment,"appointment_id");
-    }
-    public function addAppointment($appointment) {
-      return $this->insert("appointments",$appointment);
-    } */
+
 }
 
 

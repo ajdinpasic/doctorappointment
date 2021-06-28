@@ -28,7 +28,7 @@ class PatientService extends BaseService{
 
 }
   public function register($patient) {
-    //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
+
 
     try {
       $this->dao->beginTransaction();
@@ -65,7 +65,7 @@ class PatientService extends BaseService{
 
     $this->smtpclient->send_token_for_registrationPatient($patient);
       return $patient;
-    // TODO: send email with some token
+
   }
 
   public function confirm($token) {
@@ -74,7 +74,7 @@ class PatientService extends BaseService{
   $this->account_dao->updateEntity($patient["account_id"],["status"=> "Active"]);
 
 
-    //  TODO: send email to customer (success)
+
   }
 
   public function login($patient) {
@@ -105,15 +105,7 @@ class PatientService extends BaseService{
 
 
 
-/*
-  public function insertEntity($patient) {
-    // validation check
-    if (!isset($patient["patient_name"])) {
-        throw new Exception("Name is missing");
-    }
-    return parent::insertEntity($patient);
 
-  } */
 
 
 

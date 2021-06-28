@@ -33,13 +33,7 @@ else {
 
 }
 
-  /*  public function getDoctorbyId($id) {
 
-  }
-
-  public function getDcotorBy() {
-    return $this->query("SELECT * FROM doctors",[]);
-  } */
   public function getDoctorByEmail($email) {
     return $this->query_unique("SELECT * FROM doctors WHERE doctor_email = :doctor_email",["doctor_email"=>$email]);
   }
@@ -48,13 +42,7 @@ else {
     return $this->query_unique("SELECT * FROM doctors WHERE doctor_name = :doctor_name",["doctor_name"=>strtolower($name)]);
   }
 
-  /*
-  public function updateDoctorById($id,$doctor) {
-    return $this->update($id,"doctors",$doctor,"doctor_id");
-  }
-  public function addDoctor($doctor) {
-    return $this->insert("doctors",$doctor);
-  } */
+  
 
 
 }

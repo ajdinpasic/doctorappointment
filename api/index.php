@@ -33,7 +33,7 @@ Flight::set('flight.log_errors', true);
 
 Flight::map('error', function(Exception $ex){
     Flight::json(["message" => $ex->getMessage()], $ex->getCode());
-}); 
+});
 
 
 

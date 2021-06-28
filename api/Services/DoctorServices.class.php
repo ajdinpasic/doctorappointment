@@ -30,7 +30,7 @@ class DoctorService extends BaseService {
 
 }
   public function register($doctor) {
-    //if(!isset($patient["patient_name"])) throw new Exception("Account field is required");
+
 
     try {
       $this->dao->beginTransaction();
@@ -75,7 +75,7 @@ class DoctorService extends BaseService {
     if (!isset($doctor["doctor_id"])) throw new Exception("Invalid token",400);
     $this->account_dao->updateEntity($doctor["account_id"],["status"=> "Active"]);
 
-    //  TODO: send email to customer (success)
+
   }
 
 public function login($doctor) {
