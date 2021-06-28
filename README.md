@@ -1,5 +1,5 @@
 # doctorappointment
-doctorappointment
+Student project purpose
 
 Online doctor appointment project is the web application
 which helps customers/patients to online reserve a term at the doctor's place.
